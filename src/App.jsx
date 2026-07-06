@@ -939,7 +939,7 @@ export default function App() {
           
           <div className="enamel-layout">
             <div className="enamel-grid">
-              <div className="enamel-card" onClick={() => { playTic(); setActiveEnamelDetail(ENAMEL_DETAILS.sweets); }} style={{ cursor: 'pointer' }}>
+              <div className="enamel-card" onClick={() => setActiveEnamelDetail(ENAMEL_DETAILS.sweets)} style={{ cursor: 'pointer' }}>
                 <div className="enamel-card-icon">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 9h16M9 5v14M14 5v14"/>
@@ -951,7 +951,7 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="enamel-card" onClick={() => { playTic(); setActiveEnamelDetail(ENAMEL_DETAILS.smoking); }} style={{ cursor: 'pointer' }}>
+              <div className="enamel-card" onClick={() => setActiveEnamelDetail(ENAMEL_DETAILS.smoking)} style={{ cursor: 'pointer' }}>
                 <div className="enamel-card-icon">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <path d="M17 6c0-1.5-1-2-1-3M13 6c0-1.5-1-2-1-3M4 10h13a3 3 0 0 1 0 6h-1M4 10v4a5 5 0 0 0 5 5h3a5 5 0 0 0 5-5"/>
@@ -963,7 +963,7 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="enamel-card" onClick={() => { playTic(); setActiveEnamelDetail(ENAMEL_DETAILS.coffee); }} style={{ cursor: 'pointer' }}>
+              <div className="enamel-card" onClick={() => setActiveEnamelDetail(ENAMEL_DETAILS.coffee)} style={{ cursor: 'pointer' }}>
                 <div className="enamel-card-icon">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <path d="M18 8h1a3 3 0 0 1 0 6h-1M4 8h14v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5Z"/><path d="M6 2v2M10 2v2M14 2v2"/>
