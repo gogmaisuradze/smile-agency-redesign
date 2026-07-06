@@ -669,7 +669,7 @@ export default function App() {
       <header className={headerScrolled ? 'scrolled' : ''}>
         <div className="wrap nav">
           <a href="#top" className="brand">
-            <img src="/images/logo.png?v=2" alt="Smile Agency Logo" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
+            <img src="/images/logo.webp?v=2" alt="Smile Agency Logo" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
             ღიმილის სააგენტო
           </a>
           <nav className={`nav-links ${mobileMenuOpen ? 'open' : ''}`} id="navLinks">
@@ -1264,7 +1264,7 @@ export default function App() {
        <footer>
         <div className="wrap">
           <a href="#top" className="brand">
-            <img src="/images/logo.png?v=2" alt="Smile Agency Logo" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
+            <img src="/images/logo.webp?v=2" alt="Smile Agency Logo" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
             ღიმილის სააგენტო
           </a>
           <div className="foot-links">
