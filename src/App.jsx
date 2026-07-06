@@ -432,6 +432,21 @@ export default function App() {
   const [activeEnamelDetail, setActiveEnamelDetail] = useState(null)
   const [activePriceCategory, setActivePriceCategory] = useState(null)
 
+  // Doctor rating authentication states
+  const [authUser, setAuthUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem('smile_auth_user');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+  const [pendingRating, setPendingRating] = useState(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authName, setAuthName] = useState('');
+  const [authPhone, setAuthPhone] = useState('');
+  const [authError, setAuthError] = useState('');
+
   // Doctor ratings state loaded from localStorage
   const [doctorRatings, setDoctorRatings] = useState(() => {
     try {
@@ -462,14 +477,19 @@ export default function App() {
     };
   }
 
-  const handleRateDoctor = async (name, score) => {
+  const handleRateDoctor = async (name, score, userObject) => {
+    const finalUser = userObject || authUser;
     const newRatings = { ...doctorRatings, [name]: score };
     setDoctorRatings(newRatings);
     try {
       localStorage.setItem('smile_doctor_ratings', JSON.stringify(newRatings));
     } catch (e) {}
     
-    const text = `⭐️ <b>ახალი შეფასება!</b>\n👨‍⚕️ ექიმი: <b>${name}</b>\n🌟 შეფასება: <b>${score} / 5 ვარსკვლავი</b>`;
+    const text = `⭐️ <b>ახალი შეფასება!</b>\n` +
+                 `👨‍⚕️ ექიმი: <b>${name}</b>\n` +
+                 `🌟 შეფასება: <b>${score} / 5 ვარსკვლავი</b>\n` +
+                 `👤 შემფასებელი: <b>${finalUser ? finalUser.name : 'ანონიმური'}</b>\n` +
+                 `📞 ტელეფონი: <b>${finalUser ? finalUser.phone : 'არ არის'}</b>`;
     await sendTelegramMessage(text);
   }
 
@@ -1998,7 +2018,14 @@ export default function App() {
                         return (
                           <button
                             key={star}
-                            onClick={() => handleRateDoctor(activeDoctorDetail.name, star)}
+                            onClick={() => {
+                              if (authUser) {
+                                handleRateDoctor(activeDoctorDetail.name, star);
+                              } else {
+                                setPendingRating({ doctorName: activeDoctorDetail.name, score: star });
+                                setShowAuthModal(true);
+                              }
+                            }}
                             onMouseEnter={() => setHoverRating(star)}
                             className="transition-transform hover:scale-125 focus:outline-none"
                             style={{ background: 'none', border: 'none', padding: '2px', cursor: 'pointer' }}
@@ -2063,6 +2090,109 @@ export default function App() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* RATING AUTHENTICATION MODAL */}
+      {showAuthModal && (
+        <div className="modal-overlay" style={{ zIndex: 3000 }} onClick={() => {
+          setShowAuthModal(false);
+          setPendingRating(null);
+          setAuthError('');
+        }}>
+          <div className="modal-card glass-neu text-left" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '400px', width: '90%', padding: '28px' }}>
+            <button 
+              onClick={() => {
+                setShowAuthModal(false);
+                setPendingRating(null);
+                setAuthError('');
+              }} 
+              className="chat-close-recipe" 
+              style={{ position: 'absolute', right: '20px', top: '20px' }}
+              aria-label="დახურვა"
+            >
+              <X className="w-4 h-4" />
+            </button>
+            
+            <span className="text-[10px] uppercase font-bold tracking-widest text-[#E08A79] mb-1.5 block">
+              ✦ ვერიფიკაცია
+            </span>
+            <h3 className="font-serif font-bold text-lg text-[#33353A] mb-2">შეფასების დადასტურება</h3>
+            <p className="text-xs text-[#5A5D64] mb-4">
+              ექიმის შესაფასებლად გთხოვთ მიუთითოთ თქვენი სახელი, გვარი და ნამდვილი ტელეფონის ნომერი.
+            </p>
+            
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              
+              // Validate mobile number: must start with 5 and be exactly 9 digits
+              const cleanPhone = authPhone.replace(/\s+/g, '').replace('+995', '');
+              const georgianMobileRegex = /^5\d{8}$/;
+              
+              if (!authName.trim() || authName.trim().split(/\s+/).length < 2) {
+                setAuthError('გთხოვთ მიუთითოთ სახელი და გვარი (მაგ: გიორგი მაისურაძე)');
+                return;
+              }
+              
+              if (!georgianMobileRegex.test(cleanPhone)) {
+                setAuthError('მიუთითეთ ნამდვილი მობილურის ნომერი (მაგ: 599 xx xx xx)');
+                return;
+              }
+              
+              const verifiedUser = {
+                name: authName.trim(),
+                phone: '+995 ' + cleanPhone.slice(0, 3) + ' ' + cleanPhone.slice(3, 5) + ' ' + cleanPhone.slice(5, 7) + ' ' + cleanPhone.slice(7, 9)
+              };
+              
+              setAuthUser(verifiedUser);
+              localStorage.setItem('smile_auth_user', JSON.stringify(verifiedUser));
+              setAuthError('');
+              setShowAuthModal(false);
+              
+              if (pendingRating) {
+                handleRateDoctor(pendingRating.doctorName, pendingRating.score, verifiedUser);
+                setPendingRating(null);
+              }
+            }}>
+              <div className="field mb-3">
+                <label className="text-xs font-bold text-[#33353A] mb-1 block">სახელი და გვარი</label>
+                <input 
+                  type="text" 
+                  placeholder="მაგ: გიორგი მაისურაძე"
+                  value={authName}
+                  onChange={(e) => setAuthName(e.target.value)}
+                  required
+                  style={{ width: '100%', padding: '10px', fontSize: '12px' }}
+                />
+              </div>
+              
+              <div className="field mb-3">
+                <label className="text-xs font-bold text-[#33353A] mb-1 block">ტელეფონის ნომერი</label>
+                <input 
+                  type="tel" 
+                  placeholder="5xx xx xx xx"
+                  value={authPhone}
+                  onChange={(e) => setAuthPhone(e.target.value)}
+                  required
+                  style={{ width: '100%', padding: '10px', fontSize: '12px' }}
+                />
+              </div>
+              
+              {authError && (
+                <div className="text-xs font-bold text-red-500 mb-3" style={{ color: '#E74C3C' }}>
+                  ⚠️ {authError}
+                </div>
+              )}
+              
+              <button 
+                type="submit" 
+                className="phone-onboarding-btn mt-2" 
+                style={{ width: '100%', padding: '12px', fontSize: '12px' }}
+              >
+                შესვლის დადასტურება
+              </button>
+            </form>
           </div>
         </div>
       )}
