@@ -669,7 +669,7 @@ export default function App() {
       <header className={headerScrolled ? 'scrolled' : ''}>
         <div className="wrap nav">
           <a href="#top" className="brand">
-            <img src="/images/logo.webp?v=2" alt="Smile Agency Logo" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
+            <img src="images/logo.webp?v=2" alt="Smile Agency Logo" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
             ღიმილის სააგენტო
           </a>
           <nav className={`nav-links ${mobileMenuOpen ? 'open' : ''}`} id="navLinks">
@@ -694,7 +694,7 @@ export default function App() {
           <div className="phone-onboarding-card" style={{ maxWidth: '100%', width: '100%', padding: '32px' }}>
             <div className="phone-onboarding-media" style={{ width: '100%', aspectRatio: '21 / 8', height: 'auto', borderRadius: '16px' }}>
               <video autoPlay loop muted playsInline className="rounded-2xl" style={{ width: '100%', height: '100%', objectFit: 'cover' }}>
-                <source src="/images/ქავერი.mp4?v=5" type="video/mp4" />
+                <source src="images/ქავერი.mp4?v=5" type="video/mp4" />
               </video>
             </div>
             <div style={{ marginTop: '24px', textAlign: 'center' }}>
@@ -979,7 +979,7 @@ export default function App() {
             <div className="enamel-info-pane">
               <div className="enamel-info-video">
                 <video autoPlay loop muted playsInline>
-                  <source src="/images/glass_tooth_nerves.mp4" type="video/mp4" />
+                  <source src="images/glass_tooth_nerves.mp4" type="video/mp4" />
                 </video>
               </div>
               <h3>პროფესიული დაცვა</h3>
@@ -1264,7 +1264,7 @@ export default function App() {
        <footer>
         <div className="wrap">
           <a href="#top" className="brand">
-            <img src="/images/logo.webp?v=2" alt="Smile Agency Logo" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
+            <img src="images/logo.webp?v=2" alt="Smile Agency Logo" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
             ღიმილის სააგენტო
           </a>
           <div className="foot-links">
