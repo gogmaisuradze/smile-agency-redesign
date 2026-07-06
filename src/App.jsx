@@ -947,7 +947,7 @@ export default function App() {
             )}
 
             {/* View All Doctors Button */}
-            <div className="text-left mt-10 px-2 pb-2">
+            <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '40px', paddingLeft: '8px', paddingBottom: '8px' }}>
               <button 
                 onClick={() => setShowTeamModal(true)} 
                 className="phone-onboarding-btn glass-neu"
