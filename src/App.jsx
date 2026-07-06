@@ -947,7 +947,7 @@ export default function App() {
             )}
 
             {/* View All Doctors Button */}
-            <div className="text-center mt-8">
+            <div className="text-left mt-10 px-2 pb-2">
               <button 
                 onClick={() => setShowTeamModal(true)} 
                 className="phone-onboarding-btn glass-neu"
