@@ -211,6 +211,24 @@ const playClickSound = () => {
   }
 }
 
+const ENAMEL_DETAILS = {
+  sweets: {
+    title: "შოკოლადი & ტკბილეული",
+    damage: "ტკბილეულის მიღებისას პირის ღრუში არსებული ბაქტერიები იკვებებიან შაქრით და გამოყოფენ აგრესიულ მჟავებს. ეს მჟავები უტევს კბილის ემალს, იწვევს მის დემინერალიზაციას (მინერალების დაკარგვას) და დროთა განმავლობაში აჩენს კარიესს.",
+    tip: "ტკბილეულის მიღების შემდეგ აუცილებლად გამოივლეთ თბილი წყალი, რათა ჩამოირეცხოს შაქრის ნარჩენები. კბილების გახეხვა რეკომენდებულია ჭამიდან 30 წუთის შემდეგ, რადგან მჟავით დასუსტებული ემალის გახეხვა მყისვე აზიანებს მას."
+  },
+  smoking: {
+    title: "მოწევა",
+    damage: "თამბაქოს კვამლში შემავალი ნიკოტინი და ფისები (ტარი) მყისიერად ეკვრის ემალის ზედაპირს, რის გამოც კბილები იღებს ყვითელ ან ყავისფერ ელფერს. გარდა ამისა, ნიკოტინი ავიწროებს სისხლძარღვებს ღრძილებში, რაც იწვევს პაროდონტიტს, კბილების მორყევას და პირის ღრუს სიმშრალეს.",
+    tip: "საუკეთესო გამოსავალი თამბაქოსთვის თავის დანებებაა. კბილის ფერისა და ღრძილების სიჯანსაღის შესანარჩუნებლად აუცილებელია წელიწადში ორჯერ პროფესიული წმენდა კლინიკაში ულტრაბგერითი სკალერითა და Air-Flow სისტემით."
+  },
+  coffee: {
+    title: "ყავა & ჩაი",
+    damage: "ყავა და ჩაი მდიდარია ორგანული საღებავებით - ტანინებით. ტანინები მარტივად აღწევს კბილის ემალის მიკროსკოპულ ფორებში და იწვევს კბილების მდგრად პიგმენტაციას (გამუქებას). ასევე, მათში შემავალი მჟავები და ცხელი ტემპერატურა ასუსტებს მინანქარს.",
+    tip: "შეეცადეთ ყავა ან ჩაი მიირთვათ საწრუპით, რათა მინიმუმამდე დაიყვანოთ სითხის კონტაქტი კბილებთან. დალევიდან 15-20 წუთში კი გამოივლეთ წყალი პირის ღრუში."
+  }
+}
+
 const SERVICES_DETAILS = {
   therapy: {
     title: "თერაპია",
@@ -411,6 +429,7 @@ export default function App() {
   const [activeServiceDetail, setActiveServiceDetail] = useState(null)
   const [activeDoctorDetail, setActiveDoctorDetail] = useState(null)
   const [showMapModal, setShowMapModal] = useState(false)
+  const [activeEnamelDetail, setActiveEnamelDetail] = useState(null)
 
   // Doctor ratings state loaded from localStorage
   const [doctorRatings, setDoctorRatings] = useState(() => {
@@ -920,7 +939,7 @@ export default function App() {
           
           <div className="enamel-layout">
             <div className="enamel-grid">
-              <div className="enamel-card">
+              <div className="enamel-card" onClick={() => { playTic(); setActiveEnamelDetail(ENAMEL_DETAILS.sweets); }} style={{ cursor: 'pointer' }}>
                 <div className="enamel-card-icon">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 9h16M9 5v14M14 5v14"/>
@@ -932,7 +951,7 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="enamel-card">
+              <div className="enamel-card" onClick={() => { playTic(); setActiveEnamelDetail(ENAMEL_DETAILS.smoking); }} style={{ cursor: 'pointer' }}>
                 <div className="enamel-card-icon">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <path d="M17 6c0-1.5-1-2-1-3M13 6c0-1.5-1-2-1-3M4 10h13a3 3 0 0 1 0 6h-1M4 10v4a5 5 0 0 0 5 5h3a5 5 0 0 0 5-5"/>
@@ -944,7 +963,7 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="enamel-card">
+              <div className="enamel-card" onClick={() => { playTic(); setActiveEnamelDetail(ENAMEL_DETAILS.coffee); }} style={{ cursor: 'pointer' }}>
                 <div className="enamel-card-icon">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <path d="M18 8h1a3 3 0 0 1 0 6h-1M4 8h14v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5Z"/><path d="M6 2v2M10 2v2M14 2v2"/>
@@ -1690,6 +1709,64 @@ export default function App() {
                     }
                     setSelectedService(formService);
                     setActiveServiceDetail(null);
+                    const bookingSec = document.getElementById('booking');
+                    if (bookingSec) {
+                      bookingSec.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className="phone-onboarding-btn"
+                  style={{ width: 'auto', padding: '12px 24px' }}
+                >
+                  ჩაეწერე კონსულტაციაზე
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ENAMEL DETAILS MODAL OVERLAY */}
+      {activeEnamelDetail && (
+        <div className="modal-overlay" onClick={() => setActiveEnamelDetail(null)}>
+          <div className="modal-card glass-neu" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '550px', width: '92%' }}>
+            <button 
+              onClick={() => setActiveEnamelDetail(null)} 
+              className="chat-close-recipe" 
+              style={{ position: 'absolute', right: '20px', top: '20px' }}
+              aria-label="დახურვა"
+            >
+              <X className="w-4 h-4" />
+            </button>
+            <div className="text-left">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-[#E08A79] mb-2 flex items-center gap-2">
+                ✦ პროფილაქტიკა & დაცვა
+              </span>
+              <h3 className="font-serif font-bold text-2xl text-[#33353A] mb-4 mt-2">
+                {activeEnamelDetail.title}
+              </h3>
+              
+              <div className="glass-neu p-4 mb-4" style={{ background: 'rgba(224, 138, 121, 0.05)', border: '1px solid rgba(224, 138, 121, 0.15)', boxShadow: 'none' }}>
+                <h4 className="font-bold text-xs text-[#E08A79] mb-2 uppercase tracking-wider">
+                  როგორ აზიანებს ემალს:
+                </h4>
+                <p className="text-sm text-[#5A5D64] leading-relaxed">
+                  {activeEnamelDetail.damage}
+                </p>
+              </div>
+
+              <div className="glass-neu p-4" style={{ background: 'rgba(255, 255, 255, 0.25)', boxShadow: 'none' }}>
+                <h4 className="font-bold text-xs text-[#33353A] mb-2 uppercase tracking-wider">
+                  რეკომენდაცია / პრევენცია:
+                </h4>
+                <p className="text-sm text-[#5A5D64] leading-relaxed">
+                  {activeEnamelDetail.tip}
+                </p>
+              </div>
+
+              <div className="mt-6 flex justify-end gap-3">
+                <button
+                  onClick={() => {
+                    setActiveEnamelDetail(null);
                     const bookingSec = document.getElementById('booking');
                     if (bookingSec) {
                       bookingSec.scrollIntoView({ behavior: 'smooth' });
