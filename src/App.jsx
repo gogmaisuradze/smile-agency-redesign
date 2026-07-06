@@ -430,6 +430,7 @@ export default function App() {
   const [activeDoctorDetail, setActiveDoctorDetail] = useState(null)
   const [showMapModal, setShowMapModal] = useState(false)
   const [activeEnamelDetail, setActiveEnamelDetail] = useState(null)
+  const [activePriceCategory, setActivePriceCategory] = useState(null)
 
   // Doctor ratings state loaded from localStorage
   const [doctorRatings, setDoctorRatings] = useState(() => {
@@ -1586,53 +1587,183 @@ export default function App() {
       {/* PRICES MODAL OVERLAY */}
       {showPricesModal && (
         <div className="modal-overlay" onClick={() => setShowPricesModal(false)}>
-          <div className="modal-card glass-neu" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-card glass-neu" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '650px', width: '90%', maxHeight: '85vh', overflow: 'hidden', display: 'flex', flexDirection: 'column', padding: '32px 24px 24px 24px' }}>
             <button 
               onClick={() => setShowPricesModal(false)} 
               className="chat-close-recipe" 
-              style={{ position: 'absolute', right: '20px', top: '20px' }}
+              style={{ position: 'absolute', right: '20px', top: '20px', zIndex: 10 }}
               aria-label="დახურვა"
             >
               <X className="w-4 h-4" />
             </button>
-            <div className="text-left">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-[#E08A79] mb-2 block">
-                ✦ ფასების სია
-              </span>
-              <h3 className="font-serif font-bold text-xl text-[#33353A] mb-4">კლინიკის სერვისების ფასები</h3>
-              <p className="text-sm text-[#5A5D64] mb-4">
-                Smile Agency გთავაზობთ ხელმისაწვდომ და გამჭვირვალე ფასებს. კონსულტაცია უფასოა იმპლანტაციისა და ორთოდონტიის მკურნალობის გეგმის შედგენისას.
-              </p>
-              
-              <div className="flex flex-col gap-3">
-                <div className="flex justify-between items-center border-b border-white/40 pb-2">
-                  <span className="text-xs font-semibold text-[#33353A]">კონსულტაცია & დიაგნოსტიკა</span>
-                  <span className="text-xs font-bold text-[#E08A79]">უფასო</span>
-                </div>
-                <div className="flex justify-between items-center border-b border-white/40 pb-2">
-                  <span className="text-xs font-semibold text-[#33353A]">ჰიგიენური წმენდა (Air-Flow + ულტრაბგერა)</span>
-                  <span className="text-xs font-bold text-[#E08A79]">80 ₾ -დან</span>
-                </div>
-                <div className="flex justify-between items-center border-b border-white/40 pb-2">
-                  <span className="text-xs font-semibold text-[#33353A]">კბილის დაბჟენვა (თერაპია, ჰელიოპლომბი)</span>
-                  <span className="text-xs font-bold text-[#E08A79]">90 ₾ -დან</span>
-                </div>
-                <div className="flex justify-between items-center border-b border-white/40 pb-2">
-                  <span className="text-xs font-semibold text-[#33353A]">კბილის ამოღება (მარტივი / რთული)</span>
-                  <span className="text-xs font-bold text-[#E08A79]">60 ₾ / 150 ₾</span>
-                </div>
-                <div className="flex justify-between items-center border-b border-white/40 pb-2">
-                  <span className="text-xs font-semibold text-[#33353A]">მეტალის ბრეკეტები (ერთი ყბა)</span>
-                  <span className="text-xs font-bold text-[#E08A79]">800 ₾ -დან</span>
-                </div>
-                <div className="flex justify-between items-center border-b border-white/40 pb-2">
-                  <span className="text-xs font-semibold text-[#33353A]">კბილის იმპლანტაცია (პრემიუმ კლასი)</span>
-                  <span className="text-xs font-bold text-[#E08A79]">750 ₾ -დან</span>
-                </div>
-                <div className="flex justify-between items-center border-b border-white/40 pb-2">
-                  <span className="text-xs font-semibold text-[#33353A]">მეტალო-კერამიკის გვირგვინი</span>
-                  <span className="text-xs font-bold text-[#E08A79]">200 ₾ -დან</span>
-                </div>
+            <div className="text-left" style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
+              <div style={{ paddingBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.4)', flexShrink: 0 }}>
+                <span className="text-[10px] uppercase font-bold tracking-widest text-[#E08A79] mb-1 block">
+                  ✦ ფასების კატალოგი
+                </span>
+                <h3 className="font-serif font-bold text-xl text-[#33353A] mb-1">კლინიკის სერვისების ფასები</h3>
+                <p className="text-xs text-[#5A5D64]">
+                  Smile Agency გთავაზობთ გამჭვირვალე ფასებს. მკურნალობის საბოლოო გეგმა დგინდება ექიმთან კონსულტაციისას.
+                </p>
+              </div>
+
+              {/* Tab Category Buttons */}
+              <div style={{ 
+                display: 'flex', 
+                gap: '8px', 
+                overflowX: 'auto', 
+                padding: '12px 0', 
+                flexShrink: 0, 
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none'
+              }} className="no-scrollbar">
+                {[
+                  "ზოგადი მომსახურება",
+                  "აღდგენითი თერაპია",
+                  "ენდოდონტია (არხების მკურნალობა)",
+                  "პაროდონტოლოგია და ჰიგიენა",
+                  "ბავშვთა სტომატოლოგია",
+                  "ქირურგია",
+                  "იმპლანტოლოგია",
+                  "ორთოპედია",
+                  "ორთოდონტია",
+                  "კბილის სამკაული"
+                ].map((categoryName) => {
+                  const isActive = (activePriceCategory || "ზოგადი მომსახურება") === categoryName;
+                  return (
+                    <button
+                      key={categoryName}
+                      onClick={() => setActivePriceCategory(categoryName)}
+                      className={`phone-onboarding-btn-secondary ${isActive ? 'active-price-tab' : ''}`}
+                      style={{
+                        padding: '6px 14px',
+                        fontSize: '0.75rem',
+                        whiteSpace: 'nowrap',
+                        borderRadius: '20px',
+                        backgroundColor: isActive ? 'var(--accent-color)' : 'rgba(255,255,255,0.5)',
+                        color: isActive ? '#fff' : 'var(--text-color)',
+                        boxShadow: isActive ? 'inset 1px 1px 3px rgba(0,0,0,0.15)' : '1px 1px 3px rgba(0,0,0,0.05)',
+                        border: 'none',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease'
+                      }}
+                    >
+                      {categoryName}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Tab Content Area */}
+              <div style={{ flexGrow: 1, overflowY: 'auto', paddingRight: '4px', marginBlock: '8px' }} className="custom-scrollbar">
+                {(() => {
+                  const currentCatName = activePriceCategory || "ზოგადი მომსახურება";
+                  const pricingData = {
+                    "ზოგადი მომსახურება": [
+                      { n: "პროფესიონალური ჰიგიენა", p: "150₾ - 270₾" },
+                      { n: "კოფერდამი", p: "20₾" },
+                      { n: "ვიზიოგრაფია", p: "6₾" },
+                      { n: "კბილების გათეთრება", p: "700₾ - 1700₾" }
+                    ],
+                    "აღდგენითი თერაპია": [
+                      { n: "მხატვრული რესტავრაცია", p: "250₾" },
+                      { n: "ზედაპირული კარიესი", p: "120₾ - 180₾" },
+                      { n: "საშუალო კარიესი", p: "180₾ - 250₾" },
+                      { n: "ღრმა კარიესი", p: "170₾ - 250₾" },
+                      { n: "მერილენდის ხიდი", p: "600₾" }
+                    ],
+                    "ენდოდონტია (არხების მკურნალობა)": [
+                      { n: "Guttafusion - ერთი არხი", p: "220₾" },
+                      { n: "Guttafusion - რთული არხები", p: "300₾ - 400₾" },
+                      { n: "Endobunic - ერთი არხი", p: "160₾" },
+                      { n: "Endobunic - რთული არხები", p: "200₾ - 230₾" },
+                      { n: "Reciproc - ერთი არხი", p: "180₾" },
+                      { n: "Reciproc - რთული არხები", p: "300₾" },
+                      { n: "შიდა გათეთრება", p: "150₾" },
+                      { n: "არხის განბჟენა", p: "70₾" },
+                      { n: "წკირი ამოღება", p: "60₾" },
+                      { n: "მინა-ბოჭკოვანი წკირი", p: "70₾" },
+                      { n: "მეტალის წკირი", p: "40₾" },
+                      { n: "პერფორაციის დახურვა", p: "100₾" }
+                    ],
+                    "პაროდონტოლოგია და ჰიგიენა": [
+                      { n: "ქვების და ნადების მოცილება", p: "150₾ - 200₾" },
+                      { n: "ჰაერ-ჭავლოვანი აპარატით წმენდა", p: "170₾ - 230₾" },
+                      { n: "აბრაზიული პასტით გაპრიალება", p: "90₾" },
+                      { n: "პაროდონტოლოგიური რუკის შედგენა", p: "80₾" },
+                      { n: "ღრძილის მკურნალობა / კორექცია", p: "60₾ - 100₾" },
+                      { n: "ფრენექტომია", p: "150₾" },
+                      { n: "ფტორირება", p: "50₾" },
+                      { n: "შინირება - ერთი კბილი", p: "100₾" }
+                    ],
+                    "ბავშვთა სტომატოლოგია": [
+                      { n: "ექსტრაქცია (ანესთეზიით)", p: "60₾" },
+                      { n: "ფისურების ჰერმეტიზაცია", p: "70₾" },
+                      { n: "სარძევე კბილის კარიესი", p: "70₾ - 120₾" },
+                      { n: "პულპიტი, პერიოდონტიტი", p: "130₾ - 150₾" },
+                      { n: "ბავშვთა ჰიგიენური წმენდა", p: "100₾ - 150₾" }
+                    ],
+                    "ქირურგია": [
+                      { n: "ანესთეზია", p: "20₾ - 30₾" },
+                      { n: "კბილის ამოღება", p: "80₾ - 150₾" },
+                      { n: "ფესვის ამოღება", p: "50₾ - 150₾" },
+                      { n: "სიბრძნის კბილის ამოღება", p: "250 ₾ - 350 ₾" },
+                      { n: "რეტენციული კბილის ამოღება", p: "300₾ - 450₾" },
+                      { n: "ფესვის მწვერვალის რეზექცია", p: "250₾ - 300₾" },
+                      { n: "სინუს ლიფტინგი", p: "1000₾ - 2000₾" },
+                      { n: "აუგმენტაცია (ძვლის გადანერგვა)", p: "500₾ - 2000₾" }
+                    ],
+                    "იმპლანტოლოგია": [
+                      { n: "MIS (ისრაელი)", p: "1500₾" },
+                      { n: "Neobiotech (კორეა)", p: "1000₾" },
+                      { n: "MIS C1 (ისრაელი)", p: "1500₾" },
+                      { n: "Schutz (გერმანია)", p: "2000₾" },
+                      { n: "Straumann (შვეიცარია)", p: "2500₾" }
+                    ],
+                    "ორთოპედია": [
+                      { n: "ცირკონო-კერამიკის გვირგვინი", p: "350₾ - 500₾" },
+                      { n: "მეტალო-კერამიკის გვიგვინი", p: "180₾" },
+                      { n: "პრეს-კერამიკის ვინირი", p: "700₾ - 750₾" },
+                      { n: "ბრუქსიზმის კაპა", p: "220₾" },
+                      { n: "მოსახსნელი პროტეზი", p: "500₾ - 1000₾" },
+                      { n: "პროტეზი იმპლანტებზე", p: "2200₾ - 3200₾" }
+                    ],
+                    "ორთოდონტია": [
+                      { n: "მეტალის ბრეკეტები", p: "1500₾" },
+                      { n: "კერამიკული ბრეკეტები", p: "2500₾" },
+                      { n: "საფირის ბრეკეტები", p: "3000₾ - 3500₾" },
+                      { n: "თვითლიგირებადი ბრეკეტები", p: "3500₾ - 5500₾" },
+                      { n: "ელაინერები", p: "1800$ - 6000$" },
+                      { n: "სპლინტ თერაპია", p: "500₾ - 1700₾" }
+                    ],
+                    "კბილის სამკაული": [
+                      { n: "ცირკონი", p: "50₾" },
+                      { n: "სვაროვსკი", p: "70₾" },
+                      { n: "ბრილიანტი", p: "150₾" }
+                    ]
+                  };
+                  return (
+                    <div className="flex flex-col gap-3">
+                      {(pricingData[currentCatName] || []).map((item, idx) => (
+                        <div key={idx} className="flex justify-between items-center border-b border-white/40 pb-2">
+                          <span className="text-xs font-semibold text-[#33353A]">{item.n}</span>
+                          <span className="text-xs font-bold text-[#E08A79]">{item.p}</span>
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })()}
+              </div>
+
+              <div style={{ flexShrink: 0, marginTop: '8px', borderTop: '1px solid rgba(255,255,255,0.4)', paddingTop: '12px', textAlign: 'center' }}>
+                <a 
+                  href="#booking" 
+                  onClick={() => setShowPricesModal(false)}
+                  className="phone-onboarding-btn" 
+                  style={{ display: 'inline-flex', width: 'auto', padding: '10px 24px', fontSize: '0.85rem' }}
+                >
+                  უფასო კონსულტაციის დაჯავშნა
+                </a>
               </div>
             </div>
           </div>
