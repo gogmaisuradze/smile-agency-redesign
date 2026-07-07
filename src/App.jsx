@@ -1446,7 +1446,7 @@ export default function App() {
               </div>
               <h4>SmileBot</h4>
               <p>აქტიური დამხმარე</p>
-              <button onClick={() => setShowChat(false)} className="chat-close-recipe" aria-label="დახურვა">
+              <button onClick={() => { playClickSound(); setShowChat(false); }} className="chat-close-recipe" aria-label="დახურვა">
                 <X className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -1520,7 +1520,7 @@ export default function App() {
         <div className="modal-overlay" onClick={() => setShowAboutModal(false)}>
           <div className="modal-card glass-neu" onClick={(e) => e.stopPropagation()}>
             <button 
-              onClick={() => setShowAboutModal(false)} 
+              onClick={() => { playClickSound(); setShowAboutModal(false); }} 
               className="chat-close-recipe" 
               style={{ position: 'absolute', right: '20px', top: '20px' }}
               aria-label="დახურვა"
@@ -1581,7 +1581,7 @@ export default function App() {
         <div className="modal-overlay" onClick={() => setShowTeamModal(false)}>
           <div className="modal-card wide glass-neu" onClick={(e) => e.stopPropagation()}>
             <button 
-              onClick={() => setShowTeamModal(false)} 
+              onClick={() => { playClickSound(); setShowTeamModal(false); }} 
               className="chat-close-recipe" 
               style={{ position: 'absolute', right: '20px', top: '20px' }}
               aria-label="დახურვა"
@@ -1694,7 +1694,7 @@ export default function App() {
         <div className="modal-overlay" onClick={() => setShowResultsModal(false)}>
           <div className="modal-card glass-neu" onClick={(e) => e.stopPropagation()}>
             <button 
-              onClick={() => setShowResultsModal(false)} 
+              onClick={() => { playClickSound(); setShowResultsModal(false); }} 
               className="chat-close-recipe" 
               style={{ position: 'absolute', right: '20px', top: '20px' }}
               aria-label="დახურვა"
@@ -1739,7 +1739,7 @@ export default function App() {
         <div className="modal-overlay" onClick={() => setShowPricesModal(false)}>
           <div className="modal-card glass-neu" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '650px', width: '90%', maxHeight: '85vh', overflow: 'hidden', display: 'flex', flexDirection: 'column', padding: '32px 24px 24px 24px' }}>
             <button 
-              onClick={() => setShowPricesModal(false)} 
+              onClick={() => { playClickSound(); setShowPricesModal(false); }} 
               className="chat-close-recipe" 
               style={{ position: 'absolute', right: '20px', top: '20px', zIndex: 10 }}
               aria-label="დახურვა"
@@ -1935,7 +1935,7 @@ export default function App() {
         <div className="modal-overlay" onClick={() => setShowBlogModal(false)}>
           <div className="modal-card glass-neu" onClick={(e) => e.stopPropagation()}>
             <button 
-              onClick={() => setShowBlogModal(false)} 
+              onClick={() => { playClickSound(); setShowBlogModal(false); }} 
               className="chat-close-recipe" 
               style={{ position: 'absolute', right: '20px', top: '20px' }}
               aria-label="დახურვა"
@@ -1977,7 +1977,7 @@ export default function App() {
         <div className="modal-overlay" onClick={() => setActiveServiceDetail(null)}>
           <div className="modal-card glass-neu" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '600px', width: '92%' }}>
             <button 
-              onClick={() => setActiveServiceDetail(null)} 
+              onClick={() => { playClickSound(); setActiveServiceDetail(null); }} 
               className="chat-close-recipe" 
               style={{ position: 'absolute', right: '20px', top: '20px' }}
               aria-label="დახურვა"
@@ -2042,7 +2042,7 @@ export default function App() {
         <div className="modal-overlay" onClick={() => setActiveEnamelDetail(null)}>
           <div className="modal-card glass-neu" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '550px', width: '92%' }}>
             <button 
-              onClick={() => setActiveEnamelDetail(null)} 
+              onClick={() => { playClickSound(); setActiveEnamelDetail(null); }} 
               className="chat-close-recipe" 
               style={{ position: 'absolute', right: '20px', top: '20px' }}
               aria-label="დახურვა"
@@ -2100,7 +2100,7 @@ export default function App() {
         <div className="modal-overlay" onClick={() => setActiveDoctorDetail(null)}>
           <div className="modal-card glass-neu" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '650px', width: '92%' }}>
             <button 
-              onClick={() => setActiveDoctorDetail(null)} 
+              onClick={() => { playClickSound(); setActiveDoctorDetail(null); }} 
               className="chat-close-recipe" 
               style={{ position: 'absolute', right: '20px', top: '20px' }}
               aria-label="დახურვა"
@@ -2234,6 +2234,7 @@ export default function App() {
           <div className="modal-card glass-neu text-left" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '400px', width: '90%', padding: '28px' }}>
             <button 
               onClick={() => {
+                playClickSound();
                 setShowAuthModal(false);
                 setPendingRating(null);
                 setAuthError('');
@@ -2332,7 +2333,7 @@ export default function App() {
         <div className="modal-overlay" onClick={() => setShowMapModal(false)}>
           <div className="modal-card glass-neu" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '800px', width: '92%', padding: '24px' }}>
             <button 
-              onClick={() => setShowMapModal(false)} 
+              onClick={() => { playClickSound(); setShowMapModal(false); }} 
               className="chat-close-recipe" 
               style={{ position: 'absolute', right: '20px', top: '20px' }}
               aria-label="დახურვა"
