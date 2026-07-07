@@ -188,7 +188,7 @@ const getDoctorDetailsByName = (name) => {
 
 const playClickSound = () => {
   try {
-    const audio = new Audio('/click.mp3');
+    const audio = new Audio(`${import.meta.env.BASE_URL}click.mp3`);
     audio.volume = 0.25;
     audio.play().catch(() => {});
   } catch (e) {
@@ -378,6 +378,7 @@ export default function App() {
   const [headerScrolled, setHeaderScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeLink, setActiveLink] = useState('#dashboard')
+  const [expandedEnamel, setExpandedEnamel] = useState(null)
 
   // Doctor filtering states
   const [searchQuery, setSearchQuery] = useState('')
@@ -677,7 +678,7 @@ export default function App() {
       <header className={headerScrolled ? 'scrolled' : ''}>
         <div className="wrap nav">
           <a href="#top" className="brand">
-            <img src="/images/logo.webp?v=4" alt="Smile Agency Logo" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
+            <img src={`${import.meta.env.BASE_URL}images/logo.webp?v=4`} alt="Smile Agency Logo" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
             ღიმილის სააგენტო
           </a>
           <nav className={`nav-links ${mobileMenuOpen ? 'open' : ''}`} id="navLinks">
@@ -702,7 +703,7 @@ export default function App() {
           <div className="phone-onboarding-card" style={{ maxWidth: '100%', width: '100%', padding: '32px' }}>
             <div className="phone-onboarding-media" style={{ width: '100%', aspectRatio: '21 / 8', height: 'auto', borderRadius: '16px' }}>
               <video autoPlay loop muted playsInline className="rounded-2xl" style={{ width: '100%', height: '100%', objectFit: 'cover' }}>
-                <source src="/images/ქავერი.mp4?v=5" type="video/mp4" />
+                <source src={`${import.meta.env.BASE_URL}images/ქავერი.mp4?v=5`} type="video/mp4" />
               </video>
             </div>
             <div style={{ marginTop: '24px', textAlign: 'center' }}>
@@ -935,7 +936,7 @@ export default function App() {
             )}
 
             {/* View All Doctors Button */}
-            <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '40px', paddingLeft: '8px', paddingBottom: '8px' }}>
+            <div className="doctor-view-all-container" style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '40px', paddingLeft: '8px', paddingBottom: '8px' }}>
               <button 
                 onClick={() => setShowTeamModal(true)} 
                 className="glass-neu"
@@ -976,7 +977,13 @@ export default function App() {
           
           <div className="enamel-layout">
             <div className="enamel-grid">
-              <div className="enamel-card" onClick={() => setActiveEnamelDetail(ENAMEL_DETAILS.sweets)} style={{ cursor: 'pointer' }}>
+              <div className="enamel-card" onClick={() => {
+                if (window.innerWidth <= 768) {
+                  setExpandedEnamel(expandedEnamel === 'sweets' ? null : 'sweets');
+                } else {
+                  setActiveEnamelDetail(ENAMEL_DETAILS.sweets);
+                }
+              }} style={{ cursor: 'pointer' }}>
                 <div className="enamel-card-icon">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 9h16M9 5v14M14 5v14"/>
@@ -984,11 +991,17 @@ export default function App() {
                 </div>
                 <div className="enamel-card-content">
                   <h3>შოკოლადი & ტკბილეული</h3>
-                  <p>შაქარი და მჟავები, რომლებიც ასუსტებენ კბილის მინანქარს და ზრდიან კარიესის რისკს.</p>
+                  <p className={`enamel-desc ${expandedEnamel === 'sweets' ? 'expanded' : ''}`}>შაქარი და მჟავები, რომლებიც ასუსტებენ კბილის მინანქარს და ზრდიან კარიესის რისკს.</p>
                 </div>
               </div>
 
-              <div className="enamel-card" onClick={() => setActiveEnamelDetail(ENAMEL_DETAILS.smoking)} style={{ cursor: 'pointer' }}>
+              <div className="enamel-card" onClick={() => {
+                if (window.innerWidth <= 768) {
+                  setExpandedEnamel(expandedEnamel === 'smoking' ? null : 'smoking');
+                } else {
+                  setActiveEnamelDetail(ENAMEL_DETAILS.smoking);
+                }
+              }} style={{ cursor: 'pointer' }}>
                 <div className="enamel-card-icon">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <path d="M17 6c0-1.5-1-2-1-3M13 6c0-1.5-1-2-1-3M4 10h13a3 3 0 0 1 0 6h-1M4 10v4a5 5 0 0 0 5 5h3a5 5 0 0 0 5-5"/>
@@ -996,11 +1009,17 @@ export default function App() {
                 </div>
                 <div className="enamel-card-content">
                   <h3>მოწევა</h3>
-                  <p>ნიკოტინი და ტარი, რომლებიც იწვევენ კბილის გაყვითლებას, ნადებს და აზიანებენ ღრძილებს.</p>
+                  <p className={`enamel-desc ${expandedEnamel === 'smoking' ? 'expanded' : ''}`}>ნიკოტინი და ტარი, რომლებიც იწვევენ კბილის გაყვითლებას, ნადებს და აზიანებენ ღრძილებს.</p>
                 </div>
               </div>
 
-              <div className="enamel-card" onClick={() => setActiveEnamelDetail(ENAMEL_DETAILS.coffee)} style={{ cursor: 'pointer' }}>
+              <div className="enamel-card" onClick={() => {
+                if (window.innerWidth <= 768) {
+                  setExpandedEnamel(expandedEnamel === 'coffee' ? null : 'coffee');
+                } else {
+                  setActiveEnamelDetail(ENAMEL_DETAILS.coffee);
+                }
+              }} style={{ cursor: 'pointer' }}>
                 <div className="enamel-card-icon">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <path d="M18 8h1a3 3 0 0 1 0 6h-1M4 8h14v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5Z"/><path d="M6 2v2M10 2v2M14 2v2"/>
@@ -1008,7 +1027,7 @@ export default function App() {
                 </div>
                 <div className="enamel-card-content">
                   <h3>ყავა & ჩაი</h3>
-                  <p>ძლიერი პიგმენტები და ტანინები, რომლებიც ღრმად აღწევენ მინანქარში და ტოვებენ მუქ ლაქებს.</p>
+                  <p className={`enamel-desc ${expandedEnamel === 'coffee' ? 'expanded' : ''}`}>ძლიერი პიგმენტები და ტანინები, რომლებიც ღრმად აღწევენ მინანქარში და ტოვებენ მუქ ლაქებს.</p>
                 </div>
               </div>
             </div>
@@ -1016,7 +1035,7 @@ export default function App() {
             <div className="enamel-info-pane">
               <div className="enamel-info-video">
                 <video autoPlay loop muted playsInline>
-                  <source src="/images/glass_tooth_nerves.mp4" type="video/mp4" />
+                  <source src={`${import.meta.env.BASE_URL}images/glass_tooth_nerves.mp4`} type="video/mp4" />
                 </video>
               </div>
               <h3>პროფესიული დაცვა</h3>
@@ -1301,7 +1320,7 @@ export default function App() {
        <footer>
         <div className="wrap">
           <a href="#top" className="brand">
-            <img src="/images/logo.webp?v=4" alt="Smile Agency Logo" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
+            <img src={`${import.meta.env.BASE_URL}images/logo.webp?v=4`} alt="Smile Agency Logo" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
             ღიმილის სააგენტო
           </a>
           <div className="foot-links">
