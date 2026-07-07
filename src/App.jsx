@@ -379,6 +379,7 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeLink, setActiveLink] = useState('#dashboard')
   const [expandedEnamel, setExpandedEnamel] = useState(null)
+  const [expandedService, setExpandedService] = useState(null)
 
   // Doctor filtering states
   const [searchQuery, setSearchQuery] = useState('')
@@ -727,27 +728,45 @@ export default function App() {
             <p>დიაგნოსტიკიდან რთულ ქირურგიულ ჩარევამდე — მკურნალობის სრული ციკლი ერთ სივრცეში.</p>
           </div>
           <div className="svc-grid">
-            <article className="svc" onClick={() => setActiveServiceDetail({ ...SERVICES_DETAILS.therapy, key: 'therapy' })}>
+            <article className="svc" onClick={() => {
+              if (window.innerWidth <= 768) {
+                setExpandedService(expandedService === 'therapy' ? null : 'therapy');
+              } else {
+                setActiveServiceDetail({ ...SERVICES_DETAILS.therapy, key: 'therapy' });
+              }
+            }} style={{ cursor: 'pointer' }}>
               <div className="ic">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                   <path d="M12 3c2.5 0 3.2 1 5 1s2.6-.8 3.7.2C22 5.5 21.5 9 20.4 12.8 19.5 15.8 19 19 17.3 19c-1.4 0-1.6-2.2-2.8-3.5-.7-.8-2.3-.8-3 0C10.3 16.8 10.1 19 8.7 19 7 19 6.5 15.8 5.6 12.8 4.5 9 4 5.5 5.3 4.2 6.4 3.2 7.3 4 9 4s2.5-1 3-1Z"/>
                 </svg>
               </div>
               <h3>თერაპია</h3>
-              <p>კარიესისა და გართულებების მკურნალობა კბილის შენარჩუნებით.</p>
+              <p className={`svc-desc ${expandedService === 'therapy' ? 'expanded' : ''}`}>კარიესისა და გართულებების მკურნალობა კბილის შენარჩუნებით.</p>
             </article>
 
-            <article className="svc" onClick={() => setActiveServiceDetail({ ...SERVICES_DETAILS.orthopedics, key: 'orthopedics' })}>
+            <article className="svc" onClick={() => {
+              if (window.innerWidth <= 768) {
+                setExpandedService(expandedService === 'orthopedics' ? null : 'orthopedics');
+              } else {
+                setActiveServiceDetail({ ...SERVICES_DETAILS.orthopedics, key: 'orthopedics' });
+              }
+            }} style={{ cursor: 'pointer' }}>
               <div className="ic">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                   <path d="M4 10h16M6 10V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3M8 10v8a2 2 0 0 1-4 0M16 10v8a2 2 0 0 0 4 0"/>
                 </svg>
               </div>
               <h3>ორთოპედია</h3>
-              <p>გვიგვინები, ხიდები და პროტეზირება დაკარგული კბილებისთვის.</p>
+              <p className={`svc-desc ${expandedService === 'orthopedics' ? 'expanded' : ''}`}>გვიგვინები, ხიდები და პროტეზირება დაკარგული კბილებისთვის.</p>
             </article>
 
-            <article className="svc" onClick={() => setActiveServiceDetail({ ...SERVICES_DETAILS.orthodontics, key: 'orthodontics' })}>
+            <article className="svc" onClick={() => {
+              if (window.innerWidth <= 768) {
+                setExpandedService(expandedService === 'orthodontics' ? null : 'orthodontics');
+              } else {
+                setActiveServiceDetail({ ...SERVICES_DETAILS.orthodontics, key: 'orthodontics' });
+              }
+            }} style={{ cursor: 'pointer' }}>
               <div className="ic">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                   <path d="M4 7h16M4 12h16M4 17h16"/>
@@ -757,10 +776,16 @@ export default function App() {
                 </svg>
               </div>
               <h3>ორთოდონტია</h3>
-              <p>კბილების სწორება ბრეკეტებითა და გამჭვირვალე ელაინერებით.</p>
+              <p className={`svc-desc ${expandedService === 'orthodontics' ? 'expanded' : ''}`}>კბილების სწორება ბრეკეტებითა და გამჭვირვალე ელაინერებით.</p>
             </article>
 
-            <article className="svc" onClick={() => setActiveServiceDetail({ ...SERVICES_DETAILS.surgery, key: 'surgery' })}>
+            <article className="svc" onClick={() => {
+              if (window.innerWidth <= 768) {
+                setExpandedService(expandedService === 'surgery' ? null : 'surgery');
+              } else {
+                setActiveServiceDetail({ ...SERVICES_DETAILS.surgery, key: 'surgery' });
+              }
+            }} style={{ cursor: 'pointer' }}>
               <div className="ic">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                   <path d="m14.5 4.5 5 5L9 20l-5 1 1-5L15.5 5.5"/>
@@ -768,20 +793,32 @@ export default function App() {
                 </svg>
               </div>
               <h3>ქირურგია</h3>
-              <p>კბილის ამოღება, რეზექცია და ქირურგიული მანიპულაციები.</p>
+              <p className={`svc-desc ${expandedService === 'surgery' ? 'expanded' : ''}`}>კბილის ამოღება, რეზექცია და ქირურგიული მანიპულაციები.</p>
             </article>
 
-            <article className="svc" onClick={() => setActiveServiceDetail({ ...SERVICES_DETAILS.pediatrics, key: 'pediatrics' })}>
+            <article className="svc" onClick={() => {
+              if (window.innerWidth <= 768) {
+                setExpandedService(expandedService === 'pediatrics' ? null : 'pediatrics');
+              } else {
+                setActiveServiceDetail({ ...SERVICES_DETAILS.pediatrics, key: 'pediatrics' });
+              }
+            }} style={{ cursor: 'pointer' }}>
               <div className="ic">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                   <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM9.5 9.5c.3-.3.7-.5 1.1-.5.4 0 .8.2 1.1.5.3.3.5.7.5 1.1s-.2.8-.5 1.1"/><path d="M14.5 9.5c.3-.3.7-.5 1.1-.5.4 0 .8.2 1.1.5.3.3.5.7.5 1.1s-.2.8-.5 1.1M8 15s1.5 2 4 2 4-2 4-2"/>
                 </svg>
               </div>
               <h3>ბავშვთა სტომატოლოგია</h3>
-              <p>პატარა პაციენტების მკურნალობა მეგობრულ, უმტკივნეულო გარემოში.</p>
+              <p className={`svc-desc ${expandedService === 'pediatrics' ? 'expanded' : ''}`}>პატარა პაციენტების მკურნალობა მეგობრულ, უმტკივნეულო გარემოში.</p>
             </article>
 
-            <article className="svc" onClick={() => setActiveServiceDetail({ ...SERVICES_DETAILS.maxillofacial, key: 'maxillofacial' })}>
+            <article className="svc" onClick={() => {
+              if (window.innerWidth <= 768) {
+                setExpandedService(expandedService === 'maxillofacial' ? null : 'maxillofacial');
+              } else {
+                setActiveServiceDetail({ ...SERVICES_DETAILS.maxillofacial, key: 'maxillofacial' });
+              }
+            }} style={{ cursor: 'pointer' }}>
               <div className="ic">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                   <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
@@ -789,10 +826,16 @@ export default function App() {
                 </svg>
               </div>
               <h3>ყბა-სახის ქირურგია</h3>
-              <p>ყბა-სახის სისტემის რთული ოპერაციები და რეკონსტრუქცია.</p>
+              <p className={`svc-desc ${expandedService === 'maxillofacial' ? 'expanded' : ''}`}>ყბა-სახის სისტემის რთული ოპერაციები და რეკონსტრუქცია.</p>
             </article>
 
-            <article className="svc" onClick={() => setActiveServiceDetail({ ...SERVICES_DETAILS.endodontics, key: 'endodontics' })}>
+            <article className="svc" onClick={() => {
+              if (window.innerWidth <= 768) {
+                setExpandedService(expandedService === 'endodontics' ? null : 'endodontics');
+              } else {
+                setActiveServiceDetail({ ...SERVICES_DETAILS.endodontics, key: 'endodontics' });
+              }
+            }} style={{ cursor: 'pointer' }}>
               <div className="ic">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                   <circle cx="12" cy="12" r="10"/>
@@ -800,37 +843,55 @@ export default function App() {
                 </svg>
               </div>
               <h3>ენდოდონტია</h3>
-              <p>კბილის ფესვის არხების მაღალი სიზუსტის მკურნალობა მიკროსკოპით.</p>
+              <p className={`svc-desc ${expandedService === 'endodontics' ? 'expanded' : ''}`}>კბილის ფესვის არხების მაღალი სიზუსტის მკურნალობა მიკროსკოპით.</p>
             </article>
 
-            <article className="svc" onClick={() => setActiveServiceDetail({ ...SERVICES_DETAILS.aesthetics, key: 'aesthetics' })}>
+            <article className="svc" onClick={() => {
+              if (window.innerWidth <= 768) {
+                setExpandedService(expandedService === 'aesthetics' ? null : 'aesthetics');
+              } else {
+                setActiveServiceDetail({ ...SERVICES_DETAILS.aesthetics, key: 'aesthetics' });
+              }
+            }} style={{ cursor: 'pointer' }}>
               <div className="ic">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                   <path d="m12 3-1.912 5.886H3.894l4.948 3.596L6.93 18.368 12 14.772l5.07 3.596-1.912-5.886 4.948-3.596h-6.194L12 3Z"/>
                 </svg>
               </div>
               <h3>ესთეტიკური სტომატოლოგია</h3>
-              <p>ვინირები, კბილების გათეთრება და ღიმილის სრული დიზაინი.</p>
+              <p className={`svc-desc ${expandedService === 'aesthetics' ? 'expanded' : ''}`}>ვინირები, კბილების გათეთრება და ღიმილის სრული დიზაინი.</p>
             </article>
 
-            <article className="svc" onClick={() => setActiveServiceDetail({ ...SERVICES_DETAILS.implantology, key: 'implantology' })}>
+            <article className="svc" onClick={() => {
+              if (window.innerWidth <= 768) {
+                setExpandedService(expandedService === 'implantology' ? null : 'implantology');
+              } else {
+                setActiveServiceDetail({ ...SERVICES_DETAILS.implantology, key: 'implantology' });
+              }
+            }} style={{ cursor: 'pointer' }}>
               <div className="ic">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/>
                 </svg>
               </div>
               <h3>იმპლანტოლოგია</h3>
-              <p>დაკარგული კბილების აღდგენა თანამედროვე პრემიუმ იმპლანტებით.</p>
+              <p className={`svc-desc ${expandedService === 'implantology' ? 'expanded' : ''}`}>დაკარგული კბილების აღდგენა თანამედროვე პრემიუმ იმპლანტებით.</p>
             </article>
 
-            <article className="svc" onClick={() => setActiveServiceDetail({ ...SERVICES_DETAILS.periodontology, key: 'periodontology' })}>
+            <article className="svc" onClick={() => {
+              if (window.innerWidth <= 768) {
+                setExpandedService(expandedService === 'periodontology' ? null : 'periodontology');
+              } else {
+                setActiveServiceDetail({ ...SERVICES_DETAILS.periodontology, key: 'periodontology' });
+              }
+            }} style={{ cursor: 'pointer' }}>
               <div className="ic">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                   <path d="M4 12c0-4.4 3.6-8 8-8s8 3.6 8 8M12 12c0 2.2-1.8 4-4 4s-4-1.8-4-4"/>
                 </svg>
               </div>
               <h3>პაროდონტოლოგია</h3>
-              <p>ღრძილების მკურნალობა, გაჯანსაღება და დაავადებების პრევენცია.</p>
+              <p className={`svc-desc ${expandedService === 'periodontology' ? 'expanded' : ''}`}>ღრძილების მკურნალობა, გაჯანსაღება და დაავადებების პრევენცია.</p>
             </article>
           </div>
         </div>
