@@ -730,7 +730,11 @@ export default function App() {
           <div className="svc-grid">
             <article className="svc" onClick={() => {
               if (window.innerWidth <= 768) {
-                setExpandedService(expandedService === 'therapy' ? null : 'therapy');
+                if (expandedService === 'therapy') {
+                  setActiveServiceDetail({ ...SERVICES_DETAILS.therapy, key: 'therapy' });
+                } else {
+                  setExpandedService('therapy');
+                }
               } else {
                 setActiveServiceDetail({ ...SERVICES_DETAILS.therapy, key: 'therapy' });
               }
@@ -746,7 +750,11 @@ export default function App() {
 
             <article className="svc" onClick={() => {
               if (window.innerWidth <= 768) {
-                setExpandedService(expandedService === 'orthopedics' ? null : 'orthopedics');
+                if (expandedService === 'orthopedics') {
+                  setActiveServiceDetail({ ...SERVICES_DETAILS.orthopedics, key: 'orthopedics' });
+                } else {
+                  setExpandedService('orthopedics');
+                }
               } else {
                 setActiveServiceDetail({ ...SERVICES_DETAILS.orthopedics, key: 'orthopedics' });
               }
@@ -762,7 +770,11 @@ export default function App() {
 
             <article className="svc" onClick={() => {
               if (window.innerWidth <= 768) {
-                setExpandedService(expandedService === 'orthodontics' ? null : 'orthodontics');
+                if (expandedService === 'orthodontics') {
+                  setActiveServiceDetail({ ...SERVICES_DETAILS.orthodontics, key: 'orthodontics' });
+                } else {
+                  setExpandedService('orthodontics');
+                }
               } else {
                 setActiveServiceDetail({ ...SERVICES_DETAILS.orthodontics, key: 'orthodontics' });
               }
@@ -781,7 +793,11 @@ export default function App() {
 
             <article className="svc" onClick={() => {
               if (window.innerWidth <= 768) {
-                setExpandedService(expandedService === 'surgery' ? null : 'surgery');
+                if (expandedService === 'surgery') {
+                  setActiveServiceDetail({ ...SERVICES_DETAILS.surgery, key: 'surgery' });
+                } else {
+                  setExpandedService('surgery');
+                }
               } else {
                 setActiveServiceDetail({ ...SERVICES_DETAILS.surgery, key: 'surgery' });
               }
@@ -798,7 +814,11 @@ export default function App() {
 
             <article className="svc" onClick={() => {
               if (window.innerWidth <= 768) {
-                setExpandedService(expandedService === 'pediatrics' ? null : 'pediatrics');
+                if (expandedService === 'pediatrics') {
+                  setActiveServiceDetail({ ...SERVICES_DETAILS.pediatrics, key: 'pediatrics' });
+                } else {
+                  setExpandedService('pediatrics');
+                }
               } else {
                 setActiveServiceDetail({ ...SERVICES_DETAILS.pediatrics, key: 'pediatrics' });
               }
@@ -814,7 +834,11 @@ export default function App() {
 
             <article className="svc" onClick={() => {
               if (window.innerWidth <= 768) {
-                setExpandedService(expandedService === 'maxillofacial' ? null : 'maxillofacial');
+                if (expandedService === 'maxillofacial') {
+                  setActiveServiceDetail({ ...SERVICES_DETAILS.maxillofacial, key: 'maxillofacial' });
+                } else {
+                  setExpandedService('maxillofacial');
+                }
               } else {
                 setActiveServiceDetail({ ...SERVICES_DETAILS.maxillofacial, key: 'maxillofacial' });
               }
@@ -831,7 +855,11 @@ export default function App() {
 
             <article className="svc" onClick={() => {
               if (window.innerWidth <= 768) {
-                setExpandedService(expandedService === 'endodontics' ? null : 'endodontics');
+                if (expandedService === 'endodontics') {
+                  setActiveServiceDetail({ ...SERVICES_DETAILS.endodontics, key: 'endodontics' });
+                } else {
+                  setExpandedService('endodontics');
+                }
               } else {
                 setActiveServiceDetail({ ...SERVICES_DETAILS.endodontics, key: 'endodontics' });
               }
@@ -848,7 +876,11 @@ export default function App() {
 
             <article className="svc" onClick={() => {
               if (window.innerWidth <= 768) {
-                setExpandedService(expandedService === 'aesthetics' ? null : 'aesthetics');
+                if (expandedService === 'aesthetics') {
+                  setActiveServiceDetail({ ...SERVICES_DETAILS.aesthetics, key: 'aesthetics' });
+                } else {
+                  setExpandedService('aesthetics');
+                }
               } else {
                 setActiveServiceDetail({ ...SERVICES_DETAILS.aesthetics, key: 'aesthetics' });
               }
@@ -864,7 +896,11 @@ export default function App() {
 
             <article className="svc" onClick={() => {
               if (window.innerWidth <= 768) {
-                setExpandedService(expandedService === 'implantology' ? null : 'implantology');
+                if (expandedService === 'implantology') {
+                  setActiveServiceDetail({ ...SERVICES_DETAILS.implantology, key: 'implantology' });
+                } else {
+                  setExpandedService('implantology');
+                }
               } else {
                 setActiveServiceDetail({ ...SERVICES_DETAILS.implantology, key: 'implantology' });
               }
@@ -880,7 +916,11 @@ export default function App() {
 
             <article className="svc" onClick={() => {
               if (window.innerWidth <= 768) {
-                setExpandedService(expandedService === 'periodontology' ? null : 'periodontology');
+                if (expandedService === 'periodontology') {
+                  setActiveServiceDetail({ ...SERVICES_DETAILS.periodontology, key: 'periodontology' });
+                } else {
+                  setExpandedService('periodontology');
+                }
               } else {
                 setActiveServiceDetail({ ...SERVICES_DETAILS.periodontology, key: 'periodontology' });
               }
