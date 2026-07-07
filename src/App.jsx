@@ -1634,6 +1634,7 @@ export default function App() {
                       key={i} 
                       className="doctor-app-card"
                       onClick={() => {
+                        playClickSound();
                         if (details) {
                           setActiveDoctorDetail(details);
                         } else {
@@ -1956,19 +1957,19 @@ export default function App() {
                 <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
                   <h4 className="font-bold text-sm text-[#33353A] mb-1">როგორ მოვუაროთ ბრეკეტებს სწორად?</h4>
                   <p className="text-xs text-[#5A5D64] mb-2">გაიგეთ, როგორ გამოიყენოთ სპეციალური ორთოდონტიული ჯაგრისები და ფლოსი ბრეკეტებით მკურნალობის პერიოდში სრულყოფილი სისუფთავის შესანარჩუნებლად.</p>
-                  <a href="#booking" onClick={() => setShowBlogModal(false)} className="text-[10px] font-bold text-[#E08A79] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                  <a href="#booking" onClick={() => { playClickSound(); setShowBlogModal(false); }} className="text-[10px] font-bold text-[#E08A79] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
                 </article>
 
                 <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
                   <h4 className="font-bold text-sm text-[#33353A] mb-1">კბილის იმპლანტაციის 5 უპირატესობა</h4>
                   <p className="text-xs text-[#5A5D64] mb-2">რატომ არის იმპლანტი საუკეთესო და ყველაზე ბუნებრივი არჩევანი დაკარგული კბილების აღსადგენად. როგორ გვეხმარება ის მეზობელი კბილების შენარჩუნებაში.</p>
-                  <a href="#booking" onClick={() => setShowBlogModal(false)} className="text-[10px] font-bold text-[#E08A79] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                  <a href="#booking" onClick={() => { playClickSound(); setShowBlogModal(false); }} className="text-[10px] font-bold text-[#E08A79] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
                 </article>
 
                 <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
                   <h4 className="font-bold text-sm text-[#33353A] mb-1">როგორ ავიცილოთ თავიდან კარიესი?</h4>
                   <p className="text-xs text-[#5A5D64] mb-2">ყოველდღიური მარტივი რჩევები, კვების რაციონის კორექტირება და სწორი ჰიგიენური ჩვევები, რომლებიც დაიცავს თქვენს ემალს დაზიანებისგან.</p>
-                  <a href="#booking" onClick={() => setShowBlogModal(false)} className="text-[10px] font-bold text-[#E08A79] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                  <a href="#booking" onClick={() => { playClickSound(); setShowBlogModal(false); }} className="text-[10px] font-bold text-[#E08A79] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
                 </article>
               </div>
             </div>
@@ -2017,6 +2018,7 @@ export default function App() {
               <div className="mt-6 flex justify-end">
                 <button
                   onClick={() => {
+                    playClickSound();
                     let formService = activeServiceDetail.title;
                     if (formService === 'ქირურგია' || formService === 'ყბა-სახის ქირურგია') {
                       formService = 'ქირურგია / ყბა-სახე';
@@ -2082,6 +2084,8 @@ export default function App() {
               <div className="mt-6 flex justify-end gap-3">
                 <button
                   onClick={() => {
+                    playClickSound();
+                    setSelectedService('კონსულტაცია');
                     setActiveEnamelDetail(null);
                     const bookingSec = document.getElementById('booking');
                     if (bookingSec) {
@@ -2208,6 +2212,7 @@ export default function App() {
                 <div className="mt-6 flex justify-end gap-3">
                   <button
                     onClick={() => {
+                      playClickSound();
                       setSelectedDoctor(activeDoctorDetail.name);
                       setActiveDoctorDetail(null);
                       setShowTeamModal(false);
