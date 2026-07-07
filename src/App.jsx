@@ -188,24 +188,9 @@ const getDoctorDetailsByName = (name) => {
 
 const playClickSound = () => {
   try {
-    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContextClass) return;
-    const audioCtx = new AudioContextClass();
-    const oscillator = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-    
-    oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(1000, audioCtx.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.05);
-    
-    gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
-    
-    oscillator.start();
-    oscillator.stop(audioCtx.currentTime + 0.05);
+    const audio = new Audio('/click.mp3');
+    audio.volume = 0.25;
+    audio.play().catch(() => {});
   } catch (e) {
     // Silently catch autoplay/activation blocks
   }
@@ -388,9 +373,11 @@ const renderServiceIcon = (key) => {
 }
 
 export default function App() {
+  const lang = 'ka'
   // Navigation states
   const [headerScrolled, setHeaderScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [activeLink, setActiveLink] = useState('#dashboard')
 
   // Doctor filtering states
   const [searchQuery, setSearchQuery] = useState('')
@@ -694,10 +681,10 @@ export default function App() {
             ღიმილის სააგენტო
           </a>
           <nav className={`nav-links ${mobileMenuOpen ? 'open' : ''}`} id="navLinks">
-            <a href="#dashboard" onClick={() => setMobileMenuOpen(false)} className="active">მთავარი</a>
-            <a href="#services" onClick={() => setMobileMenuOpen(false)}>სერვისები</a>
-            <a href="#doctors-portal" onClick={() => setMobileMenuOpen(false)}>ექიმები</a>
-            <a href="#booking" onClick={() => setMobileMenuOpen(false)}>დაჯავშნა</a>
+            <a href="#dashboard" onClick={() => { setMobileMenuOpen(false); setActiveLink('#dashboard'); }} className={activeLink === '#dashboard' ? 'active' : ''}>მთავარი</a>
+            <a href="#services" onClick={() => { setMobileMenuOpen(false); setActiveLink('#services'); }} className={activeLink === '#services' ? 'active' : ''}>სერვისები</a>
+            <a href="#doctors-portal" onClick={() => { setMobileMenuOpen(false); setActiveLink('#doctors-portal'); }} className={activeLink === '#doctors-portal' ? 'active' : ''}>ექიმები</a>
+            <a href="#booking" onClick={() => { setMobileMenuOpen(false); setActiveLink('#booking'); }} className={activeLink === '#booking' ? 'active' : ''}>დაჯავშნა</a>
           </nav>
           <a href="#booking" className="nav-cta">
             <CalendarIcon className="w-4 h-4" />
@@ -919,6 +906,7 @@ export default function App() {
                       <div className="doctor-app-info">
                         <h3 title={d.n}>{d.n}</h3>
                         <p title={d.s}>{d.s}</p>
+                        <span className="doctor-profile-link">დეტალურად ➔</span>
                       </div>
                     </div>
                     <div className="doctor-app-meta">
@@ -950,20 +938,27 @@ export default function App() {
             <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '40px', paddingLeft: '8px', paddingBottom: '8px' }}>
               <button 
                 onClick={() => setShowTeamModal(true)} 
-                className="phone-onboarding-btn glass-neu"
+                className="glass-neu"
                 style={{ 
                   display: 'inline-flex', 
                   alignItems: 'center', 
+                  justifyContent: 'center',
                   gap: '8px', 
                   width: 'auto', 
+                  flex: 'none',
                   padding: '12px 28px',
                   borderRadius: '30px',
                   fontWeight: 'bold',
-                  boxShadow: '3px 3px 8px var(--shadow-dark), -3px -3px 8px var(--shadow-light)'
+                  backgroundColor: 'var(--accent-color)',
+                  color: '#ffffff',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  boxShadow: '3px 3px 8px var(--shadow-dark), -3px -3px 8px var(--shadow-light)',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease'
                 }}
               >
                 <Users className="w-4 h-4" />
-                ყველას ნახვა
+                {lang === 'ka' ? 'ყველას ნახვა' : 'View All'}
               </button>
             </div>
           </div>
@@ -1414,32 +1409,46 @@ export default function App() {
             </button>
             <div className="text-left">
               <span className="text-[10px] uppercase font-bold tracking-widest text-[#E08A79] mb-2 block">
-                ✦ კლინიკის შესახებ
+                {lang === 'ka' ? '✦ კლინიკის შესახებ' : '✦ About Clinic'}
               </span>
-              <h3 className="font-serif font-bold text-xl text-[#33353A] mb-4">ღიმილის სააგენტო — უმაღლესი სტანდარტის სტომატოლოგია</h3>
+              <h3 className="font-serif font-bold text-xl text-[#33353A] mb-4">
+                {lang === 'ka' ? 'ღიმილის სააგენტო — უმაღლესი სტანდარტის სტომატოლოგია' : 'Smile Agency — Dental Care of Highest Standards'}
+              </h3>
               <p className="text-sm leading-relaxed text-[#5A5D64] mb-3">
-                „ღიმილის სააგენტო“ 2020 წლიდან ზრუნავს თქვენს ჯანსაღ და ესთეტიკურ ღიმილზე. ჩვენი გუნდი აერთიანებს 18 მაღალკვალიფიციურ, გამოცდილ სტომატოლოგს, რომლებიც მუდმივად ეუფლებიან მკურნალობის თანამედროვე, საერთაშორისო მეთოდებს.
+                {lang === 'ka' 
+                  ? '„ღიმილის სააგენტო“ 2020 წლიდან ზრუნავს თქვენს ჯანსაღ და ესთეტიკურ ღიმილზე. ჩვენი გუნდი აერთიანებს 18 მაღალკვალიფიციურ, გამოცდილ სტომატოლოგს, რომლებიც მუდმივად ეუფლებიან მკურნალობის თანამედროვე, საერთაშორისო მეთოდებს.'
+                  : 'Since 2020, Smile Agency has been caring for your healthy and beautiful smile. Our team brings together 18 highly qualified, experienced dentists who continuously master modern, international treatment methods.'}
               </p>
               <p className="text-sm leading-relaxed text-[#5A5D64] mb-6">
-                კლინიკა აღჭურვილია ულტრათანამედროვე ციფრული სადიაგნოსტიკო აპარატურით, რაც უზრუნველყოფს მკურნალობის მაქსიმალურ სიზუსტეს, უსაფრთხოებას და კომფორტს ყოველი პაციენტისთვის. ჩვენი მიზანია შევქმნათ თბილი, უმტკივნეულო გარემო, სადაც პრემიუმ ხარისხის მომსახურება ხელმისაწვდომია მთელი ოჯახისთვის.
+                {lang === 'ka'
+                  ? 'კლინიკა აღჭურვილია ულტრათანამედროვე ციფრული სადიაგნოსტიკო აპარატურით, რაც უზრუნველყოფს მკურნალობის მაქსიმალურ სიზუსტეს, უსაფრთხოებას და კომფორტს ყოველი პაციენტისთვის. ჩვენი მიზანია შევქმნათ თბილი, უმტკივნეულო გარემო, სადაც პრემიუმ ხარისხის მომსახურება ხელმისაწვდომია მთელი ოჯახისთვის.'
+                  : 'The clinic is equipped with state-of-the-art digital diagnostic equipment, ensuring maximum precision, safety, and comfort for every patient. Our goal is to create a warm, painless environment where premium quality services are accessible to the whole family.'}
               </p>
               
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
                 <div className="glass-neu p-4 text-center" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.1)' }}>
-                  <div className="text-2xl font-bold text-[#E08A79] font-serif">5+</div>
-                  <div className="text-[10px] font-bold text-[#8A8E98] uppercase mt-1">წელი ბაზარზე</div>
+                  <div className="text-2xl font-bold text-[#E08A79] font-serif">2020</div>
+                  <div className="text-[10px] font-bold text-[#8A8E98] uppercase mt-1">
+                    {lang === 'ka' ? 'წლიდან ბაზარზე' : 'Since 2020 on Market'}
+                  </div>
                 </div>
                 <div className="glass-neu p-4 text-center" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.1)' }}>
                   <div className="text-2xl font-bold text-[#E08A79] font-serif">18</div>
-                  <div className="text-[10px] font-bold text-[#8A8E98] uppercase mt-1">ექიმის გუნდი</div>
+                  <div className="text-[10px] font-bold text-[#8A8E98] uppercase mt-1">
+                    {lang === 'ka' ? 'ექიმის გუნდი' : 'Doctors Team'}
+                  </div>
                 </div>
                 <div className="glass-neu p-4 text-center" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.1)' }}>
                   <div className="text-2xl font-bold text-[#E08A79] font-serif">10K+</div>
-                  <div className="text-[10px] font-bold text-[#8A8E98] uppercase mt-1">პაციენტი</div>
+                  <div className="text-[10px] font-bold text-[#8A8E98] uppercase mt-1">
+                    {lang === 'ka' ? 'პაციენტი' : 'Patients'}
+                  </div>
                 </div>
                 <div className="glass-neu p-4 text-center" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.1)' }}>
                   <div className="text-2xl font-bold text-[#E08A79] font-serif">7/7</div>
-                  <div className="text-[10px] font-bold text-[#8A8E98] uppercase mt-1">ღიაა ყოველდღე</div>
+                  <div className="text-[10px] font-bold text-[#8A8E98] uppercase mt-1">
+                    {lang === 'ka' ? 'ღიაა ყოველდღე' : 'Open Daily'}
+                  </div>
                 </div>
               </div>
             </div>
@@ -1527,6 +1536,7 @@ export default function App() {
                         <div className="doctor-app-info">
                           <h3 title={d.n}>{d.n}</h3>
                           <p title={d.s}>{d.s}</p>
+                          <span className="doctor-profile-link">დეტალურად ➔</span>
                         </div>
                       </div>
                       <div className="doctor-app-meta">
