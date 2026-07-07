@@ -1755,6 +1755,8 @@ footer .brand {
 
   /* Calendar grid scaling for mobile phone zones */
   .cal-grid {
+    display: grid !important;
+    grid-template-columns: repeat(7, 1fr) !important;
     gap: 4px !important;
   }
   .cal-grid .wd {
@@ -1763,6 +1765,8 @@ footer .brand {
   }
   .day {
     font-size: 0.76rem !important;
+    padding: 0 !important;
+    aspect-ratio: 1 / 1 !important;
   }
   .cal-top .m {
     font-size: 0.95rem !important;
