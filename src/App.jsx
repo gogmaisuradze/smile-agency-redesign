@@ -52,7 +52,7 @@ const BOT_RESPONSES = {
   welcome: 'გამარჯობა! მე ვარ SmileBot. რით შემიძლია დაგეხმაროთ დღეს? აირჩიეთ კითხვა ან მოგვწერეთ:',
   services: 'ღიმილის სააგენტოში გთავაზობთ სრულ სტომატოლოგიურ მომსახურებას: თერაპია (კარიესის მკურნალობა), ორთოპედია (პროთეზირება, გვირგვინები), ორთოდონტია (ბრეკეტები, ელაინერებით სწორება), ქირურგია და იმპლანტაცია, პაროდონტოლოგია და ციფრული რენტგენოგრაფია. დეტალური ინფორმაციისთვის შეგიძლიათ ეწვიოთ საიტზე სერვისების განყოფილებას.',
   prices: 'კლინიკაში მოქმედებს ხელმისაწვდომი ფასები. კონსულტაცია უფასოა იმპლანტაციისა და პროტეზირების მკურნალობის გეგმის შედგენისას. დეტალური ფასები განისაზღვრება ექიმთან ვიზიტისას.',
-  contact: 'კლინიკა მდებარეობს თბილისში, მელიტონ და ანდრია ბალანჩივაძეების ქ. 14. სამუშაო საათები: ყოველდღე 9:00 - 22:00. ტელეფონი: 555 58 53 56.'
+  contact: 'კლინიკა მდებარეობს თბილისში, მელიტონ და ანდრია ბალანჩივაძეების ქ. 14. სამუშაო საათები: ორშ – შაბ: 9:00–22:00 · კვ: 11:00–18:00. ტელეფონი: 555 58 53 56.'
 }
 
 const MONTHS = ["იანვარი", "თებერვალი", "მარტი", "აპრილი", "მაისი", "ივნისი", "ივლისი", "აგვისტო", "სექტემბერი", "ოქტომბერი", "ნოემბერი", "დეკემბერი"]
@@ -1245,8 +1245,7 @@ export default function App() {
                   if (!day) return <div key={`empty-${idx}`} className="day empty"></div>
                   const isSelected = selectedDate && day.toDateString() === selectedDate.toDateString()
                   const isPast = day < today
-                  const isSunday = day.getDay() === 0
-                  const isDisabled = isPast || isSunday
+                  const isDisabled = isPast
                   
                   return (
                     <button
@@ -1257,7 +1256,6 @@ export default function App() {
                       }}
                       disabled={isDisabled}
                       className={`day ${isSelected ? 'sel' : ''}`}
-                      style={isSunday ? { opacity: 0.35, cursor: 'not-allowed', color: '#8A8E98' } : {}}
                     >
                       {day.getDate()}
                     </button>
@@ -1268,6 +1266,12 @@ export default function App() {
               <div className="slots-label">აირჩიე დრო</div>
               <div className="slots">
                 {TIMES.map((time, idx) => {
+                  // Filter out Sunday hours: Sunday working hours are 11:00 to 18:00
+                  const isDateSunday = selectedDate && selectedDate.getDay() === 0;
+                  if (isDateSunday) {
+                    const hour = parseInt(time.split(':')[0]);
+                    if (hour < 11 || hour > 18) return null;
+                  }
                   const isSelected = selectedTime === time
                   return (
                     <button
@@ -1410,7 +1414,7 @@ export default function App() {
               <span className="ic"><Clock className="w-5 h-5" /></span>
               <div>
                 <div className="lab">საათები</div>
-                <div className="val">ორშ – შაბ: 9:00–22:00 · კვ: დაკეტილი</div>
+                <div className="val">ორშ – შაბ: 9:00–22:00 · კვ: 11:00–18:00</div>
               </div>
             </div>
           </div>
