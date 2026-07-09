@@ -688,7 +688,7 @@ export default function App() {
           <nav className={`nav-links ${mobileMenuOpen ? 'open' : ''}`} id="navLinks">
             <a href="#dashboard" onClick={() => { setMobileMenuOpen(false); setActiveLink('#dashboard'); }} className={activeLink === '#dashboard' ? 'active' : ''}>მთავარი</a>
             <a href="#services" onClick={() => { setMobileMenuOpen(false); setActiveLink('#services'); }} className={activeLink === '#services' ? 'active' : ''}>სერვისები</a>
-            <a href="#doctors-portal" onClick={() => { setMobileMenuOpen(false); setActiveLink('#doctors-portal'); }} className={activeLink === '#doctors-portal' ? 'active' : ''}>ექიმები</a>
+            <a href="#doctors" onClick={() => { setMobileMenuOpen(false); setActiveLink('#doctors'); }} className={activeLink === '#doctors' ? 'active' : ''}>ექიმები</a>
             <a href="#booking" onClick={() => { setMobileMenuOpen(false); setActiveLink('#booking'); }} className={activeLink === '#booking' ? 'active' : ''}>დაჯავშნა</a>
           </nav>
           <a href="#booking" className="nav-cta">
@@ -941,7 +941,7 @@ export default function App() {
       </section>
 
       {/* ACTIVE DOCTORS PORTAL SECTION */}
-      <section className="block" id="doctors-portal" style={{ paddingTop: 0 }}>
+      <section className="block" id="doctors" style={{ paddingTop: 0 }}>
         <div className="wrap text-left">
           <div className="glass-neu">
             <span className="text-[10px] uppercase font-bold tracking-widest text-[#E08A79] mb-2 block">
@@ -1071,7 +1071,7 @@ export default function App() {
       </section>
 
       {/* CLINICAL HUB PORTALS */}
-      <section className="block" id="doctors" style={{paddingTop: 0}}>
+      <section className="block" id="clinical-menu" style={{paddingTop: 0}}>
         <div className="wrap text-left">
           <div className="head">
             <span className="eyebrow">კლინიკის მენიუ</span>
