@@ -1613,7 +1613,7 @@ export default function App() {
                 {categories.map((cat, idx) => (
                   <button
                     key={idx}
-                    onClick={() => setActiveCategory(cat)}
+                    onClick={() => { playClickSound(); setActiveCategory(cat); }}
                     className={`service-chip ${activeCategory === cat ? 'active' : ''}`}
                   >
                     {cat}
@@ -1682,6 +1682,7 @@ export default function App() {
                         <button 
                           onClick={(e) => {
                             e.stopPropagation();
+                            playClickSound();
                             setShowTeamModal(false);
                             handleSelectDoctorForBooking(d.n, d.s);
                           }}
