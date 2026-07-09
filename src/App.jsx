@@ -19,7 +19,8 @@ import {
   DollarSign,
   TrendingUp,
   BookOpen,
-  Fingerprint
+  Fingerprint,
+  Cpu
 } from 'lucide-react'
 
 // Doctor list
@@ -415,6 +416,7 @@ export default function App() {
   const [showResultsModal, setShowResultsModal] = useState(false)
   const [showPricesModal, setShowPricesModal] = useState(false)
   const [showBlogModal, setShowBlogModal] = useState(false)
+  const [showEquipModal, setShowEquipModal] = useState(false)
   const [activeServiceDetail, setActiveServiceDetail] = useState(null)
   const [activeDoctorDetail, setActiveDoctorDetail] = useState(null)
   const [showMapModal, setShowMapModal] = useState(false)
@@ -1198,6 +1200,14 @@ export default function App() {
               <p>რჩევები ჯანსაღი ღიმილისთვის</p>
             </div>
 
+            <div className="menu-hub-card" onClick={() => setShowEquipModal(true)}>
+              <div className="menu-hub-icon">
+                <Cpu className="w-5 h-5" />
+              </div>
+              <h3>ჩვენი აპარატურა</h3>
+              <p>ჩვენი საუკეთესო აპარატურა</p>
+            </div>
+
           </div>
         </div>
       </section>
@@ -1377,13 +1387,13 @@ export default function App() {
           </div>
 
           <div className="cstrip">
-            <div className="citem">
+            <a className="citem" href="tel:+995555585356" style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>
               <span className="ic"><Phone className="w-5 h-5" /></span>
               <div>
                 <div className="lab">დარეკე</div>
-                <a className="val" href="tel:+995555585356">555 585 356</a>
+                <div className="val">555 585 356</div>
               </div>
-            </div>
+            </a>
 
             <div className="citem" onClick={() => setShowMapModal(true)} style={{ cursor: 'pointer' }}>
               <span className="ic"><MapPin className="w-5 h-5" /></span>
@@ -1393,13 +1403,13 @@ export default function App() {
               </div>
             </div>
 
-            <div className="citem">
+            <a className="citem" href="mailto:Smileagency2020@gmail.com" style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>
               <span className="ic"><Mail className="w-5 h-5" /></span>
               <div>
                 <div className="lab">ელ. ფოსტა</div>
-                <a className="val" href="mailto:Smileagency2020@gmail.com">Smileagency2020@gmail.com</a>
+                <div className="val">Smileagency2020@gmail.com</div>
               </div>
-            </div>
+            </a>
 
             <div 
               className="citem" 
@@ -1970,6 +1980,57 @@ export default function App() {
                   <h4 className="font-bold text-sm text-[#33353A] mb-1">როგორ ავიცილოთ თავიდან კარიესი?</h4>
                   <p className="text-xs text-[#5A5D64] mb-2">ყოველდღიური მარტივი რჩევები, კვების რაციონის კორექტირება და სწორი ჰიგიენური ჩვევები, რომლებიც დაიცავს თქვენს ემალს დაზიანებისგან.</p>
                   <a href="#booking" onClick={() => { playClickSound(); setShowBlogModal(false); }} className="text-[10px] font-bold text-[#E08A79] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* EQUIPMENT MODAL OVERLAY */}
+      {showEquipModal && (
+        <div className="modal-overlay" onClick={() => setShowEquipModal(false)}>
+          <div className="modal-card glass-neu" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '600px', width: '92%', maxHeight: '85vh', overflowY: 'auto' }}>
+            <button 
+              onClick={() => { playClickSound(); setShowEquipModal(false); }} 
+              className="chat-close-recipe" 
+              style={{ position: 'absolute', right: '20px', top: '20px' }}
+              aria-label="დახურვა"
+            >
+              <X className="w-4 h-4" />
+            </button>
+            <div className="text-left">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-[#E08A79] mb-2 block">
+                ✦ უახლესი ტექნოლოგიები
+              </span>
+              <h3 className="font-serif font-bold text-xl text-[#33353A] mb-4">ჩვენი საუკეთესო აპარატურა</h3>
+              <p className="text-xs text-[#5A5D64] mb-6">
+                ღიმილის სააგენტო აღჭურვილია წამყვანი ევროპული და ამერიკული ბრენდების ულტრათანამედროვე აპარატურით, რაც მკურნალობის მაქსიმალურ სიზუსტეს, უსაფრთხოებასა და უმტკივნეულო პროცესს გარანტირებს.
+              </p>
+              
+              <div className="flex flex-col gap-4">
+                <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
+                  <h4 className="font-bold text-sm text-[#33353A] mb-1">სტომატოლოგიური მიკროსკოპი (Leica / Zeiss)</h4>
+                  <p className="text-xs text-[#5A5D64] mb-2">კბილის ფესვის არხების მკურნალობისას უზრუნველყოფს 30-ჯერად გადიდებას. გვეხმარება ყველაზე რთულად შესამჩნევი ანატომიური დეტალების დანახვასა და მკურნალობაში.</p>
+                  <a href="#booking" onClick={() => { playClickSound(); setSelectedService('კონსულტაცია'); setShowEquipModal(false); }} className="text-[10px] font-bold text-[#E08A79] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                </article>
+
+                <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
+                  <h4 className="font-bold text-sm text-[#33353A] mb-1">3D კომპიუტერული ტომოგრაფი (CBCT)</h4>
+                  <p className="text-xs text-[#5A5D64] mb-2">ულტრა-დაბალი გამოსხივების ციფრული 3D დიაგნოსტიკა. წამებში ვიღებთ ყბა-კბილთა სისტემის უზუსტეს სამგანზომილებიან სურათს მკურნალობის უშეცდომო დაგეგმვისთვის.</p>
+                  <a href="#booking" onClick={() => { playClickSound(); setSelectedService('კონსულტაცია'); setShowEquipModal(false); }} className="text-[10px] font-bold text-[#E08A79] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                </article>
+
+                <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
+                  <h4 className="font-bold text-sm text-[#33353A] mb-1">შიდა პირის ღრუს 3D სკანერი (3Shape TRIOS)</h4>
+                  <p className="text-xs text-[#5A5D64] mb-2">ტრადიციული, უსიამოვნო ანაბეჭდების მასების ნაცვლად, პირის ღრუს სწრაფი, კომფორტული და ზუსტი ციფრული სკანირება ვინირებისა და გვირგვინების დასამზადებლად.</p>
+                  <a href="#booking" onClick={() => { playClickSound(); setSelectedService('კონსულტაცია'); setShowEquipModal(false); }} className="text-[10px] font-bold text-[#E08A79] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                </article>
+
+                <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
+                  <h4 className="font-bold text-sm text-[#33353A] mb-1">სტომატოლოგიური ლაზერი (Biolase)</h4>
+                  <p className="text-xs text-[#5A5D64] mb-2">რბილი ქსოვილების უმტკივნეულო, უსისხლო და ნაკლებად ინვაზიური მკურნალობისთვის. გამოიყენება ღრძილების პლასტიკაში, სტერილიზაციასა და თერაპიაში.</p>
+                  <a href="#booking" onClick={() => { playClickSound(); setSelectedService('კონსულტაცია'); setShowEquipModal(false); }} className="text-[10px] font-bold text-[#E08A79] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
                 </article>
               </div>
             </div>
