@@ -1121,14 +1121,6 @@ export default function App() {
               <p>სერვისების ღირებულებების სია</p>
             </div>
 
-            <div className="menu-hub-card" onClick={() => setShowBlogModal(true)}>
-              <div className="menu-hub-icon">
-                <BookOpen className="w-5 h-5" />
-              </div>
-              <h3>ბლოგი</h3>
-              <p>რჩევები ჯანსაღი ღიმილისთვის</p>
-            </div>
-
           </div>
         </div>
       </section>
@@ -1210,6 +1202,20 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      {/* WIDE BLOG BANNER */}
+      <div className="wrap text-left" style={{ marginTop: '-20px', marginBottom: '40px' }}>
+        <div className="menu-hub-blog-wide animate-on-scroll" onClick={() => setShowBlogModal(true)}>
+          <div className="menu-hub-icon">
+            <BookOpen className="w-5 h-5" />
+          </div>
+          <div className="text-left flex-1">
+            <h3>ბლოგი</h3>
+            <p>საინტერესო სტატიები & რჩევები ჯანსაღი ღიმილისთვის</p>
+          </div>
+          <ChevronRight className="w-5 h-5 text-[#E08A79] shrink-0" />
+        </div>
+      </div>
 
       {/* BOOKING CALENDAR */}
       <section className="block" id="booking" style={{paddingTop: 0}}>
