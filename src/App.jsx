@@ -1176,6 +1176,14 @@ export default function App() {
               <p>გაიცანით 18 პროფესიონალი ექიმი</p>
             </div>
 
+            <div className="menu-hub-card" onClick={() => setShowEquipModal(true)}>
+              <div className="menu-hub-icon">
+                <Cpu className="w-5 h-5" />
+              </div>
+              <h3>ჩვენი აპარატურა</h3>
+              <p>ჩვენი საუკეთესო აპარატურა</p>
+            </div>
+
             <div className="menu-hub-card" onClick={() => setShowResultsModal(true)}>
               <div className="menu-hub-icon">
                 <TrendingUp className="w-5 h-5" />
@@ -1192,22 +1200,17 @@ export default function App() {
               <p>სერვისების ღირებულებების სია</p>
             </div>
 
-            <div className="menu-hub-card" onClick={() => setShowBlogModal(true)}>
-              <div className="menu-hub-icon">
-                <BookOpen className="w-5 h-5" />
-              </div>
-              <h3>ბლოგი</h3>
-              <p>რჩევები ჯანსაღი ღიმილისთვის</p>
-            </div>
+          </div>
 
-            <div className="menu-hub-card" onClick={() => setShowEquipModal(true)}>
-              <div className="menu-hub-icon">
-                <Cpu className="w-5 h-5" />
-              </div>
-              <h3>ჩვენი აპარატურა</h3>
-              <p>ჩვენი საუკეთესო აპარატურა</p>
+          <div className="menu-hub-blog-wide animate-on-scroll" onClick={() => setShowBlogModal(true)}>
+            <div className="menu-hub-icon">
+              <BookOpen className="w-5 h-5" />
             </div>
-
+            <div className="text-left flex-1">
+              <h3>კლინიკის ბლოგი</h3>
+              <p>საინტერესო სტატიები & რჩევები ჯანსაღი ღიმილისთვის</p>
+            </div>
+            <ChevronRight className="w-5 h-5 text-[#E08A79] shrink-0" />
           </div>
         </div>
       </section>
