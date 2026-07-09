@@ -604,6 +604,7 @@ header {
     4px 4px 12px var(--shadow-dark), 
     -4px -4px 12px var(--shadow-light);
   transition: all 0.2s ease;
+  flex: 1;
 }
 
 .enamel-card:hover {
