@@ -20,7 +20,8 @@ import {
   TrendingUp,
   BookOpen,
   Fingerprint,
-  Cpu
+  Cpu,
+  Cigarette
 } from 'lucide-react'
 
 // Doctor list
@@ -1069,86 +1070,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* REDESIGNED ENAMEL ENEMIES CARDS */}
-      <section className="block" id="enamel" style={{paddingTop: 0}}>
-        <div className="wrap">
-          <div className="head text-left">
-            <span className="eyebrow">პროფილაქტიკა</span>
-            <h2>რა აზიანებს კბილის ემალს</h2>
-            <p>ყოველდღიური ჩვევები, რომლებიც კბილს აფერადებს და ასუსტებს — და რასაც პროფესიული მოვლა აბალანსებს.</p>
-          </div>
-          
-          <div className="enamel-layout">
-            <div className="enamel-grid">
-              <div className="enamel-card" onClick={() => {
-                if (window.innerWidth <= 768) {
-                  setExpandedEnamel(expandedEnamel === 'sweets' ? null : 'sweets');
-                } else {
-                  setActiveEnamelDetail(ENAMEL_DETAILS.sweets);
-                }
-              }} style={{ cursor: 'pointer' }}>
-                <div className="enamel-card-icon">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                    <rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 9h16M9 5v14M14 5v14"/>
-                  </svg>
-                </div>
-                <div className="enamel-card-content">
-                  <h3>შოკოლადი & ტკბილეული</h3>
-                  <p className={`enamel-desc ${expandedEnamel === 'sweets' ? 'expanded' : ''}`}>შაქარი და მჟავები, რომლებიც ასუსტებენ კბილის მინანქარს და ზრდიან კარიესის რისკს.</p>
-                </div>
-              </div>
-
-              <div className="enamel-card" onClick={() => {
-                if (window.innerWidth <= 768) {
-                  setExpandedEnamel(expandedEnamel === 'smoking' ? null : 'smoking');
-                } else {
-                  setActiveEnamelDetail(ENAMEL_DETAILS.smoking);
-                }
-              }} style={{ cursor: 'pointer' }}>
-                <div className="enamel-card-icon">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                    <path d="M17 6c0-1.5-1-2-1-3M13 6c0-1.5-1-2-1-3M4 10h13a3 3 0 0 1 0 6h-1M4 10v4a5 5 0 0 0 5 5h3a5 5 0 0 0 5-5"/>
-                  </svg>
-                </div>
-                <div className="enamel-card-content">
-                  <h3>მოწევა</h3>
-                  <p className={`enamel-desc ${expandedEnamel === 'smoking' ? 'expanded' : ''}`}>ნიკოტინი და ტარი, რომლებიც იწვევენ კბილის გაყვითლებას, ნადებს და აზიანებენ ღრძილებს.</p>
-                </div>
-              </div>
-
-              <div className="enamel-card" onClick={() => {
-                if (window.innerWidth <= 768) {
-                  setExpandedEnamel(expandedEnamel === 'coffee' ? null : 'coffee');
-                } else {
-                  setActiveEnamelDetail(ENAMEL_DETAILS.coffee);
-                }
-              }} style={{ cursor: 'pointer' }}>
-                <div className="enamel-card-icon">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                    <path d="M18 8h1a3 3 0 0 1 0 6h-1M4 8h14v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5Z"/><path d="M6 2v2M10 2v2M14 2v2"/>
-                  </svg>
-                </div>
-                <div className="enamel-card-content">
-                  <h3>ყავა & ჩაი</h3>
-                  <p className={`enamel-desc ${expandedEnamel === 'coffee' ? 'expanded' : ''}`}>ძლიერი პიგმენტები და ტანინები, რომლებიც ღრმად აღწევენ მინანქარში და ტოვებენ მუქ ლაქებს.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="enamel-info-pane">
-              <div className="enamel-info-video">
-                <video autoPlay loop muted playsInline>
-                  <source src={`${import.meta.env.BASE_URL}images/glass_tooth_nerves.mp4`} type="video/mp4" />
-                </video>
-              </div>
-              <h3>პროფესიული დაცვა</h3>
-              <p>პროფესიული წმენდა, გათეთრება და პროფილაქტიკა ემალს იცავს — დაჯავშნე ჰიგიენის ვიზიტი წელიწადში ორჯერ.</p>
-              <a href="#booking" className="btn btn-primary">დაჯავშნე ვიზიტი</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CLINICAL HUB PORTALS */}
       <section className="block" id="doctors" style={{paddingTop: 0}}>
         <div className="wrap text-left">
@@ -1200,17 +1121,92 @@ export default function App() {
               <p>სერვისების ღირებულებების სია</p>
             </div>
 
-          </div>
+            <div className="menu-hub-card" onClick={() => setShowBlogModal(true)}>
+              <div className="menu-hub-icon">
+                <BookOpen className="w-5 h-5" />
+              </div>
+              <h3>ბლოგი</h3>
+              <p>რჩევები ჯანსაღი ღიმილისთვის</p>
+            </div>
 
-          <div className="menu-hub-blog-wide animate-on-scroll" onClick={() => setShowBlogModal(true)}>
-            <div className="menu-hub-icon">
-              <BookOpen className="w-5 h-5" />
+          </div>
+        </div>
+      </section>
+
+      {/* REDESIGNED ENAMEL ENEMIES CARDS */}
+      <section className="block" id="enamel" style={{paddingTop: 0}}>
+        <div className="wrap">
+          <div className="head text-left">
+            <span className="eyebrow">პროფილაქტიკა</span>
+            <h2>რა აზიანებს კბილის ემალს</h2>
+            <p>ყოველდღიური ჩვევები, რომლებიც კბილს აფერადებს და ასუსტებს — და რასაც პროფესიული მოვლა აბალანსებს.</p>
+          </div>
+          
+          <div className="enamel-layout">
+            <div className="enamel-grid">
+              <div className="enamel-card" onClick={() => {
+                if (window.innerWidth <= 768) {
+                  setExpandedEnamel(expandedEnamel === 'sweets' ? null : 'sweets');
+                } else {
+                  setActiveEnamelDetail(ENAMEL_DETAILS.sweets);
+                }
+              }} style={{ cursor: 'pointer' }}>
+                <div className="enamel-card-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 9h16M9 5v14M14 5v14"/>
+                  </svg>
+                </div>
+                <div className="enamel-card-content">
+                  <h3>შოკოლადი & ტკბილეული</h3>
+                  <p className={`enamel-desc ${expandedEnamel === 'sweets' ? 'expanded' : ''}`}>შაქარი და მჟავები, რომლებიც ასუსტებენ კბილის მინანქარს და ზრდიან კარიესის რისკს.</p>
+                </div>
+              </div>
+
+              <div className="enamel-card" onClick={() => {
+                if (window.innerWidth <= 768) {
+                  setExpandedEnamel(expandedEnamel === 'smoking' ? null : 'smoking');
+                } else {
+                  setActiveEnamelDetail(ENAMEL_DETAILS.smoking);
+                }
+              }} style={{ cursor: 'pointer' }}>
+                <div className="enamel-card-icon">
+                  <Cigarette className="w-5.5 h-5.5" strokeWidth={1.8} />
+                </div>
+                <div className="enamel-card-content">
+                  <h3>მოწევა</h3>
+                  <p className={`enamel-desc ${expandedEnamel === 'smoking' ? 'expanded' : ''}`}>ნიკოტინი და ტარი, რომლებიც იწვევენ კბილის გაყვითლებას, ნადებს და აზიანებენ ღრძილებს.</p>
+                </div>
+              </div>
+
+              <div className="enamel-card" onClick={() => {
+                if (window.innerWidth <= 768) {
+                  setExpandedEnamel(expandedEnamel === 'coffee' ? null : 'coffee');
+                } else {
+                  setActiveEnamelDetail(ENAMEL_DETAILS.coffee);
+                }
+              }} style={{ cursor: 'pointer' }}>
+                <div className="enamel-card-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <path d="M18 8h1a3 3 0 0 1 0 6h-1M4 8h14v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5Z"/><path d="M6 2v2M10 2v2M14 2v2"/>
+                  </svg>
+                </div>
+                <div className="enamel-card-content">
+                  <h3>ყავა & ჩაი</h3>
+                  <p className={`enamel-desc ${expandedEnamel === 'coffee' ? 'expanded' : ''}`}>ძლიერი პიგმენტები და ტანინები, რომლებიც ღრმად აღწევენ მინანქარში და ტოვებენ მუქ ლაქებს.</p>
+                </div>
+              </div>
             </div>
-            <div className="text-left flex-1">
-              <h3>კლინიკის ბლოგი</h3>
-              <p>საინტერესო სტატიები & რჩევები ჯანსაღი ღიმილისთვის</p>
+
+            <div className="enamel-info-pane">
+              <div className="enamel-info-video">
+                <video autoPlay loop muted playsInline>
+                  <source src={`${import.meta.env.BASE_URL}images/glass_tooth_nerves.mp4`} type="video/mp4" />
+                </video>
+              </div>
+              <h3>პროფესიული დაცვა</h3>
+              <p>პროფესიული წმენდა, გათეთრება და პროფილაქტიკა ემალს იცავს — დაჯავშნე ჰიგიენის ვიზიტი წელიწადში ორჯერ.</p>
+              <a href="#booking" className="btn btn-primary">დაჯავშნე ვიზიტი</a>
             </div>
-            <ChevronRight className="w-5 h-5 text-[#E08A79] shrink-0" />
           </div>
         </div>
       </section>
