@@ -1956,3 +1956,50 @@ footer .brand {
 :root.theme-teal .enamel-info-video video {
   filter: hue-rotate(170deg) saturate(1.2) brightness(1.05);
 }
+
+/* Nav Right Flex Wrapper and Language Toggle styling */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lang-toggle-btn {
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid var(--line-color);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 
+    3px 3px 8px var(--shadow-dark), 
+    -3px -3px 8px var(--shadow-light);
+  margin-right: 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--app-text-dark);
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.lang-toggle-btn:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.65);
+  color: var(--accent-color);
+}
+.lang-toggle-btn:active {
+  box-shadow: 
+    inset 2px 2px 5px var(--shadow-dark), 
+    inset -2px -2px 5px var(--shadow-light);
+}
+
+@media (max-width: 768px) {
+  .lang-toggle-btn {
+    margin-right: 6px !important;
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 0.65rem !important;
+  }
+}

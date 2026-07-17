@@ -375,7 +375,19 @@ const renderServiceIcon = (key) => {
 }
 
 export default function App() {
-  const lang = 'ka'
+  const [lang, setLang] = useState(() => {
+    return localStorage.getItem('site-lang') || 'ka';
+  });
+
+  const toggleLanguage = () => {
+    playClickSound();
+    setLang(prev => prev === 'ka' ? 'en' : 'ka');
+  };
+
+  useEffect(() => {
+    localStorage.setItem('site-lang', lang);
+  }, [lang]);
+
   // Navigation states
   const [headerScrolled, setHeaderScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -705,12 +717,20 @@ export default function App() {
             ღიმილის სააგენტო
           </a>
           <nav className={`nav-links ${mobileMenuOpen ? 'open' : ''}`} id="navLinks">
-            <a href="#dashboard" onClick={() => { setMobileMenuOpen(false); setActiveLink('#dashboard'); }} className={activeLink === '#dashboard' ? 'active' : ''}>მთავარი</a>
-            <a href="#services" onClick={() => { setMobileMenuOpen(false); setActiveLink('#services'); }} className={activeLink === '#services' ? 'active' : ''}>სერვისები</a>
-            <a href="#doctors" onClick={() => { setMobileMenuOpen(false); setActiveLink('#doctors'); }} className={activeLink === '#doctors' ? 'active' : ''}>ექიმები</a>
-            <a href="#booking" onClick={() => { setMobileMenuOpen(false); setActiveLink('#booking'); }} className={activeLink === '#booking' ? 'active' : ''}>დაჯავშნა</a>
+            <a href="#dashboard" onClick={() => { setMobileMenuOpen(false); setActiveLink('#dashboard'); }} className={activeLink === '#dashboard' ? 'active' : ''}>{lang === 'ka' ? 'მთავარი' : 'Home'}</a>
+            <a href="#services" onClick={() => { setMobileMenuOpen(false); setActiveLink('#services'); }} className={activeLink === '#services' ? 'active' : ''}>{lang === 'ka' ? 'სერვისები' : 'Services'}</a>
+            <a href="#doctors" onClick={() => { setMobileMenuOpen(false); setActiveLink('#doctors'); }} className={activeLink === '#doctors' ? 'active' : ''}>{lang === 'ka' ? 'ექიმები' : 'Doctors'}</a>
+            <a href="#booking" onClick={() => { setMobileMenuOpen(false); setActiveLink('#booking'); }} className={activeLink === '#booking' ? 'active' : ''}>{lang === 'ka' ? 'დაჯავშნა' : 'Booking'}</a>
           </nav>
-          <div className="flex items-center gap-1">
+          <div className="nav-right">
+            <button 
+              onClick={toggleLanguage}
+              className="lang-toggle-btn"
+              title={lang === 'ka' ? 'Change Language to English' : 'ენის შეცვლა ქართულად'}
+              aria-label="ენა"
+            >
+              {lang === 'ka' ? 'EN' : 'KA'}
+            </button>
             <button 
               onClick={toggleTheme}
               className="theme-toggle-btn"
@@ -721,7 +741,7 @@ export default function App() {
             </button>
             <a href="#booking" className="nav-cta">
               <CalendarIcon className="w-4 h-4" />
-              დაჯავშნე ვიზიტი
+              {lang === 'ka' ? 'დაჯავშნე ვიზიტი' : 'Book Visit'}
             </a>
           </div>
           <button className="burger" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="მენიუ">
