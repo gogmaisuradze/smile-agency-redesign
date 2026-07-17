@@ -50,6 +50,14 @@ const GRADS = [
   "linear-gradient(135deg, #FF9500, #E67E22)"
 ]
 
+
+const BOT_RESPONSES_EN = {
+  welcome: 'Hello! I am SmileBot. How can I help you today? Choose a question or write to us:',
+  services: 'At Smile Agency we offer full dental services: Therapy (caries treatment), Orthopedics (prosthetics, crowns), Orthodontics (braces, aligner alignment), Surgery and Implantation, Periodontology, and Digital X-ray. For detailed info, visit the Services section.',
+  prices: 'The clinic has affordable prices. Consultation is free when compiling an implant and prosthetics treatment plan. Detailed prices are determined during the visit.',
+  contact: 'The clinic is located at 14 Meliton and Andria Balanchivadze St, Tbilisi. Working hours: Mon - Sat: 9:00-22:00 · Sun: 11:00-18:00. Phone: 555 58 53 56.'
+};
+
 const BOT_RESPONSES = {
   welcome: 'გამარჯობა! მე ვარ SmileBot. რით შემიძლია დაგეხმაროთ დღეს? აირჩიეთ კითხვა ან მოგვწერეთ:',
   services: 'ღიმილის სააგენტოში გთავაზობთ სრულ სტომატოლოგიურ მომსახურებას: თერაპია (კარიესის მკურნალობა), ორთოპედია (პროთეზირება, გვირგვინები), ორთოდონტია (ბრეკეტები, ელაინერებით სწორება), ქირურგია და იმპლანტაცია, პაროდონტოლოგია და ციფრული რენტგენოგრაფია. დეტალური ინფორმაციისთვის შეგიძლიათ ეწვიოთ საიტზე სერვისების განყოფილებას.',
@@ -57,9 +65,128 @@ const BOT_RESPONSES = {
   contact: 'კლინიკა მდებარეობს თბილისში, მელიტონ და ანდრია ბალანჩივაძეების ქ. 14. სამუშაო საათები: ორშ – შაბ: 9:00–22:00 · კვ: 11:00–18:00. ტელეფონი: 555 58 53 56.'
 }
 
+
+const getDoctorSpecialty = (s) => {
+  return s
+    .replace(/ბავშვთა სტომატოლოგია/g, "Pediatric Dentistry")
+    .replace(/თერაპია/g, "Therapy")
+    .replace(/კონსულტაცია/g, "Consultation")
+    .replace(/იმპლანტოლოგია/g, "Implantology")
+    .replace(/ყბა-სახის ქირურგია/g, "Maxillofacial Surgery")
+    .replace(/ორთოდონტია/g, "Orthodontics")
+    .replace(/ქირურგია \/ ყბა-სახე/g, "Surgery / Maxillofacial")
+    .replace(/ქირურგია/g, "Surgery")
+    .replace(/პაროდონტოლოგია/g, "Periodontology")
+    .replace(/ესთეტიკური სტომატოლოგია/g, "Aesthetic Dentistry")
+    .replace(/ასისტენტი/g, "Assistant");
+};
+
+const MONTHS_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const MONTHS = ["იანვარი", "თებერვალი", "მარტი", "აპრილი", "მაისი", "ივნისი", "ივლისი", "აგვისტო", "სექტემბერი", "ოქტომბერი", "ნოემბერი", "დეკემბერი"]
 const WDS = ["ორ", "სამ", "ოთხ", "ხუთ", "პარ", "შაბ", "კვ"]
 const TIMES = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00"]
+
+
+const DOCTORS_DETAILS_EN = {
+  "ani-chogovadze": {
+    name: "Ani Chogovadze",
+    role: "Head of Clinic / Implantologist",
+    specialization: "Dental implantation, maxillofacial surgery, complex oral rehabilitation.",
+    education: "Higher medical education, certified implantologist.",
+    bio: "Head of the clinic and lead implantologist. Dedicated to implementing the highest standards of treatment."
+  },
+  "dimitri-gvarjaladze": {
+    name: "Dimitri Gvarjaladze",
+    role: "Therapist / Orthodontist",
+    specialization: "Therapeutic treatment, orthodontics, primary emergency care.",
+    education: "Faculty of Stomatology, Tbilisi State Medical University (2011-2016).\nResidency (Pediatric and Adult Therapy): Unident (2017-2018).\nOral Surgery: Dentiveri XXI Residency (2024).",
+    bio: "• Dr. Karol Babinski 'From Stress to Success' (2023)\n• 61th Edsa meeting, Amsterdam (2018)\n• Dr. Sergey Radlinsky 'Biomechanic of Teeth' (2017)"
+  },
+  "nato-shengelia": {
+    name: "Nato Shengelia",
+    role: "Pediatric Dentist",
+    specialization: "Pediatric and adolescent therapeutic dentistry, preventive procedures.",
+    education: "Higher medical education, specialized courses in pediatric dentistry.",
+    bio: "Known for an exceptional psychological approach to children, making dental treatment comfortable for young patients."
+  },
+  "lika-davlianidze": {
+    name: "Lika Davlianidze",
+    role: "Maxillofacial Surgeon / Manager",
+    specialization: "Maxillofacial surgery, clinical management.",
+    education: "Higher medical education in maxillofacial surgery.",
+    bio: "Clinic manager and maxillofacial surgeon. Ensures smooth administrative and medical operations of the clinic."
+  },
+  "otar-chakvetadze": {
+    name: "Otar Chakvetadze",
+    role: "Therapist / Periodontologist",
+    specialization: "Gum disease treatment, periodontal therapy.",
+    education: "Higher medical education, residency in therapeutic dentistry.",
+    bio: "Dr. Otar Chakvetadze helps patients effectively manage periodontitis and other gum issues."
+  },
+  "shorena-shioshvili": {
+    name: "Shorena Shioshvili",
+    role: "Pediatric and Adolescent Therapist",
+    specialization: "Pediatric and adolescent therapy, treatment with microscope, aesthetic restorations.",
+    education: "Specialization course in pediatric dentistry (2019).\nTSMU Stomatological Faculty (2005).\nTSMU Faculty of Translator-Referent - German Language (2004).\nResidency at State Medical Academy of Georgia (2005-2006).\nGoethe Institute (2006).",
+    bio: "• Pediatric Dentistry Association Congress (2019)\n• Direct Restoration - Kaplan Sheudzhen (2020)\n• Direct Aesthetic Restorations - Dr. Tea Chubinidze (2022)\n• Effective Problem Solving In Endodontics (2023)\n• Practical Endodontics in Yerevan - Dr. Arnaldo Castellucci (2024)\n• Aesthetic Dentistry with Dr. Shiraz Khan (2025)\n• Microscope Hands-on Course - New Vision University (2025)"
+  },
+  "ana-okujava": {
+    name: "Ana Oqujava",
+    role: "Therapist / Surgeon",
+    specialization: "Oral therapy, primary surgical care.",
+    education: "Residency in Oral Surgery - Dentiveri (2023-2024).\nResidency in Therapeutic Dentistry - Unident (2022-2023).\nStomatology Program, Faculty of Medicine - Caucasus International University (2017-2021).",
+    bio: "• Human Rights in Dental Practice (2024)\n• Integration of color and morphology (2025)\n• Emergency management in pediatric dentistry (2025)\n• First Aid training course (2024)"
+  },
+  "tea-beridze": {
+    name: "Tea Beridze",
+    role: "Pediatric and Adolescent Therapist",
+    specialization: "Pediatric and adolescent therapy",
+    education: "Higher medical education, residency in therapeutic dentistry.",
+    bio: "Distinguished by extensive experience in treating children and teenagers."
+  },
+  "jenny-firtskhalava": {
+    name: "Jenny Pirtskhalava",
+    role: "Pediatric and Adolescent Therapist",
+    specialization: "Therapeutic dentistry, pediatric therapy, periodontology.",
+    education: "Medical College - Nursing (2004-2007).\nTbilisi Medical Teaching University 'Hippocrates' - Stomatology (2007-2012).\nResidency in Therapeutic Dentistry (2012-2013).\nResidency in Oral Surgery (2016).\nPractical Phyxology - IDC (2019-2020).\nPediatric Therapeutic Dentistry (2020-2021).\nInjection Cosmetology - Genesis Training Center (2019-2020).\nPeriodontology - Peri-Implant Studio.\nComputer Phyxotherapy - IDC (2022-2023).",
+    bio: "Possesses versatile experience in pediatric and adolescent therapy, rubber dam application, and periodontal treatment."
+  },
+  "tamar-chafidze": {
+    name: "Tamar Chapidze",
+    role: "Pediatric and Adolescent Therapist",
+    specialization: "Therapeutic dentistry, oral hygiene.",
+    education: "Specialized courses in pediatric and adolescent dentistry.",
+    bio: "Distinguished by great patience and a warm approach in treating pediatric oral therapeutic issues."
+  },
+  "megi-futkaradze": {
+    name: "Megi Futkaradze",
+    role: "Therapist / Aesthetic Dentist",
+    specialization: "Aesthetic dentistry, root canal treatment.",
+    education: "Higher medical education in stomatology.",
+    bio: "Specializes in aesthetic restorations and endodontic root canal treatment."
+  },
+  "aza-jiqia": {
+    name: "Aza Jikia",
+    role: "Assistant",
+    specialization: "Nursing support, hygiene control.",
+    education: "Medical education in nursing.",
+    bio: "Assists doctors during various procedures and ensures patient comfort."
+  },
+  "ketevan-surmava": {
+    name: "Ketevan Surmava",
+    role: "Assistant",
+    specialization: "Dentist assistant, instrument sterilization.",
+    education: "Relevant professional education.",
+    bio: "Ensures full readiness of the cabinet and nursing support during treatment."
+  },
+  "mariam-namicheishvili": {
+    name: "Mariam Namicheishvili",
+    role: "Assistant",
+    specialization: "Dentist assistant, cabinet organization.",
+    education: "Professional education in nursing.",
+    bio: "Assists doctors during treatment and is responsible for work environment cleanliness."
+  }
+};
 
 const DOCTORS_DETAILS = {
   "ani-chogovadze": {
@@ -176,13 +303,32 @@ const DOCTORS_DETAILS = {
   }
 }
 
-const getDoctorDetailsByName = (name) => {
+const getDoctorDetailsByName = (name, currentLang = 'ka') => {
   const cleanName = name.replace(/\s+/g, '').toLowerCase();
+  let foundKey = null;
   for (const key of Object.keys(DOCTORS_DETAILS)) {
     const doc = DOCTORS_DETAILS[key];
     const docCleanName = doc.name.replace(/\s+/g, '').toLowerCase();
     if (docCleanName === cleanName) {
-      return { ...doc, key };
+      foundKey = key;
+      break;
+    }
+  }
+  if (!foundKey) {
+    for (const key of Object.keys(DOCTORS_DETAILS_EN)) {
+      const doc = DOCTORS_DETAILS_EN[key];
+      const docCleanName = doc.name.replace(/\s+/g, '').toLowerCase();
+      if (docCleanName === cleanName) {
+        foundKey = key;
+        break;
+      }
+    }
+  }
+  if (foundKey) {
+    if (currentLang === 'ka') {
+      return { ...DOCTORS_DETAILS[foundKey], key: foundKey };
+    } else {
+      return { ...DOCTORS_DETAILS_EN[foundKey], image: DOCTORS_DETAILS[foundKey].image, key: foundKey };
     }
   }
   return null;
@@ -405,7 +551,7 @@ export default function App() {
   const [chatUnread, setChatUnread] = useState(1)
   const [customMessage, setCustomMessage] = useState('')
   const [messages, setMessages] = useState([
-    { id: 1, sender: 'bot', text: BOT_RESPONSES.welcome }
+    { id: 1, sender: 'bot', text: (lang === 'ka' ? BOT_RESPONSES.welcome : BOT_RESPONSES_EN.welcome) }
   ])
 
   // Calendar states
@@ -760,12 +906,12 @@ export default function App() {
               </video>
             </div>
             <div style={{ marginTop: '24px', textAlign: 'center' }}>
-              <h2 className="phone-onboarding-title" style={{ fontSize: '2rem' }}>გაიღიმეთ თავდაჯერებულად!</h2>
-              <p className="phone-onboarding-subtitle" style={{ fontSize: '1.05rem', maxWidth: '800px', marginInline: 'auto', marginBottom: '32px' }}>სრული სტომატოლოგიური მომსახურება, თანამედროვე აღჭურვილობა და 18 პროფესიონალი ექიმის გუნდი ერთ სივრცეში.</p>
+              <h2 className="phone-onboarding-title" style={{ fontSize: '2rem' }}>{lang === 'ka' ? 'გაიღიმეთ თავდაჯერებულად!' : 'Smile Confidently!'}</h2>
+              <p className="phone-onboarding-subtitle" style={{ fontSize: '1.05rem', maxWidth: '800px', marginInline: 'auto', marginBottom: '32px' }}>{lang === 'ka' ? 'სრული სტომატოლოგიური მომსახურება, თანამედროვე აღჭურვილობა და 18 პროფესიონალი ექიმის გუნდი ერთ სივრცეში.' : 'Complete dental care, modern equipment and a team of 18 professional doctors in one space.'}</p>
             </div>
             <div className="phone-onboarding-actions" style={{ maxWidth: '480px', marginInline: 'auto' }}>
-              <a href="#booking" className="phone-onboarding-btn">დაჯავშნე ვიზიტი</a>
-              <a href="tel:+995555585356" className="phone-onboarding-btn-secondary">დარეკე კლინიკაში</a>
+              <a href="#booking" className="phone-onboarding-btn">{lang === 'ka' ? 'დაჯავშნე ვიზიტი' : 'Book Visit'}</a>
+              <a href="tel:+995555585356" className="phone-onboarding-btn-secondary">{lang === 'ka' ? 'დარეკე კლინიკაში' : 'Call Clinic'}</a>
             </div>
           </div>
         </div>
@@ -775,9 +921,9 @@ export default function App() {
       <section className="block" id="services" style={{ paddingTop: 0 }}>
         <div className="wrap">
           <div className="head text-left">
-            <span className="eyebrow">მიმართულებები</span>
-            <h2>სრულყოფილი სტომატოლოგიური სერვისები</h2>
-            <p>დიაგნოსტიკიდან რთულ ქირურგიულ ჩარევამდე — მკურნალობის სრული ციკლი ერთ სივრცეში.</p>
+            <span className="eyebrow">{lang === 'ka' ? 'მიმართულებები' : 'Specialties'}</span>
+            <h2>{lang === 'ka' ? 'სრულყოფილი სტომატოლოგიური სერვისები' : 'Perfect Dental Services'}</h2>
+            <p>{lang === 'ka' ? 'დიაგნოსტიკიდან რთულ ქირურგიულ ჩარევამდე — მკურნალობის სრული ციკლი ერთ სივრცეში.' : 'From diagnostics to complex surgical interventions — a complete treatment cycle in one space.'}</p>
           </div>
           <div className="svc-grid">
             <article className="svc" onClick={() => {
@@ -796,8 +942,8 @@ export default function App() {
                   <path d="M12 3c2.5 0 3.2 1 5 1s2.6-.8 3.7.2C22 5.5 21.5 9 20.4 12.8 19.5 15.8 19 19 17.3 19c-1.4 0-1.6-2.2-2.8-3.5-.7-.8-2.3-.8-3 0C10.3 16.8 10.1 19 8.7 19 7 19 6.5 15.8 5.6 12.8 4.5 9 4 5.5 5.3 4.2 6.4 3.2 7.3 4 9 4s2.5-1 3-1Z"/>
                 </svg>
               </div>
-              <h3>თერაპია</h3>
-              <p className={`svc-desc ${expandedService === 'therapy' ? 'expanded' : ''}`}>კარიესისა და გართულებების მკურნალობა კბილის შენარჩუნებით.</p>
+              <h3>{lang === 'ka' ? 'თერაპია' : 'Therapy'}</h3>
+              <p className={`svc-desc ${expandedService === 'therapy' ? 'expanded' : ''}`}>{lang === 'ka' ? 'კარიესისა და გართულებების მკურნალობა კბილის შენარჩუნებით.' : 'Treatment of caries and complications while preserving the tooth.'}</p>
             </article>
 
             <article className="svc" onClick={() => {
@@ -816,8 +962,8 @@ export default function App() {
                   <path d="M4 10h16M6 10V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3M8 10v8a2 2 0 0 1-4 0M16 10v8a2 2 0 0 0 4 0"/>
                 </svg>
               </div>
-              <h3>ორთოპედია</h3>
-              <p className={`svc-desc ${expandedService === 'orthopedics' ? 'expanded' : ''}`}>გვიგვინები, ხიდები და პროტეზირება დაკარგული კბილებისთვის.</p>
+              <h3>{lang === 'ka' ? 'ორთოპედია' : 'Orthopedics'}</h3>
+              <p className={`svc-desc ${expandedService === 'orthopedics' ? 'expanded' : ''}`}>{lang === 'ka' ? 'გვიგვინები, ხიდები და პროტეზირება დაკარგული კბილებისთვის.' : 'Crowns, bridges and prosthetics for missing teeth.'}</p>
             </article>
 
             <article className="svc" onClick={() => {
@@ -839,8 +985,8 @@ export default function App() {
                   <circle cx="10" cy="17" r="1.5" fill="currentColor"/>
                 </svg>
               </div>
-              <h3>ორთოდონტია</h3>
-              <p className={`svc-desc ${expandedService === 'orthodontics' ? 'expanded' : ''}`}>კბილების სწორება ბრეკეტებითა და გამჭვირვალე ელაინერებით.</p>
+              <h3>{lang === 'ka' ? 'ორთოდონტია' : 'Orthodontics'}</h3>
+              <p className={`svc-desc ${expandedService === 'orthodontics' ? 'expanded' : ''}`}>{lang === 'ka' ? 'კბილების სწორება ბრეკეტებითა და გამჭვირვალე ელაინერებით.' : 'Teeth straightening with braces and clear aligners.'}</p>
             </article>
 
             <article className="svc" onClick={() => {
@@ -860,8 +1006,8 @@ export default function App() {
                   <path d="M13 6l5 5"/>
                 </svg>
               </div>
-              <h3>ქირურგია</h3>
-              <p className={`svc-desc ${expandedService === 'surgery' ? 'expanded' : ''}`}>კბილის ამოღება, რეზექცია და ქირურგიული მანიპულაციები.</p>
+              <h3>{lang === 'ka' ? 'ქირურგია' : 'Surgery'}</h3>
+              <p className={`svc-desc ${expandedService === 'surgery' ? 'expanded' : ''}`}>{lang === 'ka' ? 'კბილის ამოღება, რეზექცია და ქირურგიული მანიპულაციები.' : 'Tooth extraction, resection and surgical procedures.'}</p>
             </article>
 
             <article className="svc" onClick={() => {
@@ -880,8 +1026,8 @@ export default function App() {
                   <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM9.5 9.5c.3-.3.7-.5 1.1-.5.4 0 .8.2 1.1.5.3.3.5.7.5 1.1s-.2.8-.5 1.1"/><path d="M14.5 9.5c.3-.3.7-.5 1.1-.5.4 0 .8.2 1.1.5.3.3.5.7.5 1.1s-.2.8-.5 1.1M8 15s1.5 2 4 2 4-2 4-2"/>
                 </svg>
               </div>
-              <h3>ბავშვთა სტომატოლოგია</h3>
-              <p className={`svc-desc ${expandedService === 'pediatrics' ? 'expanded' : ''}`}>პატარა პაციენტების მკურნალობა მეგობრულ, უმტკივნეულო გარემოში.</p>
+              <h3>{lang === 'ka' ? 'ბავშვთა სტომატოლოგია' : 'Pediatric Dentistry'}</h3>
+              <p className={`svc-desc ${expandedService === 'pediatrics' ? 'expanded' : ''}`}>{lang === 'ka' ? 'პატარა პაციენტების მკურნალობა მეგობრულ, უმტკივნეულო გარემოში.' : 'Treatment of young patients in a friendly, painless environment.'}</p>
             </article>
 
             <article className="svc" onClick={() => {
@@ -901,8 +1047,8 @@ export default function App() {
                   <path d="M3.27 6.96 12 12.01l8.73-5.05M12 22.08V12"/>
                 </svg>
               </div>
-              <h3>ყბა-სახის ქირურგია</h3>
-              <p className={`svc-desc ${expandedService === 'maxillofacial' ? 'expanded' : ''}`}>ყბა-სახის სისტემის რთული ოპერაციები და რეკონსტრუქცია.</p>
+              <h3>{lang === 'ka' ? 'ყბა-სახის ქირურგია' : 'Maxillofacial Surgery'}</h3>
+              <p className={`svc-desc ${expandedService === 'maxillofacial' ? 'expanded' : ''}`}>{lang === 'ka' ? 'ყბა-სახის სისტემის რთული ოპერაციები და რეკონსტრუქცია.' : 'Complex surgeries and reconstruction of the jaw-face system.'}</p>
             </article>
 
             <article className="svc" onClick={() => {
@@ -922,8 +1068,8 @@ export default function App() {
                   <path d="m9.5 9.5 5 5M14.5 9.5l-5 5"/>
                 </svg>
               </div>
-              <h3>ენდოდონტია</h3>
-              <p className={`svc-desc ${expandedService === 'endodontics' ? 'expanded' : ''}`}>კბილის ფესვის არხების მაღალი სიზუსტის მკურნალობა მიკროსკოპით.</p>
+              <h3>{lang === 'ka' ? 'ენდოდონტია' : 'Endodontics'}</h3>
+              <p className={`svc-desc ${expandedService === 'endodontics' ? 'expanded' : ''}`}>{lang === 'ka' ? 'კბილის ფესვის არხების მაღალი სიზუსტის მკურნალობა მიკროსკოპით.' : 'High-precision treatment of root canals under microscope.'}</p>
             </article>
 
             <article className="svc" onClick={() => {
@@ -942,7 +1088,7 @@ export default function App() {
                   <path d="m12 3-1.912 5.886H3.894l4.948 3.596L6.93 18.368 12 14.772l5.07 3.596-1.912-5.886 4.948-3.596h-6.194L12 3Z"/>
                 </svg>
               </div>
-              <h3>ესთეტიკური სტომატოლოგია</h3>
+              <h3>{lang === 'ka' ? 'ესთეტიკური სტომატოლოგია' : 'Aesthetic Dentistry'}</h3>
               <p className={`svc-desc ${expandedService === 'aesthetics' ? 'expanded' : ''}`}>ვინირები, კბილების გათეთრება და ღიმილის სრული დიზაინი.</p>
             </article>
 
@@ -1027,7 +1173,7 @@ export default function App() {
             <div className="doctor-app-grid">
               {filteredDoctors.slice(0, 6).map((d, i) => {
                 const init = d.n.split(" ").map(w => w[0]).join("")
-                const details = getDoctorDetailsByName(d.n)
+                const details = getDoctorDetailsByName(d.n, lang)
                 const ratingInfo = getDoctorRating(d.n)
                 return (
                   <article 
@@ -1052,13 +1198,13 @@ export default function App() {
                     <div className="doctor-app-top">
                       <div className="doctor-app-avatar" style={{ background: GRADS[i % GRADS.length], overflow: 'hidden' }}>
                         {details && details.image ? (
-                          <img src={details.image} alt={d.n} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                          <img src={details.image} alt={lang === 'ka' ? d.n : (getDoctorDetailsByName(d.n, 'en') ? getDoctorDetailsByName(d.n, 'en').name : d.n)} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         ) : (
                           init
                         )}
                       </div>
                       <div className="doctor-app-info">
-                        <h3 title={d.n}>{d.n}</h3>
+                        <h3 title={lang === 'ka' ? d.n : (getDoctorDetailsByName(d.n, 'en') ? getDoctorDetailsByName(d.n, 'en').name : d.n)}>{lang === 'ka' ? d.n : (getDoctorDetailsByName(d.n, 'en') ? getDoctorDetailsByName(d.n, 'en').name : d.n)}</h3>
                         <p title={d.s}>{d.s}</p>
                         <span className="doctor-profile-link">დეტალურად ➔</span>
                       </div>
@@ -1123,8 +1269,8 @@ export default function App() {
       <section className="block" id="clinical-menu" style={{paddingTop: 0}}>
         <div className="wrap text-left">
           <div className="head">
-            <span className="eyebrow">კლინიკის მენიუ</span>
-            <h2>გაეცანით დეტალებს</h2>
+            <span className="eyebrow">{lang === 'ka' ? 'კლინიკის მენიუ' : 'Clinical Menu'}</span>
+            <h2>{lang === 'ka' ? 'გაეცანით დეტალებს' : 'Explore Details'}</h2>
             <p>აირჩიეთ სასურველი სექცია კლინიკის შესახებ სრული ინფორმაციის მისაღებად.</p>
           </div>
           
@@ -1134,7 +1280,7 @@ export default function App() {
               <div className="menu-hub-icon">
                 <Award className="w-5 h-5" />
               </div>
-              <h3>ჩვენს შესახებ</h3>
+              <h3>{lang === 'ka' ? 'ჩვენს შესახებ' : 'About Us'}</h3>
               <p>კლინიკის ისტორია და მიღწევები</p>
             </div>
 
@@ -1142,7 +1288,7 @@ export default function App() {
               <div className="menu-hub-icon">
                 <Users className="w-5 h-5" />
               </div>
-              <h3>ჩვენი გუნდი</h3>
+              <h3>{lang === 'ka' ? 'ჩვენი გუნდი' : 'Our Team'}</h3>
               <p>გაიცანით 18 პროფესიონალი ექიმი</p>
             </div>
 
@@ -1150,15 +1296,15 @@ export default function App() {
               <div className="menu-hub-icon">
                 <Cpu className="w-5 h-5" />
               </div>
-              <h3>ჩვენი აპარატურა</h3>
-              <p>ჩვენი საუკეთესო აპარატურა</p>
+              <h3>{lang === 'ka' ? 'ჩვენი აპარატურა' : 'Our Equipment'}</h3>
+              <p>{lang === 'ka' ? 'ჩვენი საუკეთესო აპარატურა' : 'Our premium equipment'}</p>
             </div>
 
             <div className="menu-hub-card" onClick={() => setShowResultsModal(true)}>
               <div className="menu-hub-icon">
                 <TrendingUp className="w-5 h-5" />
               </div>
-              <h3>შედეგები</h3>
+              <h3>{lang === 'ka' ? 'შედეგები' : 'Results'}</h3>
               <p>ჩვენი ნამუშევრები & ქეისები</p>
             </div>
 
@@ -1166,8 +1312,8 @@ export default function App() {
               <div className="menu-hub-icon">
                 <DollarSign className="w-5 h-5" />
               </div>
-              <h3>ფასები</h3>
-              <p>სერვისების ღირებულებების სია</p>
+              <h3>{lang === 'ka' ? 'ფასები' : 'Prices'}</h3>
+              <p>{lang === 'ka' ? 'სერვისების ღირებულებების სია' : 'Service price list'}</p>
             </div>
 
           </div>
@@ -1199,7 +1345,7 @@ export default function App() {
                 </div>
                 <div className="enamel-card-content">
                   <h3>შოკოლადი & ტკბილეული</h3>
-                  <p className={`enamel-desc ${expandedEnamel === 'sweets' ? 'expanded' : ''}`}>შაქარი და მჟავები, რომლებიც ასუსტებენ კბილის მინანქარს და ზრდიან კარიესის რისკს.</p>
+                  <p className={`enamel-desc ${expandedEnamel === 'sweets' ? 'expanded' : ''}`}>{lang === 'ka' ? 'შაქარი და მჟავები, რომლებიც ასუსტებენ კბილის მინანქარს და ზრდიან კარიესის რისკს.' : 'Sugar and acids that weaken tooth enamel and increase risk of caries.'}</p>
                 </div>
               </div>
 
@@ -1215,7 +1361,7 @@ export default function App() {
                 </div>
                 <div className="enamel-card-content">
                   <h3>მოწევა</h3>
-                  <p className={`enamel-desc ${expandedEnamel === 'smoking' ? 'expanded' : ''}`}>ნიკოტინი და ტარი, რომლებიც იწვევენ კბილის გაყვითლებას, ნადებს და აზიანებენ ღრძილებს.</p>
+                  <p className={`enamel-desc ${expandedEnamel === 'smoking' ? 'expanded' : ''}`}>{lang === 'ka' ? 'ნიკოტინი და ტარი, რომლებიც იწვევენ კბილის გაყვითლებას, ნადებს და აზიანებენ ღრძილებს.' : 'Nicotine and tar that cause yellowing, plaque and damage gums.'}</p>
                 </div>
               </div>
 
@@ -1233,7 +1379,7 @@ export default function App() {
                 </div>
                 <div className="enamel-card-content">
                   <h3>ყავა & ჩაი</h3>
-                  <p className={`enamel-desc ${expandedEnamel === 'coffee' ? 'expanded' : ''}`}>ძლიერი პიგმენტები და ტანინები, რომლებიც ღრმად აღწევენ მინანქარში და ტოვებენ მუქ ლაქებს.</p>
+                  <p className={`enamel-desc ${expandedEnamel === 'coffee' ? 'expanded' : ''}`}>{lang === 'ka' ? 'ძლიერი პიგმენტები და ტანინები, რომლებიც ღრმად აღწევენ მინანქარში და ტოვებენ მუქ ლაქებს.' : 'Strong pigments and tannins that penetrate deep into the enamel leaving dark stains.'}</p>
                 </div>
               </div>
             </div>
@@ -1244,9 +1390,9 @@ export default function App() {
                   <source src={`${import.meta.env.BASE_URL}images/glass_tooth_nerves.mp4`} type="video/mp4" />
                 </video>
               </div>
-              <h3>პროფესიული დაცვა</h3>
-              <p>პროფესიული წმენდა, გათეთრება და პროფილაქტიკა ემალს იცავს — დაჯავშნე ჰიგიენის ვიზიტი წელიწადში ორჯერ.</p>
-              <a href="#booking" className="btn btn-primary">დაჯავშნე ვიზიტი</a>
+              <h3>{lang === 'ka' ? 'პროფესიული დაცვა' : 'Professional Protection'}</h3>
+              <p>{lang === 'ka' ? 'პროფესიული წმენდა, გათეთრება და პროფილაქტიკა ემალს იცავს — დაჯავშნე ჰიგიენის ვიზიტი წელიწადში ორჯერ.' : 'Professional cleaning, whitening and prevention protects enamel — book a hygiene visit twice a year.'}</p>
+              <a href="#booking" className="btn btn-primary">{lang === 'ka' ? 'დაჯავშნე ვიზიტი' : 'Book Visit'}</a>
             </div>
           </div>
         </div>
@@ -1259,8 +1405,8 @@ export default function App() {
             <BookOpen className="w-5 h-5" />
           </div>
           <div className="text-left flex-1">
-            <h3>ბლოგი</h3>
-            <p>საინტერესო სტატიები & რჩევები ჯანსაღი ღიმილისთვის</p>
+            <h3>{lang === 'ka' ? 'ბლოგი' : 'Blog'}</h3>
+            <p>{lang === 'ka' ? 'საინტერესო სტატიები & რჩევები ჯანსაღი ღიმილისთვის' : 'Interesting articles & tips for a healthy smile'}</p>
           </div>
           <ChevronRight className="w-5 h-5 text-[var(--accent-color)] shrink-0" />
         </div>
@@ -1270,16 +1416,16 @@ export default function App() {
       <section className="block" id="booking" style={{paddingTop: 0}}>
         <div className="wrap text-left">
           <div className="head">
-            <span className="eyebrow">ონლაინ დაჯავშნა</span>
-            <h2>აირჩიე დღე და დრო</h2>
-            <p>დაჯავშნე ვიზიტი კალენდარში — დაგიდასტურებთ ტელეფონით.</p>
+            <span className="eyebrow">{lang === 'ka' ? 'ონლაინ დაჯავშნა' : 'Online Booking'}</span>
+            <h2>{lang === 'ka' ? 'აირჩიე დღე და დრო' : 'Choose Date & Time'}</h2>
+            <p>{lang === 'ka' ? 'დაჯავშნე ვიზიტი კალენდარში — დაგიდასტურებთ ტელეფონით.' : 'Book your visit in the calendar — we will confirm by phone.'}</p>
           </div>
           
           <div className="booking">
             <div className="cal-pane">
               <div className="cal-top">
                 <div className="m">
-                  {MONTHS[viewDate.getMonth()]} {viewDate.getFullYear()}
+                  {lang === 'ka' ? MONTHS[viewDate.getMonth()] : MONTHS_EN[viewDate.getMonth()]} {viewDate.getFullYear()}
                 </div>
                 <div className="cal-nav">
                   <button 
@@ -1478,7 +1624,7 @@ export default function App() {
               <span className="ic"><Clock className="w-5 h-5" /></span>
               <div>
                 <div className="lab">საათები</div>
-                <div className="val">ორშ – შაბ: 9:00–22:00 · კვ: 11:00–18:00</div>
+                <div className="val">{lang === 'ka' ? 'ორშ – შაბ: 9:00–22:00 · კვ: 11:00–18:00' : 'Mon - Sat: 9:00-22:00 · Sun: 11:00-18:00'}</div>
               </div>
             </div>
           </div>
@@ -1493,12 +1639,12 @@ export default function App() {
             ღიმილის სააგენტო
           </a>
           <div className="foot-links">
-            <a href="#dashboard">მთავარი</a>
-            <a href="#services">სერვისები</a>
-            <a href="#doctors">ექიმები</a>
+            <a href="#dashboard">{lang === 'ka' ? 'მთავარი' : 'Home'}</a>
+            <a href="#services">{lang === 'ka' ? 'სერვისები' : 'Services'}</a>
+            <a href="#doctors">{lang === 'ka' ? 'ექიმები' : 'Doctors'}</a>
             <a href="https://www.facebook.com/SmileAgency.ge/" target="_blank" rel="noopener noreferrer">Facebook</a>
           </div>
-          <p>© 2026 ღიმილის სააგენტო · სტომატოლოგიური კლინიკა · თბილისი</p>
+          <p>{lang === 'ka' ? '© 2026 ღიმილის სააგენტო · სტომატოლოგიური კლინიკა · თბილისი' : '© 2026 Smile Agency · Dental Clinic · Tbilisi'}</p>
         </div>
       </footer>
 
@@ -1513,7 +1659,7 @@ export default function App() {
                 <Fingerprint className="w-5 h-5 text-white/80" style={{ mixBlendMode: 'overlay', pointerEvents: 'none' }} />
               </div>
               <h4>SmileBot</h4>
-              <p>აქტიური დამხმარე</p>
+              <p>{lang === 'ka' ? 'აქტიური დამხმარე' : 'Active Assistant'}</p>
               <button onClick={() => { playClickSound(); setShowChat(false); }} className="chat-close-recipe" aria-label="დახურვა">
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -1550,7 +1696,7 @@ export default function App() {
             <form onSubmit={handleCustomMessageSubmit} className="chat-input-form">
               <input 
                 type="text" 
-                placeholder="ჩაწერეთ შეტყობინება..." 
+                placeholder="{lang === 'ka' ? 'ჩაწერეთ შეტყობინება...' : 'Type a message...'}" 
                 value={customMessage}
                 onChange={(e) => setCustomMessage(e.target.value)}
                 className="chat-input"
@@ -1691,7 +1837,7 @@ export default function App() {
               <div className="doctor-app-grid" style={{ maxHeight: '50vh', overflowY: 'auto', paddingRight: '6px' }}>
                 {filteredDoctors.map((d, i) => {
                   const init = d.n.split(" ").map(w => w[0]).join("")
-                  const details = getDoctorDetailsByName(d.n)
+                  const details = getDoctorDetailsByName(d.n, lang)
                   const ratingInfo = getDoctorRating(d.n)
                   return (
                     <article 
@@ -1717,13 +1863,13 @@ export default function App() {
                       <div className="doctor-app-top">
                         <div className="doctor-app-avatar" style={{ background: GRADS[i % GRADS.length], overflow: 'hidden' }}>
                           {details && details.image ? (
-                            <img src={details.image} alt={d.n} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                            <img src={details.image} alt={lang === 'ka' ? d.n : (getDoctorDetailsByName(d.n, 'en') ? getDoctorDetailsByName(d.n, 'en').name : d.n)} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                           ) : (
                             init
                           )}
                         </div>
                         <div className="doctor-app-info">
-                          <h3 title={d.n}>{d.n}</h3>
+                          <h3 title={lang === 'ka' ? d.n : (getDoctorDetailsByName(d.n, 'en') ? getDoctorDetailsByName(d.n, 'en').name : d.n)}>{lang === 'ka' ? d.n : (getDoctorDetailsByName(d.n, 'en') ? getDoctorDetailsByName(d.n, 'en').name : d.n)}</h3>
                           <p title={d.s}>{d.s}</p>
                           <span className="doctor-profile-link">დეტალურად ➔</span>
                         </div>
