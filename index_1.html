@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>ღიმილის სააგენტო — სტომატოლოგიური კლინიკა თბილისში</title>
+<meta name="description" content="ღიმილის სააგენტო — სრული სტომატოლოგიური მომსახურება მოზრდილებისა და ბავშვებისთვის თბილისში. თერაპია, ორთოპედია, ორთოდონტია, ქირურგია, პაროდონტოლოგია. 18 ექიმის გუნდი. ღიაა ყოველ დღე 9:00–22:00." />
+<meta name="theme-color" content="#22425B" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="ღიმილის სააგენტო — სტომატოლოგიური კლინიკა თბილისში" />
+<meta property="og:description" content="სრული სტომატოლოგიური მომსახურება ერთ სივრცეში. 18 ექიმი, თანამედროვე აღჭურვილობა, ონლაინ დაჯავშნა." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700&family=Noto+Serif+Georgian:wght@600;700;800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Dentist","name":"ღიმილის სააგენტო · Smile Agency","description":"სრული სტომატოლოგიური მომსახურება მოზრდილებისა და ბავშვებისთვის.","telephone":"+995555585356","email":"Smileagency2020@gmail.com","address":{"@type":"PostalAddress","streetAddress":"ანდრია და მელიტონ ბალანჩივაძეების 14","addressLocality":"თბილისი","addressCountry":"GE"},"openingHours":"Mo-Su 09:00-22:00","url":"https://www.smileagency.ge/"}
+</script>
+
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#EEF3F5;--surface:#FFFFFF;--ink:#16303F;--ink-soft:#59707C;
+    --navy:#22425B;--navy-2:#2E5470;
+    --teal:#0F9B8E;--teal-deep:#0A6E66;
+    --gold:#D2A25A;--blue:#7CA6C2;
+    --mint:#E1F0EC;--mint-2:#EAF5F1;--line:#D8E3E8;
+    --shadow:0 22px 55px -26px rgba(20,50,60,.4);
+    --shadow-sm:0 10px 26px -16px rgba(20,50,60,.4);--radius:20px;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:"Noto Sans Georgian",system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3{font-family:"Noto Serif Georgian",serif;line-height:1.16;letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  .wrap{width:min(1160px,92vw);margin-inline:auto}
+  .eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-deep);display:inline-flex;align-items:center;gap:.55rem}
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--gold);border-radius:2px}
+
+  /* header */
+  header{position:sticky;top:0;z-index:50;background:rgba(238,243,245,.82);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s}
+  header.scrolled{border-color:var(--line);box-shadow:0 6px 20px -18px rgba(20,50,60,.6)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:1rem}
+  .brand{display:flex;align-items:center;gap:.6rem;font-family:"Noto Serif Georgian",serif;font-weight:800;font-size:1.1rem}
+  .brand .mark{width:36px;height:36px;flex:none;display:grid;place-items:center;background:linear-gradient(135deg,var(--navy),var(--navy-2));border-radius:11px;box-shadow:var(--shadow-sm)}
+  .nav-links{display:flex;align-items:center;gap:1.8rem;font-weight:500;font-size:.95rem}
+  .nav-links a{color:var(--ink-soft);transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-cta{display:inline-flex;align-items:center;gap:.5rem;background:var(--teal);color:#fff;padding:.6rem 1.1rem;border-radius:999px;font-weight:600;font-size:.9rem;transition:transform .2s,background .2s}
+  .nav-cta:hover{background:var(--teal-deep);transform:translateY(-1px)}
+  .burger{display:none;background:none;border:0;cursor:pointer;padding:.4rem}
+  .burger span{display:block;width:24px;height:2px;background:var(--ink);border-radius:2px;margin:5px 0}
+
+  /* hero */
+  .hero{position:relative;padding:clamp(1.5rem,4vw,3rem) 0 clamp(2rem,5vw,4rem)}
+  .hero-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(1rem,3vw,2.5rem);align-items:center}
+  .hero h1{font-size:clamp(2.1rem,5vw,3.4rem);font-weight:800;margin:1.1rem 0}
+  .hero h1 em{font-style:normal;color:var(--teal-deep);position:relative;white-space:nowrap}
+  .hero h1 em::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:9px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='12' viewBox='0 0 200 12'%3E%3Cpath d='M2 8 C60 2 140 2 198 8' stroke='%23D2A25A' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/contain}
+  .hero p.lead{font-size:1.05rem;color:var(--ink-soft);max-width:32rem;margin-bottom:1.5rem}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:.75rem}
+  .btn{display:inline-flex;align-items:center;gap:.55rem;font-weight:600;border-radius:999px;padding:.82rem 1.4rem;font-size:1rem;cursor:pointer;border:0;transition:transform .2s,box-shadow .2s,background .2s,border-color .2s}
+  .btn-primary{background:linear-gradient(135deg,var(--teal),#17B9A9);color:#fff;box-shadow:var(--shadow-sm)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px -12px rgba(15,155,142,.6)}
+  .btn-line{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+  .btn-line:hover{border-color:var(--teal);color:var(--teal-deep)}
+
+  /* hero visual: glass tooth + stats */
+  .hero-art{position:relative;aspect-ratio:1/1;border-radius:26px;overflow:hidden;background:#FEFEFC;border:1px solid var(--line)}
+  .logo-stage{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.1rem}
+  .ring{position:absolute;left:50%;top:50%;width:78%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(34,66,91,.08);z-index:0}
+  .ring2{position:absolute;left:50%;top:50%;width:58%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;border:1px dashed rgba(210,162,90,.28);z-index:0;animation:ringspin 30s linear infinite}
+  @keyframes ringspin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+  .logo-mark{position:relative;z-index:2;width:112px;height:112px;border-radius:50%;background:linear-gradient(160deg,#22425B,#2E5470);display:grid;place-items:center;box-shadow:0 18px 40px -16px rgba(34,66,91,.45);animation:logofloat 4.5s ease-in-out infinite}
+  .logo-mark svg{width:56px;height:56px;animation:toothbreathe 4.5s ease-in-out infinite}
+  @keyframes logofloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+  @keyframes toothbreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+  .logo-word{font-family:"Noto Serif Georgian",serif;font-weight:800;font-size:1.7rem;color:var(--ink);letter-spacing:.01em;text-align:center;opacity:0;animation:wordin .8s ease forwards .35s}
+  .logo-tag{font-size:.86rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--teal-deep);text-align:center;opacity:0;animation:wordin .8s ease forwards .6s}
+  @keyframes wordin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  .spark{position:absolute;border-radius:50%;background:var(--gold);opacity:0;animation:twinkle 3.2s ease-in-out infinite}
+  @keyframes twinkle{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:.9;transform:scale(1)}}
+  .stat{position:absolute;z-index:2;text-align:left}
+  .stat .num{font-family:"Noto Serif Georgian",serif;font-weight:800;font-size:clamp(1.7rem,3.4vw,2.5rem);color:var(--blue);line-height:1}
+  .stat .lab{font-size:.78rem;color:var(--ink-soft);font-weight:500;margin-top:.15rem}
+  .s1{top:12%;right:6%}.s2{top:41%;right:4%}.s3{bottom:12%;right:8%}
+  .pill-set{position:absolute;left:5%;bottom:12%;z-index:2;display:flex;flex-direction:column;gap:.55rem}
+  .pill{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:999px;padding:.5rem .9rem;font-size:.84rem;font-weight:600;color:var(--ink);backdrop-filter:blur(4px);transition:.2s}
+  .pill:hover{border-color:var(--teal);color:var(--teal-deep);transform:translateX(2px)}
+
+  /* sections */
+  section.block{padding:clamp(2.6rem,6vw,4.6rem) 0}
+  .head{max-width:42rem;margin-bottom:2rem}
+  .head h2{font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:700;margin:.7rem 0 .5rem}
+  .head p{color:var(--ink-soft);font-size:1rem}
+  .head.center{margin-inline:auto;text-align:center}
+  .head.center .eyebrow{justify-content:center}
+
+  /* services compact */
+  .svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.85rem}
+  .svc{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.1rem;display:flex;flex-direction:column;gap:.55rem;transition:transform .22s,box-shadow .22s,border-color .22s}
+  .svc:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:transparent}
+  .svc .ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:var(--mint);color:var(--teal-deep);transition:.22s}
+  .svc:hover .ic{background:linear-gradient(135deg,var(--teal),#17B9A9);color:#fff}
+  .svc h3{font-size:1.02rem;font-weight:700}
+  .svc p{color:var(--ink-soft);font-size:.83rem;line-height:1.45}
+
+  /* petals (enamel enemies) */
+  .enamel{background:linear-gradient(180deg,#fff,#eef4f6);border-radius:28px;padding:clamp(1.8rem,4vw,3rem) 1rem 2.5rem;border:1px solid var(--line)}
+  .fan{position:relative;height:330px;max-width:640px;margin:1.5rem auto 0}
+  .petal{position:absolute;left:50%;bottom:22px;width:132px;height:214px;margin-left:-66px;transform-origin:50% 100%;
+    background:linear-gradient(160deg,#2C516E,#1E3B52);border-radius:66px 66px 26px 26px;box-shadow:var(--shadow-sm);
+    display:flex;justify-content:center;transform:rotate(var(--a))}
+  .petal .pc{transform:rotate(calc(-1*var(--a)));display:flex;flex-direction:column;align-items:center;gap:.5rem;padding-top:26px;color:#fff}
+  .petal .pi{width:52px;height:52px;border-radius:50%;border:2px solid rgba(255,255,255,.85);display:grid;place-items:center}
+  .petal .pl{font-size:.9rem;font-weight:600}
+  .fan .center-tooth{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:150px;z-index:5;
+    filter:drop-shadow(0 18px 22px rgba(20,50,60,.28))}
+  .enamel .note{text-align:center;color:var(--ink-soft);font-size:.92rem;margin-top:1.2rem;max-width:34rem;margin-inline:auto}
+
+  /* process staircase */
+  .steps{display:flex;flex-direction:column;gap:.9rem}
+  .step{display:flex;align-items:center;gap:1.2rem;border-radius:18px;padding:1.3rem 1.6rem;color:#fff;box-shadow:var(--shadow-sm)}
+  .step .no{font-family:"Noto Serif Georgian",serif;font-weight:800;font-size:2.2rem;line-height:1;min-width:64px}
+  .step .st{flex:1}
+  .step .st h3{color:#fff;font-size:1.12rem;margin-bottom:.15rem}
+  .step .st p{font-size:.88rem;opacity:.9}
+  .step .pr{min-width:120px}
+  .step .pr .bar{height:6px;background:rgba(255,255,255,.25);border-radius:3px;overflow:hidden}
+  .step .pr .bar i{display:block;height:100%;background:#fff;border-radius:3px}
+  .step .pr .pct{font-size:.75rem;opacity:.85;margin-top:.3rem;font-weight:600}
+  .step .ic{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.16);display:grid;place-items:center;flex:none}
+
+  /* directions */
+  .bands{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+  .band{border-radius:var(--radius);padding:1.5rem}
+  .band.adults{background:linear-gradient(150deg,var(--navy),var(--navy-2))}
+  .band.kids{background:linear-gradient(150deg,var(--teal),var(--teal-deep))}
+  .band h3{color:#fff;font-size:1.2rem;margin-bottom:.9rem;display:flex;align-items:center;gap:.55rem}
+  .band .tags{display:flex;flex-wrap:wrap;gap:.5rem}
+  .band .tags span{background:rgba(255,255,255,.16);color:#fff;font-size:.8rem;font-weight:500;padding:.38rem .75rem;border-radius:999px;border:1px solid rgba(255,255,255,.22)}
+
+  /* doctors compact */
+  .docs{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:.75rem}
+  .doc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:.95rem;display:flex;align-items:center;gap:.7rem;transition:transform .2s,box-shadow .2s}
+  .doc:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+  .doc .av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-family:"Noto Serif Georgian",serif;color:#fff;font-size:.95rem;flex:none}
+  .doc .meta{min-width:0}
+  .doc h3{font-size:.9rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .doc .spec{font-size:.72rem;color:var(--teal-deep);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  /* booking */
+  .booking{display:grid;grid-template-columns:1.15fr .85fr;gap:0;border-radius:26px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .cal-pane{background:var(--surface);padding:clamp(1.4rem,3vw,2.2rem)}
+  .cal-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+  .cal-top .m{font-family:"Noto Serif Georgian",serif;font-weight:700;font-size:1.15rem}
+  .cal-nav{display:flex;gap:.4rem}
+  .cal-nav button{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:#fff;cursor:pointer;color:var(--ink);display:grid;place-items:center;transition:.2s}
+  .cal-nav button:hover:not(:disabled){border-color:var(--teal);color:var(--teal-deep)}
+  .cal-nav button:disabled{opacity:.35;cursor:not-allowed}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.3rem}
+  .cal-grid .wd{text-align:center;font-size:.7rem;font-weight:600;color:var(--ink-soft);padding:.3rem 0}
+  .day{aspect-ratio:1;border:0;background:none;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.9rem;font-weight:500;color:var(--ink);transition:.15s;display:grid;place-items:center}
+  .day:hover:not(:disabled){background:var(--mint-2)}
+  .day.sel{background:linear-gradient(135deg,var(--teal),#17B9A9);color:#fff;font-weight:700}
+  .day:disabled{color:#bccdd3;cursor:not-allowed}
+  .day.empty{cursor:default}
+  .slots-label{font-size:.82rem;font-weight:600;margin:1.3rem 0 .6rem;color:var(--ink)}
+  .slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:.45rem}
+  .slot{border:1px solid var(--line);background:#fff;border-radius:9px;padding:.5rem 0;font-family:inherit;font-size:.85rem;font-weight:600;cursor:pointer;color:var(--ink);transition:.15s}
+  .slot:hover{border-color:var(--teal);color:var(--teal-deep)}
+  .slot.sel{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .sum-pane{background:linear-gradient(160deg,var(--navy),#16334A);color:#fff;padding:clamp(1.4rem,3vw,2.2rem);display:flex;flex-direction:column}
+  .sum-pane h3{color:#fff;font-size:1.3rem;margin-bottom:.3rem}
+  .sum-pane .hint{opacity:.75;font-size:.85rem;margin-bottom:1.2rem}
+  .picked{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:.8rem 1rem;margin-bottom:1.1rem;font-size:.9rem;min-height:52px;display:flex;align-items:center;gap:.6rem}
+  .picked svg{flex:none;opacity:.85}
+  .field{margin-bottom:.85rem}
+  .field label{display:block;font-size:.78rem;font-weight:600;margin-bottom:.35rem;opacity:.85}
+  .field input,.field select{width:100%;padding:.72rem .9rem;border:1px solid rgba(255,255,255,.2);border-radius:10px;font-family:inherit;font-size:.92rem;color:#fff;background:rgba(255,255,255,.08)}
+  .field input::placeholder{color:rgba(255,255,255,.5)}
+  .field select option{color:#16303F}
+  .field input:focus,.field select:focus{outline:0;border-color:#fff;background:rgba(255,255,255,.14)}
+  .sum-pane .btn-primary{width:100%;justify-content:center;margin-top:.4rem;background:#fff;color:var(--navy)}
+  .sum-pane .btn-primary:hover{background:var(--gold);color:#fff}
+  .sum-pane small{display:block;text-align:center;opacity:.7;margin-top:.7rem;font-size:.78rem}
+
+  .cstrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.8rem;margin-top:1.1rem}
+  .citem{display:flex;gap:.75rem;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:.9rem 1.1rem}
+  .citem .ic{width:38px;height:38px;border-radius:10px;background:var(--mint);color:var(--teal-deep);display:grid;place-items:center;flex:none}
+  .citem .lab{font-size:.72rem;color:var(--ink-soft);font-weight:500}
+  .citem .val{font-weight:600;font-size:.92rem}
+  .citem a.val:hover{color:var(--teal-deep)}
+
+  footer{padding:2.3rem 0;text-align:center;color:var(--ink-soft);font-size:.87rem}
+  footer .brand{justify-content:center;margin-bottom:.7rem;color:var(--ink)}
+  .foot-links{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;margin:.7rem 0}
+  .foot-links a:hover{color:var(--teal-deep)}
+
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:900px){.booking{grid-template-columns:1fr}}
+  @media(max-width:860px){
+    .nav-links,.nav-cta{display:none}
+    .burger{display:block}
+    .nav-links.open{display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;background:var(--surface);padding:1.2rem 6vw 1.5rem;gap:1rem;border-bottom:1px solid var(--line);box-shadow:var(--shadow-sm)}
+    .nav-links.open a{color:var(--ink);font-size:1.05rem}
+    .hero-grid{grid-template-columns:1fr}
+    .hero-art{max-width:440px;margin:0 auto;order:-1}
+    .bands{grid-template-columns:1fr}
+  }
+  @media(max-width:720px){
+    .fan{height:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;max-width:360px}
+    .petal{position:static;width:auto;height:auto;margin:0;transform:none!important;border-radius:16px;padding:1rem}
+    .petal .pc{transform:none!important;flex-direction:row;padding-top:0;gap:.7rem}
+    .petal .pi{width:40px;height:40px}
+    .fan .center-tooth{position:static;transform:none;width:110px;margin:.4rem auto 0;grid-column:1/-1}
+    .step{flex-wrap:wrap;gap:.7rem}
+    .step .pr{min-width:100%}
+  }
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.reveal{opacity:1;transform:none;transition:none}.logo-mark,.logo-mark svg,.ring2,.spark{animation:none}}
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <span class="mark" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3c2.5 0 3.5 1 5 1s3-1 4.2.3C22.5 5.6 22 9 20.8 13c-.9 3-1.6 6-3.3 6-1.4 0-1.7-2.2-2.9-3.6-.7-.8-2.5-.8-3.2 0-1.2 1.4-1.5 3.6-2.9 3.6-1.7 0-2.4-3-3.3-6C4 9 3.5 5.6 4.8 4.3 6 3 7.5 4 9 4s2.5-1 3-1Z" fill="#fff"/></svg></span>
+      ღიმილის სააგენტო
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#services">სერვისები</a>
+      <a href="#process">პროცესი</a>
+      <a href="#doctors">ექიმები</a>
+      <a href="#booking">დაჯავშნა</a>
+    </nav>
+    <a href="#booking" class="nav-cta">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 2v4M16 2v4M3 10h18M5 6h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/></svg>
+      დაჯავშნე ვიზიტი
+    </a>
+    <button class="burger" id="burger" aria-label="მენიუ"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">სტომატოლოგიური კლინიკა · თბილისი</span>
+      <h1>ღიმილი, რომელიც <em>შენ გიხდება</em></h1>
+      <p class="lead">სრული სტომატოლოგიური მომსახურება მოზრდილებისა და ბავშვებისთვის — 18 ექიმის გუნდი, თანამედროვე აღჭურვილობა და ინდივიდუალური მკურნალობის გეგმა ერთ სივრცეში.</p>
+      <div class="hero-cta">
+        <a href="#booking" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 2v4M16 2v4M3 10h18M5 6h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/></svg>
+          დაჯავშნე ვიზიტი
+        </a>
+        <a href="tel:+995555585356" class="btn btn-line">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .7-.2 1l-2.3 2.2Z"/></svg>
+          555 585 356
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <div class="ring"></div>
+      <div class="ring2"></div>
+      <span class="spark" style="width:8px;height:8px;left:22%;top:26%;animation-delay:.2s"></span>
+      <span class="spark" style="width:6px;height:6px;right:20%;top:34%;animation-delay:1.1s"></span>
+      <span class="spark" style="width:7px;height:7px;left:28%;bottom:24%;animation-delay:1.9s"></span>
+      <span class="spark" style="width:5px;height:5px;right:26%;bottom:30%;animation-delay:2.5s"></span>
+      <div class="logo-stage">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 3c2.5 0 3.5 1.2 5 1.2s3-1 4.4.4C22.8 6.2 22.2 10 21 14.4c-1 3.4-1.8 6.6-3.6 6.6-1.5 0-1.8-2.4-3.1-4-.8-.9-2.7-.9-3.5 0-1.3 1.6-1.6 4-3.1 4-1.8 0-2.6-3.2-3.6-6.6C2.8 10 2.2 6.2 3.6 4.6 5 3.2 6.5 4.2 8 4.2S9.5 3 12 3Z" fill="#fff"/></svg>
+        </div>
+        <div class="logo-word">Smile Agency</div>
+        <div class="logo-tag">Keep smiling</div>
+      </div>
+      <div class="stat s1"><div class="num">5+</div><div class="lab">წელი კლინიკა</div></div>
+      <div class="stat s2"><div class="num">18</div><div class="lab">ექიმის გუნდი</div></div>
+      <div class="stat s3"><div class="num">7/7</div><div class="lab">ღიაა 9:00–22:00</div></div>
+      <div class="pill-set">
+        <a href="#services" class="pill">სერვისები <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+        <a href="#doctors" class="pill">ჩვენი ექიმები <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="block" id="services">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">სერვისები</span>
+      <h2>ერთი კლინიკა — ყველა მიმართულება</h2>
+      <p>დიაგნოსტიკიდან რთულ ქირურგიულ ჩარევამდე — მკურნალობის სრული ციკლი ერთ სივრცეში.</p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3c2.5 0 3.2 1 5 1s2.6-.8 3.7.2C22 5.5 21.5 9 20.4 12.8 19.5 15.8 19 19 17.3 19c-1.4 0-1.6-2.2-2.8-3.5-.7-.8-2.3-.8-3 0C10.3 16.8 10.1 19 8.7 19 7 19 6.5 15.8 5.6 12.8 4.5 9 4 5.5 5.3 4.2 6.4 3.2 7.3 4 9 4s2.5-1 3-1Z"/></svg></div><h3>თერაპია</h3><p>კარიესისა და გართულებების მკურნალობა კბილის შენარჩუნებით.</p></article>
+      <article class="svc reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10h16M6 10V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3M8 10v8a2 2 0 0 1-4 0M16 10v8a2 2 0 0 0 4 0"/></svg></div><h3>ორთოპედია</h3><p>გვირგვინები, ხიდები და პროთეზირება დაკარგული კბილებისთვის.</p></article>
+      <article class="svc reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/><circle cx="8" cy="7" r="1.5" fill="currentColor"/><circle cx="14" cy="12" r="1.5" fill="currentColor"/><circle cx="10" cy="17" r="1.5" fill="currentColor"/></svg></div><h3>ორთოდონტია</h3><p>კბილების სწორება ბრეკეტებითა და გამჭვირვალე ელაინერებით.</p></article>
+      <article class="svc reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m14.5 4.5 5 5L9 20l-5 1 1-5L15.5 5.5"/><path d="M13 6l5 5"/></svg></div><h3>ქირურგია / ყბა-სახე</h3><p>კბილის ამოღება, იმპლანტაცია და ყბა-სახის ქირურგია.</p></article>
+      <article class="svc reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10Z"/><path d="M9 10c.5 1 1.5 1.5 3 1.5s2.5-.5 3-1.5"/></svg></div><h3>პაროდონტოლოგია</h3><p>ღრძილების მკურნალობა და პროფესიული ჰიგიენა.</p></article>
+      <article class="svc reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 4v16M8 9h13M8 14h13"/></svg></div><h3>რადიოლოგია</h3><p>ციფრული რენტგენი და ზუსტი დიაგნოსტიკა.</p></article>
+      <article class="svc reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></svg></div><h3>კონსულტაცია</h3><p>პირველადი შეფასება და ინდივიდუალური გეგმა.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ENAMEL ENEMIES (petal fan) -->
+<section class="block" id="enamel" style="padding-top:0">
+  <div class="wrap">
+    <div class="head center">
+      <span class="eyebrow">პროფილაქტიკა</span>
+      <h2>რა აზიანებს ემალს</h2>
+      <p>ყოველდღიური ჩვევები, რომლებიც კბილს აფერადებს და ასუსტებს — და რასაც პროფესიული მოვლა აბალანსებს.</p>
+    </div>
+    <div class="enamel reveal">
+      <div class="fan">
+        <div class="petal" style="--a:-52deg"><div class="pc"><span class="pi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 9h16M9 5v14M14 5v14"/></svg></span><span class="pl">შოკოლადი</span></div></div>
+        <div class="petal" style="--a:-26deg"><div class="pc"><span class="pi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M17 6c0-1.5-1-2-1-3M13 6c0-1.5-1-2-1-3M4 10h13a3 3 0 0 1 0 6h-1M4 10v4a5 5 0 0 0 5 5h3a5 5 0 0 0 5-5"/></svg></span><span class="pl">მოწევა</span></div></div>
+        <div class="petal" style="--a:0deg"><div class="pc"><span class="pi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M18 8h1a3 3 0 0 1 0 6h-1M4 8h14v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5Z"/><path d="M6 2v2M10 2v2M14 2v2"/></svg></span><span class="pl">ყავა</span></div></div>
+        <div class="petal" style="--a:26deg"><div class="pc"><span class="pi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M8 3h8l-1 7a3 3 0 0 1-6 0Z"/><path d="M12 13v6M9 21h6"/></svg></span><span class="pl">ღვინო</span></div></div>
+        <div class="petal" style="--a:52deg"><div class="pc"><span class="pi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M7 11a5 5 0 0 1 10 0"/><path d="M5 11h14l-1 3H6ZM7 14l1 6h8l1-6"/></svg></span><span class="pl">ტკბილეული</span></div></div>
+        <svg class="center-tooth" viewBox="0 0 120 150" fill="none">
+          <defs><linearGradient id="tg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#dfe8ec"/></linearGradient></defs>
+          <path d="M60 12c14 0 18 7 27 7s15-6 22 2c6 7 4 22-1 40-4 15-8 30-16 30-7 0-8-11-15-18-4-4-13-4-17 0-7 7-8 18-15 18-8 0-12-15-16-30-5-18-7-33-1-40 7-8 13-2 22-2s10-7 10-7Z" fill="url(#tg)" stroke="#c7d3d8" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <p class="note">პროფესიული წმენდა, გათეთრება და პროფილაქტიკა ემალს იცავს — დაჯავშნე ჰიგიენის ვიზიტი წელიწადში ორჯერ.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="block" id="process" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><span class="eyebrow">როგორ ვმუშაობთ</span><h2>ოთხი ნაბიჯი ჯანსაღ ღიმილამდე</h2></div>
+    <div class="steps">
+      <div class="step reveal" style="background:linear-gradient(135deg,#7CA6C2,#5E8BAA)">
+        <div class="no">01</div>
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></svg></div>
+        <div class="st"><h3>კონსულტაცია</h3><p>პირველადი შეხვედრა, პრობლემის მოსმენა და შეფასება.</p></div>
+        <div class="pr"><div class="bar"><i style="width:25%"></i></div><div class="pct">25%</div></div>
+      </div>
+      <div class="step reveal" style="background:linear-gradient(135deg,#5E8BAA,#456F8E);margin-left:5%">
+        <div class="no">02</div>
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 4v16M8 9h13"/></svg></div>
+        <div class="st"><h3>დიაგნოსტიკა</h3><p>ციფრული რენტგენი და ზუსტი დიაგნოზი.</p></div>
+        <div class="pr"><div class="bar"><i style="width:50%"></i></div><div class="pct">50%</div></div>
+      </div>
+      <div class="step reveal" style="background:linear-gradient(135deg,#3C6382,#2E5470);margin-left:10%">
+        <div class="no">03</div>
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="m14.5 4.5 5 5L9 20l-5 1 1-5Z"/></svg></div>
+        <div class="st"><h3>მკურნალობა</h3><p>ინდივიდუალური გეგმა და უმტკივნეულო პროცედურები.</p></div>
+        <div class="pr"><div class="bar"><i style="width:75%"></i></div><div class="pct">75%</div></div>
+      </div>
+      <div class="step reveal" style="background:linear-gradient(135deg,#2A4A63,#22425B);margin-left:15%">
+        <div class="no">04</div>
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <div class="st"><h3>კონტროლი</h3><p>შედეგის შემოწმება და პროფილაქტიკური მოვლა.</p></div>
+        <div class="pr"><div class="bar"><i style="width:100%"></i></div><div class="pct">100%</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIRECTIONS -->
+<section class="block" id="directions" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><span class="eyebrow">მიმართულებები</span><h2>ზრუნვა მთელი ოჯახისთვის</h2></div>
+    <div class="bands">
+      <div class="band adults reveal">
+        <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>მოზრდილთა სტომატოლოგია</h3>
+        <div class="tags"><span>თერაპია</span><span>ესთეტიური სტომატოლოგია</span><span>ქირურგია</span><span>ორთოდონტია</span><span>პროფილაქტიკა</span></div>
+      </div>
+      <div class="band kids reveal">
+        <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="9" r="5"/><path d="M9 8h.01M15 8h.01M9.5 11c.7.6 1.6.9 2.5.9s1.8-.3 2.5-.9"/><path d="M5 21c1-3 4-4 7-4s6 1 7 4"/></svg>ბავშვთა სტომატოლოგია</h3>
+        <div class="tags"><span>ბავშვთა თერაპია</span><span>ბავშვთა ორთოდონტია</span><span>ბავშვთა ქირურგია</span><span>ბავშვთა ორთოპედია</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCTORS -->
+<section class="block" id="doctors" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><span class="eyebrow">ჩვენი გუნდი</span><h2>ექიმები, რომლებსაც ენდობი</h2></div>
+    <div class="docs" id="docs"></div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="block" id="booking" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><span class="eyebrow">ონლაინ დაჯავშნა</span><h2>აირჩიე დღე და დრო</h2><p>დაჯავშნე ვიზიტი კალენდარში — დაგიდასტურებთ ტელეფონით.</p></div>
+    <div class="booking reveal">
+      <div class="cal-pane">
+        <div class="cal-top">
+          <div class="m" id="calMonth"></div>
+          <div class="cal-nav">
+            <button id="prevM" aria-label="წინა თვე"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
+            <button id="nextM" aria-label="შემდეგი თვე"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
+          </div>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div class="slots-label">აირჩიე დრო</div>
+        <div class="slots" id="slots"></div>
+      </div>
+      <div class="sum-pane">
+        <h3>ვიზიტის დეტალები</h3>
+        <p class="hint">შეავსე ველები და დაადასტურე.</p>
+        <div class="picked" id="picked">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M8 2v4M16 2v4M3 10h18M5 6h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/></svg>
+          <span id="pickedText">ჯერ აირჩიე დღე და დრო</span>
+        </div>
+        <div class="field"><label for="bname">სახელი</label><input id="bname" type="text" placeholder="თქვენი სახელი"></div>
+        <div class="field"><label for="bphone">ტელეფონი</label><input id="bphone" type="tel" placeholder="5xx xx xx xx"></div>
+        <div class="field"><label for="bserv">მიმართულება</label>
+          <select id="bserv"><option>თერაპია</option><option>ორთოპედია</option><option>ორთოდონტია</option><option>ქირურგია / ყბა-სახე</option><option>პაროდონტოლოგია</option><option>რადიოლოგია</option><option>კონსულტაცია</option><option>ბავშვთა სტომატოლოგია</option></select>
+        </div>
+        <button class="btn btn-primary" id="confirmBtn">ვიზიტის დადასტურება</button>
+        <small>დაჭერით გაიხსნება წერილი · ან დარეკე: 555 585 356</small>
+      </div>
+    </div>
+
+    <div class="cstrip">
+      <div class="citem"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .7-.2 1l-2.3 2.2Z"/></svg></span><div><div class="lab">დარეკე</div><a class="val" href="tel:+995555585356">555 585 356</a></div></div>
+      <div class="citem"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 11-8 11s-8-5-8-11a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div><div class="lab">მისამართი</div><a class="val" href="https://maps.app.goo.gl/9sta6QmKy7zZL8ip9" target="_blank" rel="noopener">ბალანჩივაძეების 14, თბილისი</a></div></div>
+      <div class="citem"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><div><div class="lab">ელ. ფოსტა</div><a class="val" href="mailto:Smileagency2020@gmail.com">Smileagency2020@gmail.com</a></div></div>
+      <div class="citem"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><div class="lab">საათები</div><div class="val">ორშ – კვ · 9:00–22:00</div></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="#top" class="brand"><span class="mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3c2.5 0 3.5 1 5 1s3-1 4.2.3C22.5 5.6 22 9 20.8 13c-.9 3-1.6 6-3.3 6-1.4 0-1.7-2.2-2.9-3.6-.7-.8-2.5-.8-3.2 0-1.2 1.4-1.5 3.6-2.9 3.6-1.7 0-2.4-3-3.3-6C4 9 3.5 5.6 4.8 4.3 6 3 7.5 4 9 4s2.5-1 3-1Z" fill="#fff"/></svg></span>ღიმილის სააგენტო</a>
+    <div class="foot-links"><a href="#services">სერვისები</a><a href="#doctors">ექიმები</a><a href="#booking">დაჯავშნა</a><a href="https://www.facebook.com/SmileAgency.ge/" target="_blank" rel="noopener">Facebook</a></div>
+    <p>© 2026 ღიმილის სააგენტო · სტომატოლოგიური კლინიკა · თბილისი</p>
+  </div>
+</footer>
+
+<script>
+  const reduceMotion=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* DOCTORS */
+  const doctors=[
+    {n:"ჯენი ფირცხალავა",s:"თერაპია · პაროდონტოლოგია · ქირურგია"},
+    {n:"დიმიტრი გვარჯალაძე",s:"თერაპია · ქირურგია · კონსულტაცია"},
+    {n:"ოთარ ჩაკვეტაძე",s:"თერაპია · პაროდონტოლოგია"},
+    {n:"ოთარი ღრეული",s:"ორთოდონტია"},
+    {n:"დავით ბულია",s:"ორთოდონტია · კონსულტაცია"},
+    {n:"ირაკლი ბერაძე",s:"ორთოპედია · რადიოლოგია"},
+    {n:"ლუკა კალაძე",s:"ორთოპედია"},
+    {n:"ბექა ხაჩიაშვილი",s:"ქირურგია / ყბა-სახე"},
+    {n:"ანა ოყუჯავა",s:"თერაპია · ქირურგია"},
+    {n:"სალომე ზუხბაია",s:"თერაპია · ქირურგია"},
+    {n:"თეა ბერიძე",s:"თერაპია · პაროდონტოლოგია"},
+    {n:"ნინო ქვლივიძე",s:"რადიოლოგია"},
+    {n:"სოფიო კეთილაძე",s:"თერაპია"},
+    {n:"შორენა შიოშვილი",s:"თერაპია"},
+    {n:"თამარ ჩაფიძე",s:"თერაპია"},
+    {n:"სოფიო გუშარაშვილი",s:"თერაპია"},
+    {n:"მერი ბაბუნაშვილი",s:"თერაპია"},
+    {n:"ნიკა ბატიაშვილი",s:"სტომატოლოგი"},
+  ];
+  const grads=["#22425B,#2E5470","#0F9B8E,#17B9A9","#7CA6C2,#5E8BAA","#D2A25A,#C08A3E"];
+  const docsEl=document.getElementById("docs");
+  doctors.forEach((d,i)=>{
+    const init=d.n.split(" ").map(w=>w[0]).join("");
+    const el=document.createElement("article");el.className="doc reveal";
+    el.innerHTML=`<div class="av" style="background:linear-gradient(135deg,${grads[i%grads.length]})">${init}</div><div class="meta"><h3>${d.n}</h3><div class="spec">${d.s}</div></div>`;
+    docsEl.appendChild(el);
+  });
+
+  /* HEADER / MENU / REVEAL */
+  const header=document.querySelector("header");
+  addEventListener("scroll",()=>header.classList.toggle("scrolled",scrollY>10));
+  const burger=document.getElementById("burger"),links=document.getElementById("navLinks");
+  burger.addEventListener("click",()=>links.classList.toggle("open"));
+  links.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>links.classList.remove("open")));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.1});
+  document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+
+  /* BOOKING CALENDAR */
+  const months=["იანვარი","თებერვალი","მარტი","აპრილი","მაისი","ივნისი","ივლისი","აგვისტო","სექტემბერი","ოქტომბერი","ნოემბერი","დეკემბერი"];
+  const wds=["ორ","სამ","ოთხ","ხუთ","პარ","შაბ","კვ"];
+  const times=["09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00"];
+  const today=new Date();today.setHours(0,0,0,0);
+  let view=new Date(today.getFullYear(),today.getMonth(),1),selDate=null,selTime=null;
+  const calMonth=document.getElementById("calMonth"),calGrid=document.getElementById("calGrid"),slotsEl=document.getElementById("slots"),prevM=document.getElementById("prevM"),nextM=document.getElementById("nextM"),pickedText=document.getElementById("pickedText");
+  function renderCal(){
+    calMonth.textContent=`${months[view.getMonth()]} ${view.getFullYear()}`;
+    calGrid.innerHTML="";
+    wds.forEach(w=>{const d=document.createElement("div");d.className="wd";d.textContent=w;calGrid.appendChild(d)});
+    const first=new Date(view.getFullYear(),view.getMonth(),1);
+    const offset=(first.getDay()+6)%7;
+    const days=new Date(view.getFullYear(),view.getMonth()+1,0).getDate();
+    for(let i=0;i<offset;i++){const e=document.createElement("div");e.className="day empty";calGrid.appendChild(e)}
+    for(let d=1;d<=days;d++){
+      const date=new Date(view.getFullYear(),view.getMonth(),d);
+      const btn=document.createElement("button");btn.className="day";btn.textContent=d;
+      if(date<today)btn.disabled=true;
+      if(selDate&&date.getTime()===selDate.getTime())btn.classList.add("sel");
+      btn.addEventListener("click",()=>{selDate=date;renderCal();updatePicked()});
+      calGrid.appendChild(btn);
+    }
+    const firstOfThis=new Date(today.getFullYear(),today.getMonth(),1);
+    prevM.disabled=view<=firstOfThis;
+    nextM.disabled=view>=new Date(today.getFullYear(),today.getMonth()+3,1);
+  }
+  function renderSlots(){
+    slotsEl.innerHTML="";
+    times.forEach(t=>{const b=document.createElement("button");b.className="slot";b.textContent=t;if(selTime===t)b.classList.add("sel");b.addEventListener("click",()=>{selTime=t;renderSlots();updatePicked()});slotsEl.appendChild(b)});
+  }
+  function updatePicked(){
+    if(selDate&&selTime)pickedText.textContent=`${selDate.getDate()} ${months[selDate.getMonth()]}, ${selTime}`;
+    else if(selDate)pickedText.textContent=`${selDate.getDate()} ${months[selDate.getMonth()]} — აირჩიე დრო`;
+    else pickedText.textContent="ჯერ აირჩიე დღე და დრო";
+  }
+  prevM.addEventListener("click",()=>{view=new Date(view.getFullYear(),view.getMonth()-1,1);renderCal()});
+  nextM.addEventListener("click",()=>{view=new Date(view.getFullYear(),view.getMonth()+1,1);renderCal()});
+  renderCal();renderSlots();
+  document.getElementById("confirmBtn").addEventListener("click",()=>{
+    const name=document.getElementById("bname").value.trim(),phone=document.getElementById("bphone").value.trim(),serv=document.getElementById("bserv").value;
+    const when=selDate&&selTime?`${selDate.getDate()} ${months[selDate.getMonth()]} ${selDate.getFullYear()}, ${selTime}`:"—";
+    const body=`სახელი: ${name||"—"}%0Aტელეფონი: ${phone||"—"}%0Aმიმართულება: ${serv}%0Aსასურველი დრო: ${when}`;
+    location.href=`mailto:Smileagency2020@gmail.com?subject=${encodeURIComponent("ვიზიტის დაჯავშნა — ღიმილის სააგენტო")}&body=${body}`;
+  });
+
+/* hero tooth is pure SVG — no WebGL needed */
+</script>
+</body>
+</html>

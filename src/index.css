@@ -1,4 +1,6 @@
 :root {
+  --font-sans: "Noto Sans Georgian", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: "Noto Serif Georgian", serif;
   --bg-color: #EFEFE9;
   --bg-gradient: radial-gradient(circle at 50% 50%, #F7F5F0 0%, #E7E5DC 100%);
   --app-text: #5A5D64;
@@ -14,6 +16,11 @@
   --radius-md: 16px;
   --radius-sm: 10px;
   --sphere-grad: radial-gradient(circle at 35% 35%, #FFDFD9 0%, #E08A79 45%, #9E4D3E 90%);
+}
+
+html.lang-en {
+  --font-sans: "Outfit", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Playfair Display", "Lora", serif;
 }
 
 :root.theme-teal {
@@ -39,7 +46,7 @@ html {
 }
 
 body {
-  font-family: "Noto Sans Georgian", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--font-sans);
   color: var(--app-text);
   background: var(--bg-gradient);
   background-attachment: fixed;
@@ -106,7 +113,7 @@ header {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: "Noto Serif Georgian", serif;
+  font-family: var(--font-serif);
   font-weight: 800;
   font-size: 1.15rem;
   color: var(--app-text-dark);
@@ -318,7 +325,7 @@ header {
   height: 46px;
   border-radius: 50%;
   color: #ffffff;
-  font-family: "Noto Serif Georgian", serif;
+  font-family: var(--font-serif);
   font-weight: 800;
   font-size: 0.95rem;
   display: grid;

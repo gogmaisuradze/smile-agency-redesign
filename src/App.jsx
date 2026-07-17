@@ -66,6 +66,27 @@ const BOT_RESPONSES = {
 }
 
 
+
+const getServiceDetailTranslated = (activeDetail, currentLang) => {
+  if (!activeDetail) return null;
+  if (currentLang === 'ka') return activeDetail;
+  const enDetail = SERVICES_DETAILS_EN[activeDetail.key];
+  if (enDetail) {
+    return { ...enDetail, key: activeDetail.key };
+  }
+  return activeDetail;
+};
+
+const getEnamelDetailTranslated = (activeDetail, currentLang) => {
+  if (!activeDetail) return null;
+  if (currentLang === 'ka') return activeDetail;
+  const enDetail = ENAMEL_DETAILS_EN[activeDetail.key];
+  if (enDetail) {
+    return { ...enDetail, key: activeDetail.key };
+  }
+  return activeDetail;
+};
+
 const getDoctorSpecialty = (s) => {
   return s
     .replace(/ბავშვთა სტომატოლოგია/g, "Pediatric Dentistry")
@@ -86,6 +107,111 @@ const MONTHS = ["იანვარი", "თებერვალი", "მა�
 const WDS = ["ორ", "სამ", "ოთხ", "ხუთ", "პარ", "შაბ", "კვ"]
 const TIMES = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00"]
 
+
+
+const SERVICES_DETAILS_EN = {
+  therapy: {
+    title: "Therapy",
+    desc: "Therapeutic treatment includes caries prevention, diagnosis, and dental restoration using modern filling materials.",
+    subs: [
+      { title: "Caries Treatment", text: "Restoration of hard dental tissues using high-quality composite fillings (Asteria, Estelite, Gradia)." },
+      { title: "Aesthetic Restoration", text: "High-precision restoration of natural anatomical tooth shape and aesthetics." },
+      { title: "Professional Cleaning", text: "Plaque and dental calculus removal using ultrasound and Air-Flow device." }
+    ]
+  },
+  orthopedics: {
+    title: "Orthopedics",
+    desc: "Orthopedics is a dentistry branch focusing on diagnosis and treatment of jaw/dental system functional disorders via prosthetics.",
+    subs: [
+      { title: "Ceramic Veneers", text: "Veneers are thin porcelain plates (0.3-0.5 mm) bonded to the front tooth surface." },
+      { title: "Veneer 360 (Crown)", text: "Complete coverage of all tooth surfaces for maximum protection." },
+      { title: "Ceramic Inlay", text: "Porcelain filling fabricated in the laboratory." }
+    ]
+  },
+  orthodontics: {
+    title: "Orthodontics",
+    desc: "Orthodontics corrects tooth alignment using braces, aligners, and other specialized appliances.",
+    subs: [
+      { title: "Braces", text: "Metal, ceramic, and sapphire bracket systems." },
+      { title: "Aligners", text: "Teeth straightening using comfortable, clear transparent aligner trays." }
+    ]
+  },
+  surgery: {
+    title: "Surgery",
+    desc: "Surgical dentistry covers painless tooth extraction, root resection, and other outpatient oral surgeries.",
+    subs: [
+      { title: "Tooth Extraction", text: "Simple and complex extractions under modern local anesthesia." },
+      { title: "Wisdom Tooth Removal", text: "Atraumatic extraction of impacted and displaced wisdom teeth." }
+    ]
+  },
+  pediatrics: {
+    title: "Pediatric Dentistry",
+    desc: "Our clinic pays special attention to young patients. Prevention of early childhood caries is our top priority.",
+    subs: [
+      { title: "Early Caries", text: "Prevention of early childhood caries and painless treatments." },
+      { title: "Prevention", text: "Brushing teeth is recommended from the arrival of the very first tooth." }
+    ]
+  },
+  maxillofacial: {
+    title: "Maxillofacial Surgery",
+    desc: "Oral and maxillofacial surgery includes complex surgical interventions and extractions of all difficulty levels.",
+    subs: [
+      { title: "Complex Surgeries", text: "Complex oral/maxillofacial operations and pre-implantation plastic preparation." },
+      { title: "Sinus Lift", text: "Lifting the maxillary sinus floor and increasing bone volume for implantation." }
+    ]
+  },
+  endodontics: {
+    title: "Endodontics",
+    desc: "Endodontics covers root canal treatment and rehabilitation using advanced modern technologies.",
+    subs: [
+      { title: "Root Canal Treatment", text: "Cleaning, shaping, and hermetic filling of root canals." },
+      { title: "Rehabilitation", text: "Restoring and preserving damaged root canal systems." }
+    ]
+  },
+  aesthetics: {
+    title: "Aesthetic Dentistry",
+    desc: "Dental aesthetics involves artistic smile design and restoring the natural beauty of your teeth.",
+    subs: [
+      { title: "Smile Design", text: "Artistic creation of a personalized, beautiful smile." },
+      { title: "Teeth Whitening", text: "Teeth whitening using safe, modern clinical methods." }
+    ]
+  },
+  implantology: {
+    title: "Implantology",
+    desc: "A dental implant is the most advanced modern method for replacing a missing tooth.",
+    subs: [
+      { title: "Implantation", text: "Dental implantation using leading world brands (Israel, Germany, Switzerland, Korea)." },
+      { title: "Advantages", text: "Natural appearance and fully restored chewing function." }
+    ]
+  },
+  periodontology: {
+    title: "Periodontology",
+    desc: "Periodontology includes the treatment of gum diseases and professional oral hygiene maintenance.",
+    subs: [
+      { title: "Gum Treatment", text: "Prevention and treatment of inflammatory periodontal diseases." },
+      { title: "Hygiene", text: "Professional hygienic cleaning, scale removal, and polishing." }
+    ]
+  }
+};
+
+
+const ENAMEL_DETAILS_EN = {
+  sweets: {
+    title: "Sweets & Chocolate",
+    damage: "When consuming sweets, bacteria in the mouth feed on sugar and release aggressive acids. These acids attack the tooth enamel, causing its demineralization (loss of minerals) and eventually leading to tooth decay.",
+    tip: "Be sure to rinse your mouth with warm water after eating sweets to wash away residual sugars. Brushing teeth is recommended 30 minutes after eating, as brushing enamel weakened by acid can damage it immediately."
+  },
+  smoking: {
+    title: "Smoking",
+    damage: "Nicotine and tar in tobacco smoke immediately stick to the enamel surface, giving teeth a yellow or brown tint. Additionally, nicotine constricts blood vessels in the gums, leading to periodontitis, tooth mobility, and dry mouth.",
+    tip: "The best solution is to quit smoking. To maintain tooth color and gum health, professional cleaning is necessary twice a year using ultrasonic scalers and the Air-Flow system in our clinic."
+  },
+  coffee: {
+    title: "Coffee & Tea",
+    damage: "Coffee and tea are rich in organic pigments - tannins. Tannins easily penetrate the microscopic pores of the tooth enamel and cause persistent pigmentation (darkening) of teeth. Also, the acids and hot temperature weaken the enamel.",
+    tip: "Try drinking coffee or tea with a straw to minimize liquid contact with teeth. Rinse your mouth with water 15-20 minutes after drinking."
+  }
+};
 
 const DOCTORS_DETAILS_EN = {
   "ani-chogovadze": {
@@ -654,11 +780,17 @@ export default function App() {
       localStorage.setItem('smile_doctor_ratings', JSON.stringify(newRatings));
     } catch (e) {}
     
-    const text = `⭐️ <b>ახალი შეფასება!</b>\n` +
-                 `👨‍⚕️ ექიმი: <b>${name}</b>\n` +
-                 `🌟 შეფასება: <b>${score} / 5 ვარსკვლავი</b>\n` +
-                 `👤 შემფასებელი: <b>${finalUser ? finalUser.name : 'ანონიმური'}</b>\n` +
-                 `📞 ტელეფონი: <b>${finalUser ? finalUser.phone : 'არ არის'}</b>`;
+    const text = lang === 'ka'
+      ? `⭐️ <b>ახალი შეფასება!</b>\n` +
+        `👨‍⚕️ ექიმი: <b>${name}</b>\n` +
+        `🌟 შეფასება: <b>${score} / 5 ვარსკვლავი</b>\n` +
+        `👤 შემფასებელი: <b>${finalUser ? finalUser.name : 'ანონიმური'}</b>\n` +
+        `📞 ტელეფონი: <b>${finalUser ? finalUser.phone : 'არ არის'}</b>`
+      : `⭐️ <b>New Rating!</b>\n` +
+        `👨‍⚕️ Doctor: <b>${name}</b>\n` +
+        `🌟 Rating: <b>${score} / 5 Stars</b>\n` +
+        `👤 Reviewer: <b>${finalUser ? finalUser.name : 'Anonymous'}</b>\n` +
+        `📞 Phone: <b>${finalUser ? finalUser.phone : 'None'}</b>`;
     await sendTelegramMessage(text);
   }
 
@@ -744,18 +876,22 @@ export default function App() {
   const handleBotQuery = (queryType, userText) => {
     setMessages(prev => [...prev, { id: Date.now(), sender: 'user', text: userText }])
     
-    const userMsg = `💬 <b>SmileBot ჩატი</b>\n👤 <b>პაციენტი:</b> ${userText}`
+    const userMsg = lang === 'ka'
+      ? `💬 <b>SmileBot ჩატი</b>\n👤 <b>პაციენტი:</b> ${userText}`
+      : `💬 <b>SmileBot Chat</b>\n👤 <b>Patient:</b> ${userText}`;
     sendTelegramMessage(userMsg)
 
     setTimeout(() => {
       let botText = ''
-      if (queryType === 'services') botText = BOT_RESPONSES.services
-      else if (queryType === 'prices') botText = BOT_RESPONSES.prices
-      else if (queryType === 'contact') botText = BOT_RESPONSES.contact
+      if (queryType === 'services') botText = lang === 'ka' ? BOT_RESPONSES.services : BOT_RESPONSES_EN.services
+      else if (queryType === 'prices') botText = lang === 'ka' ? BOT_RESPONSES.prices : BOT_RESPONSES_EN.prices
+      else if (queryType === 'contact') botText = lang === 'ka' ? BOT_RESPONSES.contact : BOT_RESPONSES_EN.contact
       
       setMessages(prev => [...prev, { id: Date.now() + 1, sender: 'bot', text: botText }])
       
-      const botMsg = `💬 <b>SmileBot ჩატი</b>\n🤖 <b>ბოტი:</b> ${botText}`
+      const botMsg = lang === 'ka'
+        ? `💬 <b>SmileBot ჩატი</b>\n🤖 <b>ბოტი:</b> ${botText}`
+        : `💬 <b>SmileBot Chat</b>\n🤖 <b>Bot:</b> ${botText}`;
       sendTelegramMessage(botMsg)
     }, 600)
   }
@@ -770,14 +906,20 @@ export default function App() {
     
     setMessages(prev => [...prev, { id: Date.now(), sender: 'user', text: userText }])
     
-    const userMsg = `💬 <b>SmileBot ჩატი (ახალი კითხვა)</b>\n👤 <b>პაციენტი:</b> ${userText}`
+    const userMsg = lang === 'ka'
+      ? `💬 <b>SmileBot ჩატი (ახალი კითხვა)</b>\n👤 <b>პაციენტი:</b> ${userText}`
+      : `💬 <b>SmileBot Chat (New Question)</b>\n👤 <b>Patient:</b> ${userText}`;
     sendTelegramMessage(userMsg)
 
     setTimeout(() => {
-      const botText = "გმადლობთ შეტყობინებისთვის! თქვენი შეკითხვა გადაეცა ადმინისტრატორს და უახლოეს დროში დაგიკავშირდებით ტელეფონით."
+      const botText = lang === 'ka'
+        ? "გმადლობთ შეტყობინებისთვის! თქვენი შეკითხვა გადაეცა ადმინისტრატორს და უახლოეს დროში დაგიკავშირდებით ტელეფონით."
+        : "Thank you for your message! Your question has been forwarded to the administrator, and we will contact you shortly by phone.";
       setMessages(prev => [...prev, { id: Date.now() + 1, sender: 'bot', text: botText }])
       
-      const botMsg = `💬 <b>SmileBot ჩატი</b>\n🤖 <b>ბოტი:</b> ${botText}`
+      const botMsg = lang === 'ka'
+        ? `💬 <b>SmileBot ჩატი</b>\n🤖 <b>ბოტი:</b> ${botText}`
+        : `💬 <b>SmileBot Chat</b>\n🤖 <b>Bot:</b> ${botText}`;
       sendTelegramMessage(botMsg)
     }, 800)
   }
@@ -811,19 +953,29 @@ export default function App() {
   const handleBookingSubmit = (e) => {
     e.preventDefault()
     if (!selectedDate || !selectedTime || !patientName || !patientPhone) {
-      alert('გთხოვთ შეავსოთ ყველა აუცილებელი ველი და აირჩიოთ თარიღი/საათი!')
+      alert(lang === 'ka' ? 'გთხოვთ შეავსოთ ყველა აუცილებელი ველი და აირჩიოთ თარიღი/საათი!' : 'Please fill out all required fields and choose date/time!')
       return
     }
     
-    const dateStr = `${selectedDate.getDate()} ${MONTHS[selectedDate.getMonth()]} ${selectedDate.getFullYear()}`
+    const dateStr = lang === 'ka'
+      ? `${selectedDate.getDate()} ${MONTHS[selectedDate.getMonth()]} ${selectedDate.getFullYear()}`
+      : `${MONTHS_EN[selectedDate.getMonth()]} ${selectedDate.getDate()}, ${selectedDate.getFullYear()}`;
     
-    const bookingMsg = `📅 <b>ახალი ჯავშანი Smile Agency-ში!</b>\n\n` +
-                       `👤 <b>პაციენტი:</b> ${patientName}\n` +
-                       `📞 <b>ტელეფონი:</b> ${patientPhone}\n` +
-                       `🦷 <b>მიმართულება:</b> ${selectedService}\n` +
-                       `👤 <b>ექიმი:</b> ${selectedDoctor || 'არ არის არჩეული'}\n` +
-                       `📅 <b>თარიღი:</b> ${dateStr}\n` +
-                       `⏰ <b>საათი:</b> ${selectedTime}`
+    const bookingMsg = lang === 'ka'
+      ? `📅 <b>ახალი ჯავშანი Smile Agency-ში!</b>\n\n` +
+        `👤 <b>პაციენტი:</b> ${patientName}\n` +
+        `📞 <b>ტელეფონი:</b> ${patientPhone}\n` +
+        `🦷 <b>მიმართულება:</b> ${selectedService}\n` +
+        `👤 <b>ექიმი:</b> ${selectedDoctor || 'არ არის არჩეული'}\n` +
+        `📅 <b>თარიღი:</b> ${dateStr}\n` +
+        `⏰ <b>საათი:</b> ${selectedTime}`
+      : `📅 <b>New Booking at Smile Agency!</b>\n\n` +
+        `👤 <b>Patient:</b> ${patientName}\n` +
+        `📞 <b>Phone:</b> ${patientPhone}\n` +
+        `🦷 <b>Specialty:</b> ${selectedService}\n` +
+        `👤 <b>Doctor:</b> ${selectedDoctor || 'None Selected'}\n` +
+        `📅 <b>Date:</b> ${dateStr}\n` +
+        `⏰ <b>Time:</b> ${selectedTime}`;
     sendTelegramMessage(bookingMsg)
 
     setBookingSuccess(true)
@@ -1089,7 +1241,7 @@ export default function App() {
                 </svg>
               </div>
               <h3>{lang === 'ka' ? 'ესთეტიკური სტომატოლოგია' : 'Aesthetic Dentistry'}</h3>
-              <p className={`svc-desc ${expandedService === 'aesthetics' ? 'expanded' : ''}`}>ვინირები, კბილების გათეთრება და ღიმილის სრული დიზაინი.</p>
+              <p className={`svc-desc ${expandedService === 'aesthetics' ? 'expanded' : ''}`}>{lang === 'ka' ? 'ვინირები, კბილების გათეთრება და ღიმილის სრული დიზაინი.' : 'Veneers, teeth whitening, and complete smile design.'}</p>
             </article>
 
             <article className="svc" onClick={() => {
@@ -1108,8 +1260,8 @@ export default function App() {
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/>
                 </svg>
               </div>
-              <h3>იმპლანტოლოგია</h3>
-              <p className={`svc-desc ${expandedService === 'implantology' ? 'expanded' : ''}`}>დაკარგული კბილების აღდგენა თანამედროვე პრემიუმ იმპლანტებით.</p>
+              <h3>{lang === 'ka' ? 'იმპლანტოლოგია' : 'Implantology'}</h3>
+              <p className={`svc-desc ${expandedService === 'implantology' ? 'expanded' : ''}`}>{lang === 'ka' ? 'დაკარგული კბილების აღდგენა თანამედროვე პრემიუმ იმპლანტებით.' : 'Replacing missing teeth with modern premium implants.'}</p>
             </article>
 
             <article className="svc" onClick={() => {
@@ -1128,8 +1280,8 @@ export default function App() {
                   <path d="M4 12c0-4.4 3.6-8 8-8s8 3.6 8 8M12 12c0 2.2-1.8 4-4 4s-4-1.8-4-4"/>
                 </svg>
               </div>
-              <h3>პაროდონტოლოგია</h3>
-              <p className={`svc-desc ${expandedService === 'periodontology' ? 'expanded' : ''}`}>ღრძილების მკურნალობა, გაჯანსაღება და დაავადებების პრევენცია.</p>
+              <h3>{lang === 'ka' ? 'პაროდონტოლოგია' : 'Periodontology'}</h3>
+              <p className={`svc-desc ${expandedService === 'periodontology' ? 'expanded' : ''}`}>{lang === 'ka' ? 'ღრძილების მკურნალობა, გაჯანსაღება და დაავადებების პრევენცია.' : 'Gum treatment, healing, and disease prevention.'}</p>
             </article>
           </div>
         </div>
@@ -1140,9 +1292,9 @@ export default function App() {
         <div className="wrap text-left">
           <div className="glass-neu">
             <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-2 block">
-              ✦ რჩეული ექიმები და სერვისები
+              {lang === 'ka' ? '✦ რჩეული ექიმები და სერვისები' : '✦ Featured Doctors & Services'}
             </span>
-            <h2 className="font-serif font-bold text-2xl text-[#33353A] mb-5">აირჩიე მიმართულება</h2>
+            <h2 className="font-serif font-bold text-2xl text-[#33353A] mb-5">{lang === 'ka' ? 'აირჩიე მიმართულება' : 'Choose Specialty'}</h2>
             
             {/* Category Pill Filters */}
             <div className="service-track">
@@ -1152,7 +1304,7 @@ export default function App() {
                   onClick={() => setActiveCategory(cat)}
                   className={`service-chip ${activeCategory === cat ? 'active' : ''}`}
                 >
-                  {cat}
+                  {lang === 'ka' ? cat : ({ 'ყველა': 'All', 'თერაპია': 'Therapy', 'ორთოდონტია': 'Orthodontics', 'ორთოპედია': 'Orthopedics', 'ქირურგია': 'Surgery', 'იმპლანტოლოგია': 'Implantology', 'ბავშვთა სტომატოლოგია': 'Pediatric Dentistry', 'პაროდონტოლოგია': 'Periodontology', 'ასისტენტი': 'Assistant' }[cat] || cat)}
                 </button>
               ))}
             </div>
@@ -1162,7 +1314,7 @@ export default function App() {
               <Search className="search-icon w-5 h-5" />
               <input 
                 type="text" 
-                placeholder="მოძებნე ექიმი ან სპეციალობა..." 
+                placeholder={lang === 'ka' ? "მოძებნე ექიმი ან სპეციალობა..." : "Search doctor or specialty..."} 
                 className="search-input"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -1188,8 +1340,8 @@ export default function App() {
                           role: d.s,
                           image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=800",
                           specialization: d.s,
-                          bio: "„ღიმილის სააგენტოს“ გამოცდილი სპეციალისტი.",
-                          education: "უმაღლესი სამედიცინო განათლება, რეზიდენტურა და სერთიფიკატები."
+                          bio: lang === 'ka' ? "„ღიმილის სააგენტოს“ გამოცდილი სპეციალისტი." : "Experienced specialist at Smile Agency.",
+                          education: lang === 'ka' ? "უმაღლესი სამედიცინო განათლება, რეზიდენტურა და სერთიფიკატები." : "Higher medical education, residency and certificates."
                         });
                       }
                     }}
@@ -1205,12 +1357,12 @@ export default function App() {
                       </div>
                       <div className="doctor-app-info">
                         <h3 title={lang === 'ka' ? d.n : (getDoctorDetailsByName(d.n, 'en') ? getDoctorDetailsByName(d.n, 'en').name : d.n)}>{lang === 'ka' ? d.n : (getDoctorDetailsByName(d.n, 'en') ? getDoctorDetailsByName(d.n, 'en').name : d.n)}</h3>
-                        <p title={d.s}>{d.s}</p>
-                        <span className="doctor-profile-link">დეტალურად ➔</span>
+                        <p title={details ? details.role : d.s}>{details ? details.role : d.s}</p>
+                        <span className="doctor-profile-link">{lang === 'ka' ? 'დეტალურად ➔' : 'Details ➔'}</span>
                       </div>
                     </div>
                     <div className="doctor-app-meta">
-                      <span className="doctor-app-badge flex items-center gap-1" title={`${ratingInfo.count} შეფასება`}>
+                      <span className="doctor-app-badge flex items-center gap-1" title={lang === 'ka' ? `${ratingInfo.count} შეფასება` : `${ratingInfo.count} reviews`}>
                         <Star className="w-3.5 h-3.5 fill-current" style={{ color: '#FFB800' }} />
                         {ratingInfo.average} ({ratingInfo.count})
                       </span>
@@ -1221,7 +1373,7 @@ export default function App() {
                         }}
                         className="doctor-app-btn"
                       >
-                        დაჯავშნა
+                        {lang === 'ka' ? 'დაჯავშნა' : 'Book'}
                       </button>
                     </div>
                   </article>
@@ -1230,7 +1382,7 @@ export default function App() {
             </div>
             {filteredDoctors.length === 0 && (
               <div className="text-center py-12 text-[#8E8E93]">
-                ექიმი მოცემული სპეციალობით ვერ მოიძებნა.
+                {lang === 'ka' ? 'ექიმი მოცემული სპეციალობით ვერ მოიძებნა.' : 'No doctor found with the selected specialty.'}
               </div>
             )}
 
@@ -1271,7 +1423,7 @@ export default function App() {
           <div className="head">
             <span className="eyebrow">{lang === 'ka' ? 'კლინიკის მენიუ' : 'Clinical Menu'}</span>
             <h2>{lang === 'ka' ? 'გაეცანით დეტალებს' : 'Explore Details'}</h2>
-            <p>აირჩიეთ სასურველი სექცია კლინიკის შესახებ სრული ინფორმაციის მისაღებად.</p>
+            <p>{lang === 'ka' ? 'აირჩიეთ სასურველი სექცია კლინიკის შესახებ სრული ინფორმაციის მისაღებად.' : 'Select a section to find complete information about our clinic.'}</p>
           </div>
           
           <div className="menu-hub-grid">
@@ -1281,7 +1433,7 @@ export default function App() {
                 <Award className="w-5 h-5" />
               </div>
               <h3>{lang === 'ka' ? 'ჩვენს შესახებ' : 'About Us'}</h3>
-              <p>კლინიკის ისტორია და მიღწევები</p>
+              <p>{lang === 'ka' ? 'კლინიკის ისტორია და მიღწევები' : 'Clinic history and achievements'}</p>
             </div>
 
             <div className="menu-hub-card" onClick={() => setShowTeamModal(true)}>
@@ -1289,7 +1441,7 @@ export default function App() {
                 <Users className="w-5 h-5" />
               </div>
               <h3>{lang === 'ka' ? 'ჩვენი გუნდი' : 'Our Team'}</h3>
-              <p>გაიცანით 18 პროფესიონალი ექიმი</p>
+              <p>{lang === 'ka' ? 'გაიცანით 18 პროფესიონალი ექიმი' : 'Meet 18 professional doctors'}</p>
             </div>
 
             <div className="menu-hub-card" onClick={() => setShowEquipModal(true)}>
@@ -1305,7 +1457,7 @@ export default function App() {
                 <TrendingUp className="w-5 h-5" />
               </div>
               <h3>{lang === 'ka' ? 'შედეგები' : 'Results'}</h3>
-              <p>ჩვენი ნამუშევრები & ქეისები</p>
+              <p>{lang === 'ka' ? 'ჩვენი ნამუშევრები & ქეისები' : 'Our portfolio & cases'}</p>
             </div>
 
             <div className="menu-hub-card" onClick={() => setShowPricesModal(true)}>
@@ -1324,9 +1476,9 @@ export default function App() {
       <section className="block" id="enamel" style={{paddingTop: 0}}>
         <div className="wrap">
           <div className="head text-left">
-            <span className="eyebrow">პროფილაქტიკა</span>
-            <h2>რა აზიანებს კბილის ემალს</h2>
-            <p>ყოველდღიური ჩვევები, რომლებიც კბილს აფერადებს და ასუსტებს — და რასაც პროფესიული მოვლა აბალანსებს.</p>
+            <span className="eyebrow">{lang === 'ka' ? 'პროფილაქტიკა' : 'Prevention'}</span>
+            <h2>{lang === 'ka' ? 'რა აზიანებს კბილის ემალს' : 'What Damages Tooth Enamel'}</h2>
+            <p>{lang === 'ka' ? 'ყოველდღიური ჩვევები, რომლებიც კბილს აფერადებს და ასუსტებს — და რასაც პროფესიული მოვლა აბალანსებს.' : 'Daily habits that stain and weaken teeth — which professional care balances.'}</p>
           </div>
           
           <div className="enamel-layout">
@@ -1344,7 +1496,7 @@ export default function App() {
                   </svg>
                 </div>
                 <div className="enamel-card-content">
-                  <h3>შოკოლადი & ტკბილეული</h3>
+                  <h3>{lang === 'ka' ? 'შოკოლადი & ტკბილეული' : 'Sweets & Chocolates'}</h3>
                   <p className={`enamel-desc ${expandedEnamel === 'sweets' ? 'expanded' : ''}`}>{lang === 'ka' ? 'შაქარი და მჟავები, რომლებიც ასუსტებენ კბილის მინანქარს და ზრდიან კარიესის რისკს.' : 'Sugar and acids that weaken tooth enamel and increase risk of caries.'}</p>
                 </div>
               </div>
@@ -1360,7 +1512,7 @@ export default function App() {
                   <Cigarette className="w-5.5 h-5.5" strokeWidth={1.8} />
                 </div>
                 <div className="enamel-card-content">
-                  <h3>მოწევა</h3>
+                  <h3>{lang === 'ka' ? 'მოწევა' : 'Smoking'}</h3>
                   <p className={`enamel-desc ${expandedEnamel === 'smoking' ? 'expanded' : ''}`}>{lang === 'ka' ? 'ნიკოტინი და ტარი, რომლებიც იწვევენ კბილის გაყვითლებას, ნადებს და აზიანებენ ღრძილებს.' : 'Nicotine and tar that cause yellowing, plaque and damage gums.'}</p>
                 </div>
               </div>
@@ -1378,7 +1530,7 @@ export default function App() {
                   </svg>
                 </div>
                 <div className="enamel-card-content">
-                  <h3>ყავა & ჩაი</h3>
+                  <h3>{lang === 'ka' ? 'ყავა & ჩაი' : 'Coffee & Tea'}</h3>
                   <p className={`enamel-desc ${expandedEnamel === 'coffee' ? 'expanded' : ''}`}>{lang === 'ka' ? 'ძლიერი პიგმენტები და ტანინები, რომლებიც ღრმად აღწევენ მინანქარში და ტოვებენ მუქ ლაქებს.' : 'Strong pigments and tannins that penetrate deep into the enamel leaving dark stains.'}</p>
                 </div>
               </div>
@@ -1448,7 +1600,7 @@ export default function App() {
               </div>
 
               <div className="cal-grid">
-                {WDS.map((w, idx) => (
+                {(lang === 'ka' ? WDS : ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]).map((w, idx) => (
                   <div key={idx} className="wd">{w}</div>
                 ))}
                 {daysList.map((day, idx) => {
@@ -1473,7 +1625,7 @@ export default function App() {
                 })}
               </div>
 
-              <div className="slots-label">აირჩიე დრო</div>
+              <div className="slots-label">{lang === 'ka' ? 'აირჩიე დრო' : 'Select Time'}</div>
               <div className="slots">
                 {TIMES.map((time, idx) => {
                   // Filter out Sunday hours: Sunday working hours are 11:00 to 18:00
@@ -1498,8 +1650,8 @@ export default function App() {
 
             {/* Sum Pane */}
             <div className="sum-pane">
-              <h3>ვიზიტის დეტალები</h3>
-              <p className="hint">შეავსე ველები და დაადასტურე.</p>
+              <h3>{lang === 'ka' ? 'ვიზიტის დეტალები' : 'Visit Details'}</h3>
+              <p className="hint">{lang === 'ka' ? 'შეავსე ველები და დაადასტურე.' : 'Fill fields and confirm.'}</p>
               
               <div className="picked">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -1508,7 +1660,7 @@ export default function App() {
                 <span>
                   {selectedDate && selectedTime 
                     ? `${selectedDate.getDate()} ${MONTHS[selectedDate.getMonth()]} · ${selectedTime}`
-                    : 'ჯერ აირჩიე დღე და დრო'
+                    : (lang === 'ka' ? 'ჯერ აირჩიე დღე და დრო' : 'Select date & time first')
                   }
                 </span>
               </div>
@@ -1518,56 +1670,56 @@ export default function App() {
                   <div className="w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center mx-auto mb-3">
                     <Check className="w-5 h-5" />
                   </div>
-                  <h4 className="font-serif font-bold text-sm mb-1">მოთხოვნა გაიგზავნა!</h4>
-                  <p className="text-xs opacity-80">მალე დაგიკავშირდებით დასადასტურებლად.</p>
+                  <h4 className="font-serif font-bold text-sm mb-1">{lang === 'ka' ? 'მოთხოვნა გაიგზავნა!' : 'Request Sent!'}</h4>
+                  <p className="text-xs opacity-80">{lang === 'ka' ? 'მალე დაგიკავშირდებით დასადასტურებლად.' : 'We will contact you soon to confirm.'}</p>
                 </div>
               ) : (
                 <form onSubmit={handleBookingSubmit}>
                   <div className="field">
-                    <label>სახელი</label>
+                    <label>{lang === 'ka' ? 'სახელი' : 'Name'}</label>
                     <input 
                       type="text" 
-                      placeholder="თქვენი სახელი"
+                      placeholder={lang === 'ka' ? "თქვენი სახელი" : "Your Name"}
                       value={patientName}
                       onChange={(e) => setPatientName(e.target.value)}
-                      onInvalid={(e) => e.target.setCustomValidity('გთხოვთ შეავსოთ ეს ველი')}
+                      onInvalid={(e) => e.target.setCustomValidity(lang === 'ka' ? 'გთხოვთ შეავსოთ ეს ველი' : 'Please fill out this field')}
                       onInput={(e) => e.target.setCustomValidity('')}
                       required
                     />
                   </div>
                   
                   <div className="field">
-                    <label>ტელეფონი</label>
+                    <label>{lang === 'ka' ? 'ტელეფონი' : 'Phone'}</label>
                     <input 
                       type="tel" 
                       placeholder="5xx xx xx xx"
                       value={patientPhone}
                       onChange={(e) => setPatientPhone(e.target.value)}
-                      onInvalid={(e) => e.target.setCustomValidity('გთხოვთ შეავსოთ ეს ველი')}
+                      onInvalid={(e) => e.target.setCustomValidity(lang === 'ka' ? 'გთხოვთ შეავსოთ ეს ველი' : 'Please fill out this field')}
                       onInput={(e) => e.target.setCustomValidity('')}
                       required
                     />
                   </div>
 
                   <div className="field">
-                    <label>მიმართულება</label>
+                    <label>{lang === 'ka' ? 'მიმართულება' : 'Specialty'}</label>
                     <select 
                       value={selectedService}
                       onChange={(e) => setSelectedService(e.target.value)}
                     >
-                      <option>თერაპია</option>
-                      <option>ორთოპედია</option>
-                      <option>ორთოდონტია</option>
-                      <option>ქირურგია / ყბა-სახე</option>
-                      <option>პაროდონტოლოგია</option>
-                      <option>რადიოლოგია</option>
-                      <option>კონსულტაცია</option>
+                      <option value="თერაპია">{lang === 'ka' ? 'თერაპია' : 'Therapy'}</option>
+                      <option value="ორთოპედია">{lang === 'ka' ? 'ორთოპედია' : 'Orthopedics'}</option>
+                      <option value="ორთოდონტია">{lang === 'ka' ? 'ორთოდონტია' : 'Orthodontics'}</option>
+                      <option value="ქირურგია / ყბა-სახე">{lang === 'ka' ? 'ქირურგია / ყბა-სახე' : 'Surgery / Maxillofacial'}</option>
+                      <option value="პაროდონტოლოგია">{lang === 'ka' ? 'პაროდონტოლოგია' : 'Periodontology'}</option>
+                      <option value="რადიოლოგია">{lang === 'ka' ? 'რადიოლოგია' : 'Radiology'}</option>
+                      <option value="კონსულტაცია">{lang === 'ka' ? 'კონსულტაცია' : 'Consultation'}</option>
                     </select>
                   </div>
 
                   {selectedDoctor && (
                     <div className="field">
-                      <label>არჩეული ექიმი</label>
+                      <label>{lang === 'ka' ? 'არჩეული ექიმი' : 'Selected Doctor'}</label>
                       <input 
                         type="text" 
                         value={selectedDoctor} 
@@ -1578,11 +1730,11 @@ export default function App() {
                   )}
 
                   <button className="btn btn-primary" type="submit">
-                    ვიზიტის დადასტურება
+                    {lang === 'ka' ? 'ვიზიტის დადასტურება' : 'Confirm Visit'}
                   </button>
                 </form>
               )}
-              <small>დაჭერით გაიხსნება წერილი · ან დარეკე: 555 585 356</small>
+              <small>{lang === 'ka' ? 'დაჭერით გაიხსნება წერილი · ან დარეკე: 555 585 356' : 'Click opens email client · Or call: 555 585 356'}</small>
             </div>
           </div>
 
@@ -1590,7 +1742,7 @@ export default function App() {
             <a className="citem" href="tel:+995555585356" style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>
               <span className="ic"><Phone className="w-5 h-5" /></span>
               <div>
-                <div className="lab">დარეკე</div>
+                <div className="lab">{lang === 'ka' ? 'დარეკე' : 'Call'}</div>
                 <div className="val">555 585 356</div>
               </div>
             </a>
@@ -1598,15 +1750,15 @@ export default function App() {
             <div className="citem" onClick={() => setShowMapModal(true)} style={{ cursor: 'pointer' }}>
               <span className="ic"><MapPin className="w-5 h-5" /></span>
               <div>
-                <div className="lab">მისამართი</div>
-                <button className="val" style={{ background: 'none', border: 'none', padding: 0, font: 'inherit', textAlign: 'left', cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}>ბალანჩივაძეების 14, თბილისი</button>
+                <div className="lab">{lang === 'ka' ? 'მისამართი' : 'Address'}</div>
+                <button className="val" style={{ background: 'none', border: 'none', padding: 0, font: 'inherit', textAlign: 'left', cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}>{lang === 'ka' ? 'ბალანჩივაძეების 14, თბილისი' : '14 Balanchivadze St, Tbilisi'}</button>
               </div>
             </div>
 
             <a className="citem" href="mailto:Smileagency2020@gmail.com" style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>
               <span className="ic"><Mail className="w-5 h-5" /></span>
               <div>
-                <div className="lab">ელ. ფოსტა</div>
+                <div className="lab">{lang === 'ka' ? 'ელ. ფოსტა' : 'Email'}</div>
                 <div className="val">Smileagency2020@gmail.com</div>
               </div>
             </a>
@@ -1623,7 +1775,7 @@ export default function App() {
             >
               <span className="ic"><Clock className="w-5 h-5" /></span>
               <div>
-                <div className="lab">საათები</div>
+                <div className="lab">{lang === 'ka' ? 'საათები' : 'Hours'}</div>
                 <div className="val">{lang === 'ka' ? 'ორშ – შაბ: 9:00–22:00 · კვ: 11:00–18:00' : 'Mon - Sat: 9:00-22:00 · Sun: 11:00-18:00'}</div>
               </div>
             </div>
@@ -1680,14 +1832,14 @@ export default function App() {
             {/* Quick Actions / Chips */}
             <div className="chat-quick-actions">
               <div className="chat-quick-btns">
-                <button onClick={() => handleBotQuery('services', 'სერვისები')} className="chat-quick-btn">
-                  სერვისები
+                <button onClick={() => handleBotQuery('services', lang === 'ka' ? 'სერვისები' : 'Services')} className="chat-quick-btn">
+                  {lang === 'ka' ? 'სერვისები' : 'Services'}
                 </button>
-                <button onClick={() => handleBotQuery('prices', 'ფასები')} className="chat-quick-btn">
-                  ფასები
+                <button onClick={() => handleBotQuery('prices', lang === 'ka' ? 'ფასები' : 'Prices')} className="chat-quick-btn">
+                  {lang === 'ka' ? 'ფასები' : 'Prices'}
                 </button>
-                <button onClick={() => handleBotQuery('contact', 'მისამართი')} className="chat-quick-btn">
-                  მისამართი
+                <button onClick={() => handleBotQuery('contact', lang === 'ka' ? 'მისამართი' : 'Address')} className="chat-quick-btn">
+                  {lang === 'ka' ? 'მისამართი' : 'Address'}
                 </button>
               </div>
             </div>
@@ -1804,9 +1956,9 @@ export default function App() {
             </button>
             <div className="text-left">
               <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-2 block">
-                ✦ კლინიკის გუნდი
+                ✦ {lang === 'ka' ? 'კლინიკის გუნდი' : 'Clinic Team'}
               </span>
-              <h3 className="font-serif font-bold text-xl text-[#33353A] mb-4">ჩვენი პროფესიონალი ექიმები</h3>
+              <h3 className="font-serif font-bold text-xl text-[#33353A] mb-4">{lang === 'ka' ? 'ჩვენი პროფესიონალი ექიმები' : 'Our Professional Doctors'}</h3>
               
               {/* Category Pill Filters */}
               <div className="service-track">
@@ -1816,7 +1968,7 @@ export default function App() {
                     onClick={() => { playClickSound(); setActiveCategory(cat); }}
                     className={`service-chip ${activeCategory === cat ? 'active' : ''}`}
                   >
-                    {cat}
+                    {lang === 'ka' ? cat : ({ 'ყველა': 'All', 'თერაპია': 'Therapy', 'ორთოდონტია': 'Orthodontics', 'ორთოპედია': 'Orthopedics', 'ქირურგია': 'Surgery', 'იმპლანტოლოგია': 'Implantology', 'ბავშვთა სტომატოლოგია': 'Pediatric Dentistry', 'პაროდონტოლოგია': 'Periodontology', 'ასისტენტი': 'Assistant' }[cat] || cat)}
                   </button>
                 ))}
               </div>
@@ -1826,7 +1978,7 @@ export default function App() {
                 <Search className="search-icon w-5 h-5" />
                 <input 
                   type="text" 
-                  placeholder="მოძებნე ექიმი ან სპეციალობა..." 
+                  placeholder={lang === 'ka' ? "მოძებნე ექიმი ან სპეციალობა..." : "Search doctor or specialty..."} 
                   className="search-input"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -1853,8 +2005,8 @@ export default function App() {
                             role: d.s,
                             image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=800",
                             specialization: d.s,
-                            bio: "„ღიმილის სააგენტოს“ გამოცდილი სპეციალისტი.",
-                            education: "უმაღლესი სამედიცინო განათლება, რეზიდენტურა და სერთიფიკატები."
+                            bio: lang === 'ka' ? "„ღიმილის სააგენტოს“ გამოცდილი სპეციალისტი." : "Experienced specialist at Smile Agency.",
+                            education: lang === 'ka' ? "უმაღლესი სამედიცინო განათლება, რეზიდენტურა და სერთიფიკატები." : "Higher medical education, residency and certificates."
                           });
                         }
                       }}
@@ -1870,12 +2022,12 @@ export default function App() {
                         </div>
                         <div className="doctor-app-info">
                           <h3 title={lang === 'ka' ? d.n : (getDoctorDetailsByName(d.n, 'en') ? getDoctorDetailsByName(d.n, 'en').name : d.n)}>{lang === 'ka' ? d.n : (getDoctorDetailsByName(d.n, 'en') ? getDoctorDetailsByName(d.n, 'en').name : d.n)}</h3>
-                          <p title={d.s}>{d.s}</p>
-                          <span className="doctor-profile-link">დეტალურად ➔</span>
+                          <p title={details ? details.role : d.s}>{details ? details.role : d.s}</p>
+                          <span className="doctor-profile-link">{lang === 'ka' ? 'დეტალურად ➔' : 'Details ➔'}</span>
                         </div>
                       </div>
                       <div className="doctor-app-meta">
-                        <span className="doctor-app-badge flex items-center gap-1" title={`${ratingInfo.count} შეფასება`}>
+                        <span className="doctor-app-badge flex items-center gap-1" title={lang === 'ka' ? `${ratingInfo.count} შეფასება` : `${ratingInfo.count} reviews`}>
                           <Star className="w-3.5 h-3.5 fill-current" style={{ color: '#FFB800' }} />
                           {ratingInfo.average} ({ratingInfo.count})
                         </span>
@@ -1888,7 +2040,7 @@ export default function App() {
                           }}
                           className="doctor-app-btn"
                         >
-                          დაჯავშნა
+                          {lang === 'ka' ? 'დაჯავშნა' : 'Book'}
                         </button>
                       </div>
                     </article>
@@ -1897,7 +2049,7 @@ export default function App() {
               </div>
               {filteredDoctors.length === 0 && (
                 <div className="text-center py-12 text-[#8A8E98]">
-                  ექიმი მოცემული სპეციალობით ვერ მოიძებნა.
+                  {lang === 'ka' ? 'ექიმი მოცემული სპეციალობით ვერ მოიძებნა.' : 'No doctor found with the selected specialty.'}
                 </div>
               )}
             </div>
@@ -1919,30 +2071,30 @@ export default function App() {
             </button>
             <div className="text-left">
               <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-2 block">
-                ✦ მკურნალობის შედეგები
+                ✦ {lang === 'ka' ? 'მკურნალობის შედეგები' : 'Treatment Results'}
               </span>
-              <h3 className="font-serif font-bold text-xl text-[#33353A] mb-4">ჩვენი წარმატებული ქეისები</h3>
+              <h3 className="font-serif font-bold text-xl text-[#33353A] mb-4">{lang === 'ka' ? 'ჩვენი წარმატებული ქეისები' : 'Our Successful Cases'}</h3>
               <p className="text-sm text-[#5A5D64] mb-6">
-                გაეცანით ჩვენი პაციენტების მკურნალობის შედეგებს. თითოეული ღიმილი ინდივიდუალური ზრუნვისა და მაღალი პროფესიონალიზმის შედეგია.
+                {lang === 'ka' ? 'გაეცანით ჩვენი პაციენტების მკურნალობის შედეგებს. თითოეული ღიმილი ინდივიდუალური ზრუნვისა და მაღალი პროფესიონალიზმის შედეგია.' : 'Explore our patient treatment outcomes. Every smile is a result of individual care and high professionalism.'}
               </p>
               
               <div className="flex flex-col gap-4">
                 <div className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
-                  <h4 className="font-bold text-sm text-[#33353A] mb-1">იმპლანტაცია და ესთეტიკური პროტეზირება</h4>
-                  <p className="text-xs text-[#5A5D64] mb-2">სრული რესტავრაცია ცირკონიუმის გვირგვინებით. პაციენტს აღუდგა ღეჭვითი ფუნქცია და სრულყოფილი ესთეტიკა.</p>
-                  <span className="text-[10px] font-bold text-[var(--accent-color)] uppercase">ხანგრძლივობა: 3 კვირა</span>
+                  <h4 className="font-bold text-sm text-[#33353A] mb-1">{lang === 'ka' ? 'იმპლანტაცია და ესთეტიკური პროტეზირება' : 'Implantation & Aesthetic Prosthetics'}</h4>
+                  <p className="text-xs text-[#5A5D64] mb-2">{lang === 'ka' ? 'სრული რესტავრაცია ცირკონიუმის გვირგვინებით. პაციენტს აღუდგა ღეჭვითი ფუნქცია და სრულყოფილი ესთეტიკა.' : 'Full restoration with zirconia crowns. Patient restored chewing function and perfect aesthetics.'}</p>
+                  <span className="text-[10px] font-bold text-[var(--accent-color)] uppercase">{lang === 'ka' ? 'ხანგრძლივობა: 3 კვირა' : 'Duration: 3 Weeks'}</span>
                 </div>
 
                 <div className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
-                  <h4 className="font-bold text-sm text-[#33353A] mb-1">კბილთა გასწორება (ორთოდონტია)</h4>
-                  <p className="text-xs text-[#5A5D64] mb-2">კბილთა მწკრივისა და თანკბილვის გასწორება ლითონის თვითლიგირებადი ბრეკეტ-სისტემით.</p>
-                  <span className="text-[10px] font-bold text-[var(--accent-color)] uppercase">ხანგრძლივობა: 14 თვე</span>
+                  <h4 className="font-bold text-sm text-[#33353A] mb-1">{lang === 'ka' ? 'კბილთა გასწორება (ორთოდონტია)' : 'Teeth Straightening (Orthodontics)'}</h4>
+                  <p className="text-xs text-[#5A5D64] mb-2">{lang === 'ka' ? 'კბილთა მწკრივისა და თანკბილვის გასწორება ლითონის თვითლიგირებადი ბრეკეტ-სისტემით.' : 'Teeth alignment and bite correction with self-ligating metal braces.'}</p>
+                  <span className="text-[10px] font-bold text-[var(--accent-color)] uppercase">{lang === 'ka' ? 'ხანგრძლივობა: 14 თვე' : 'Duration: 14 Months'}</span>
                 </div>
 
                 <div className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
-                  <h4 className="font-bold text-sm text-[#33353A] mb-1">პროფესიული წმენდა და გათეთრება</h4>
-                  <p className="text-xs text-[#5A5D64] mb-2">ნადებისა და კბილის ქვების მოცილება ულტრაბგერითა და Air-Flow აპარატით, რასაც მოჰყვა კლინიკური გათეთრება 4 ტონით.</p>
-                  <span className="text-[10px] font-bold text-[var(--accent-color)] uppercase">ხანგრძლივობა: 1 სეანსი</span>
+                  <h4 className="font-bold text-sm text-[#33353A] mb-1">{lang === 'ka' ? 'პროფესიული წმენდა და გათეთრება' : 'Professional Cleaning & Whitening'}</h4>
+                  <p className="text-xs text-[#5A5D64] mb-2">{lang === 'ka' ? 'ნადებისა და კბილის ქვების მოცილება ულტრაბგერითა და Air-Flow აპარატით, რასაც მოჰყვა კლინიკური გათეთრება 4 ტონით.' : 'Removal of calculus and plaque using ultrasound and Air-Flow, followed by 4-shade clinical whitening.'}</p>
+                  <span className="text-[10px] font-bold text-[var(--accent-color)] uppercase">{lang === 'ka' ? 'ხანგრძლივობა: 1 სეანსი' : 'Duration: 1 Session'}</span>
                 </div>
               </div>
             </div>
@@ -1965,11 +2117,11 @@ export default function App() {
             <div className="text-left" style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
               <div style={{ paddingBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.4)', flexShrink: 0 }}>
                 <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-1 block">
-                  ✦ ფასების კატალოგი
+                  ✦ {lang === 'ka' ? 'ფასების კატალოგი' : 'Price Catalog'}
                 </span>
-                <h3 className="font-serif font-bold text-xl text-[#33353A] mb-1">კლინიკის სერვისების ფასები</h3>
+                <h3 className="font-serif font-bold text-xl text-[#33353A] mb-1">{lang === 'ka' ? 'კლინიკის სერვისების ფასები' : 'Clinical Service Prices'}</h3>
                 <p className="text-xs text-[#5A5D64]">
-                  Smile Agency გთავაზობთ გამჭვირვალე ფასებს. მკურნალობის საბოლოო გეგმა დგინდება ექიმთან კონსულტაციისას.
+                  {lang === 'ka' ? 'Smile Agency გთავაზობთ გამჭვირვალე ფასებს. მკურნალობის საბოლოო გეგმა დგინდება ექიმთან კონსულტაციისას.' : 'Smile Agency offers transparent pricing. The final treatment plan is set during consultation.'}
                 </p>
               </div>
 
@@ -2119,7 +2271,74 @@ export default function App() {
                     <div className="flex flex-col gap-2">
                       {(pricingData[currentCatName] || []).map((item, idx) => (
                         <div key={idx} className="flex justify-between items-center py-2 border-b border-[#33353A]/10" style={{ gap: '12px' }}>
-                          <span className="text-xs font-semibold text-[#33353A]">{item.n}</span>
+                          <span className="text-xs font-semibold text-[#33353A]">{lang === 'ka' ? item.n : ({
+  "პროფესიონალური ჰიგიენა": "Professional Hygiene",
+  "კოფერდამი": "Rubber Dam",
+  "ვიზიოგრაფია": "Radiography / RVG",
+  "კბილების გათეთრება": "Teeth Whitening",
+  "მხატვრული რესტავრაცია": "Artistic Restoration",
+  "ზედაპირული კარიესი": "Superficial Caries",
+  "საშუალო კარიესი": "Medium Caries",
+  "ღრმა კარიესი": "Deep Caries",
+  "მერილენდის ხიდი": "Maryland Bridge",
+  "Guttafusion - ერთი არხი": "Guttafusion - One Canal",
+  "Guttafusion - რთული არხები": "Guttafusion - Complex Canals",
+  "Endobunic - ერთი არხი": "Endobunic - One Canal",
+  "Endobunic - რთული არხები": "Endobunic - Complex Canals",
+  "Reciproc - ერთი არხი": "Reciproc - One Canal",
+  "Reciproc - რთული არხები": "Reciproc - Complex Canals",
+  "შიდა გათეთრება": "Internal Bleaching",
+  "არხის დაბჟენის მოხსნა": "Root Canal Unfilling",
+  "წკირი მოხსნა": "Post Removal",
+  "მინა-ბოჭკოვანი წკირი": "Glass Fiber Post",
+  "ლითონის წკირი": "Metal Post",
+  "პერფორაციის დახურვა": "Perforation Closure",
+  "ქვების და ნადების მოცილება": "Scaling & Plaque Removal",
+  "Kavo აპარატით წმენდა": "KaVo Device Cleaning",
+  "აბრაზიული პასტით გაპრიალება": "Abrasive Paste Polishing",
+  "Air-flow წმენდა": "Air-Flow Cleaning",
+  "KAVO Air-flow წმენდა": "KaVo Air-Flow Cleaning",
+  "პაროდონტოლოგიური სტატუსი": "Periodontal Status Chart",
+  "ღრძილის მკურნალობა / კორექცია": "Gum Treatment / Contouring",
+  "ფრენექტომია": "Frenectomy",
+  "ფტორირება": "Fluoridation",
+  "არტაშანირება": "Tooth Splinting",
+  "ექსტრაქცია (ნემსის გარეშე)": "Extraction (Without Needle)",
+  "ექსტრაქცია (ანესთეზიით)": "Extraction (With Anesthesia)",
+  "ფისურების ჰერმეტიზაცია": "Fissure Sealant",
+  "სარძევე კბილის კარიესი": "Primary Tooth Caries Treatment",
+  "პულპიტი, პერიოდონტიტი": "Primary Tooth Pulpitis/Periodontitis",
+  "ბავშვთა ჰიგიენური წმენდა": "Pediatric Prophylaxis",
+  "ანესთეზია": "Local Anesthesia",
+  "კბილის ამოღება": "Tooth Extraction",
+  "ფესვის ამოღება": "Root Fragment Removal",
+  "სიბრძნის კბილის ამოღება": "Wisdom Tooth Extraction",
+  "რეტინირებული კბილის ამოღება": "Impacted Tooth Extraction",
+  "ფესვის მწვერვალის რეზექცია": "Apicoectomy (Root Resection)",
+  "სინუს ლიფტი": "Sinus Lift Surgery",
+  "აუგმენტაცია (ძვლის გადანერგვა)": "Bone Augmentation",
+  "MIS (ისრაელი)": "MIS Implants (Israel)",
+  "Neobiotech (კორეა)": "Neobiotech Implants (Korea)",
+  "MIS C1 (ისრაელი)": "MIS C1 Premium (Israel)",
+  "Schutz (გერმანია)": "Schütz Dental (Germany)",
+  "Straumann (შვეიცარია)": "Straumann Premium (Switzerland)",
+  "ცირკონო-კერამიკის გვირგვინი": "Zirconia Ceramic Crown",
+  "მეტალო-კერამიკის გვიგვინი": "Metal Ceramic Crown",
+  "მეტალო-კერამიკის გვირგვინი": "Metal Ceramic Crown",
+  "პრეს-კერამიკის ვინირი": "E-max Press Veneer",
+  "ბრუქსიზმის კაპა": "Bruxism Night Guard",
+  "მოსახსნელი პროტეზი": "Removable Denture",
+  "პროტეზი იმპლანტებზე": "Overdenture on Implants",
+  "მეტალის ბრეკეტები": "Metal Braces",
+  "კერამიკული ბრეკეტები": "Ceramic Braces",
+  "საფირის ბრეკეტები": "Sapphire Braces",
+  "თვითლიგირებადი ბრეკეტები": "Self-Ligating Braces",
+  "ელაინერები": "Clear Aligners",
+  "სპლინტ თერაპია": "Splint Therapy",
+  "ცირკონი": "Zircon Tooth Gem",
+  "სვაროვსკი": "Swarovski Crystal",
+  "ბრილიანტი": "Diamond Tooth Gem"
+}[item.n] || item.n)}</span>
                           <div style={{ flexGrow: 1, borderBottom: '1px dotted rgba(51, 53, 58, 0.2)', marginInline: '8px', height: '8px' }} />
                           <span className="text-xs font-black text-[var(--accent-color)] px-3 py-1" style={{ backgroundColor: 'rgba(var(--accent-color-rgb), 0.12)', borderRadius: '12px', whiteSpace: 'nowrap' }}>
                             {item.p}
@@ -2138,7 +2357,7 @@ export default function App() {
                   className="phone-onboarding-btn" 
                   style={{ display: 'inline-flex', width: 'auto', padding: '10px 24px', fontSize: '0.85rem' }}
                 >
-                  უფასო კონსულტაციის დაჯავშნა
+                  {lang === 'ka' ? 'უფასო კონსულტაციის დაჯავშნა' : 'Book Free Consultation'}
                 </a>
               </div>
             </div>
@@ -2160,27 +2379,27 @@ export default function App() {
             </button>
             <div className="text-left">
               <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-2 block">
-                ✦ კლინიკის ბლოგი
+                ✦ {lang === 'ka' ? 'კლინიკის ბლოგი' : 'Clinic Blog'}
               </span>
-              <h3 className="font-serif font-bold text-xl text-[#33353A] mb-4">რჩევები ორალური ჰიგიენისთვის</h3>
+              <h3 className="font-serif font-bold text-xl text-[#33353A] mb-4">{lang === 'ka' ? 'რჩევები ორალური ჰიგიენისთვის' : 'Tips for Oral Hygiene'}</h3>
               
               <div className="flex flex-col gap-4">
                 <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
-                  <h4 className="font-bold text-sm text-[#33353A] mb-1">როგორ მოვუაროთ ბრეკეტებს სწორად?</h4>
-                  <p className="text-xs text-[#5A5D64] mb-2">გაიგეთ, როგორ გამოიყენოთ სპეციალური ორთოდონტიული ჯაგრისები და ფლოსი ბრეკეტებით მკურნალობის პერიოდში სრულყოფილი სისუფთავის შესანარჩუნებლად.</p>
-                  <a href="#booking" onClick={() => { playClickSound(); setShowBlogModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                  <h4 className="font-bold text-sm text-[#33353A] mb-1">{lang === 'ka' ? 'როგორ მოვუაროთ ბრეკეტებს სწორად?' : 'How to care for braces correctly?'}</h4>
+                  <p className="text-xs text-[#5A5D64] mb-2">{lang === 'ka' ? 'გაიგეთ, როგორ გამოიყენოთ სპეციალური ორთოდონტიული ჯაგრისები და ფლოსი ბრეკეტებით მკურნალობის პერიოდში სრულყოფილი სისუფთავის შესანარჩუნებლად.' : 'Learn how to use special orthodontic brushes and floss during braces treatment to maintain perfect cleanliness.'}</p>
+                  <a href="#booking" onClick={() => { playClickSound(); setShowBlogModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">{lang === 'ka' ? 'დაჯავშნე კონსულტაცია' : 'Book Consultation'} <ChevronRight className="w-3 h-3" /></a>
                 </article>
 
                 <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
-                  <h4 className="font-bold text-sm text-[#33353A] mb-1">კბილის იმპლანტაციის 5 უპირატესობა</h4>
-                  <p className="text-xs text-[#5A5D64] mb-2">რატომ არის იმპლანტი საუკეთესო და ყველაზე ბუნებრივი არჩევანი დაკარგული კბილების აღსადგენად. როგორ გვეხმარება ის მეზობელი კბილების შენარჩუნებაში.</p>
-                  <a href="#booking" onClick={() => { playClickSound(); setShowBlogModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                  <h4 className="font-bold text-sm text-[#33353A] mb-1">{lang === 'ka' ? 'კბილის იმპლანტაციის 5 უპირატესობა' : '5 Advantages of Dental Implants'}</h4>
+                  <p className="text-xs text-[#5A5D64] mb-2">{lang === 'ka' ? 'რატომ არის იმპლანტი საუკეთესო და ყველაზე ბუნებრივი არჩევანი დაკარგული კბილების აღსადგენად. როგორ გვეხმარება ის მეზობელი კბილების შენარჩუნებაში.' : 'Why implants are the best and most natural choice for replacing missing teeth. How they help preserve adjacent teeth.'}</p>
+                  <a href="#booking" onClick={() => { playClickSound(); setShowBlogModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">{lang === 'ka' ? 'დაჯავშნე კონსულტაცია' : 'Book Consultation'} <ChevronRight className="w-3 h-3" /></a>
                 </article>
 
                 <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
-                  <h4 className="font-bold text-sm text-[#33353A] mb-1">როგორ ავიცილოთ თავიდან კარიესი?</h4>
-                  <p className="text-xs text-[#5A5D64] mb-2">ყოველდღიური მარტივი რჩევები, კვების რაციონის კორექტირება და სწორი ჰიგიენური ჩვევები, რომლებიც დაიცავს თქვენს ემალს დაზიანებისგან.</p>
-                  <a href="#booking" onClick={() => { playClickSound(); setShowBlogModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                  <h4 className="font-bold text-sm text-[#33353A] mb-1">{lang === 'ka' ? 'როგორ ავიცილოთ თავიდან კარიესი?' : 'How to Avoid Caries?'}</h4>
+                  <p className="text-xs text-[#5A5D64] mb-2">{lang === 'ka' ? 'ყოველდღიური მარტივი რჩევები, კვების რაციონის კორექტირება და სწორი ჰიგიენური ჩვევები, რომლებიც დაიცავს თქვენს ემალს დაზიანებისგან.' : 'Simple daily tips, diet adjustments, and correct hygiene habits that protect your enamel from damage.'}</p>
+                  <a href="#booking" onClick={() => { playClickSound(); setShowBlogModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">{lang === 'ka' ? 'დაჯავშნე კონსულტაცია' : 'Book Consultation'} <ChevronRight className="w-3 h-3" /></a>
                 </article>
               </div>
             </div>
@@ -2202,36 +2421,36 @@ export default function App() {
             </button>
             <div className="text-left">
               <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-2 block">
-                ✦ უახლესი ტექნოლოგიები
+                ✦ {lang === 'ka' ? 'უახლესი ტექნოლოგიები' : 'Latest Technologies'}
               </span>
-              <h3 className="font-serif font-bold text-xl text-[#33353A] mb-4">ჩვენი საუკეთესო აპარატურა</h3>
+              <h3 className="font-serif font-bold text-xl text-[#33353A] mb-4">{lang === 'ka' ? 'ჩვენი საუკეთესო აპარატურა' : 'Our Premium Equipment'}</h3>
               <p className="text-xs text-[#5A5D64] mb-6">
-                ღიმილის სააგენტო აღჭურვილია წამყვანი ევროპული და ამერიკული ბრენდების ულტრათანამედროვე აპარატურით, რაც მკურნალობის მაქსიმალურ სიზუსტეს, უსაფრთხოებასა და უმტკივნეულო პროცესს გარანტირებს.
+                {lang === 'ka' ? 'ღიმილის სააგენტო აღჭურვილია წამყვანი ევროპული და ამერიკული ბრენდების ულტრათანამედროვე აპარატურით, რაც მკურნალობის მაქსიმალურ სიზუსტეს, უსაფრთხოებასა და უმტკივნეულო პროცესს გარანტირებს.' : 'Smile Agency is equipped with state-of-the-art instruments from leading European and American brands, ensuring maximum precision, safety, and a painless treatment experience.'}
               </p>
               
               <div className="flex flex-col gap-4">
                 <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
-                  <h4 className="font-bold text-sm text-[#33353A] mb-1">სტომატოლოგიური მიკროსკოპი (Leica / Zeiss)</h4>
-                  <p className="text-xs text-[#5A5D64] mb-2">კბილის ფესვის არხების მკურნალობისას უზრუნველყოფს 30-ჯერად გადიდებას. გვეხმარება ყველაზე რთულად შესამჩნევი ანატომიური დეტალების დანახვასა და მკურნალობაში.</p>
-                  <a href="#booking" onClick={() => { playClickSound(); setSelectedService('კონსულტაცია'); setShowEquipModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                  <h4 className="font-bold text-sm text-[#33353A] mb-1">{lang === 'ka' ? 'სტომატოლოგიური მიკროსკოპი (Leica / Zeiss)' : 'Dental Microscope (Leica / Zeiss)'}</h4>
+                  <p className="text-xs text-[#5A5D64] mb-2">{lang === 'ka' ? 'კბილის ფესვის არხების მკურნალობისას უზრუნველყოფს 30-ჯერად გადიდებას. გვეხმარება ყველაზე რთულად შესამჩნევი ანატომიური დეტალების დანახვასა და მკურნალობაში.' : 'Provides 30x magnification during root canal treatments, helping us see and treat the most complex anatomical details.'}</p>
+                  <a href="#booking" onClick={() => { playClickSound(); setSelectedService('კონსულტაცია'); setShowEquipModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">{lang === 'ka' ? 'დაჯავშნე კონსულტაცია' : 'Book Consultation'} <ChevronRight className="w-3 h-3" /></a>
                 </article>
 
                 <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
-                  <h4 className="font-bold text-sm text-[#33353A] mb-1">3D კომპიუტერული ტომოგრაფი (CBCT)</h4>
-                  <p className="text-xs text-[#5A5D64] mb-2">ულტრა-დაბალი გამოსხივების ციფრული 3D დიაგნოსტიკა. წამებში ვიღებთ ყბა-კბილთა სისტემის უზუსტეს სამგანზომილებიან სურათს მკურნალობის უშეცდომო დაგეგმვისთვის.</p>
-                  <a href="#booking" onClick={() => { playClickSound(); setSelectedService('კონსულტაცია'); setShowEquipModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                  <h4 className="font-bold text-sm text-[#33353A] mb-1">{lang === 'ka' ? '3D კომპიუტერული ტომოგრაფი (CBCT)' : '3D Computer Tomography (CBCT)'}</h4>
+                  <p className="text-xs text-[#5A5D64] mb-2">{lang === 'ka' ? 'ულტრა-დაბალი გამოსხივების ციფრული 3D დიაგნოსტიკა. წამებში ვიღებთ ყბა-კბილთა სისტემის უზუსტეს სამგანზომილებიან სურათს მკურნალობის უშეცდომო დაგეგმვისთვის.' : 'Digital 3D diagnostics with ultra-low radiation. We obtain a precise 3D image of the jaw system within seconds for error-free planning.'}</p>
+                  <a href="#booking" onClick={() => { playClickSound(); setSelectedService('კონსულტაცია'); setShowEquipModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">{lang === 'ka' ? 'დაჯავშნე კონსულტაცია' : 'Book Consultation'} <ChevronRight className="w-3 h-3" /></a>
                 </article>
 
                 <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
-                  <h4 className="font-bold text-sm text-[#33353A] mb-1">შიდა პირის ღრუს 3D სკანერი (3Shape TRIOS)</h4>
-                  <p className="text-xs text-[#5A5D64] mb-2">ტრადიციული, უსიამოვნო ანაბეჭდების მასების ნაცვლად, პირის ღრუს სწრაფი, კომფორტული და ზუსტი ციფრული სკანირება ვინირებისა და გვირგვინების დასამზადებლად.</p>
-                  <a href="#booking" onClick={() => { playClickSound(); setSelectedService('კონსულტაცია'); setShowEquipModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                  <h4 className="font-bold text-sm text-[#33353A] mb-1">{lang === 'ka' ? 'შიდა პირის ღრუს 3D სკანერი (3Shape TRIOS)' : 'Intraoral 3D Scanner (3Shape TRIOS)'}</h4>
+                  <p className="text-xs text-[#5A5D64] mb-2">{lang === 'ka' ? 'ტრადიციული, უსიამოვნო ანაბეჭდების მასების ნაცვლად, პირის ღრუს სწრაფი, კომფორტული და ზუსტი ციფრული სკანირება ვინირებისა და გვირგვინების დასამზადებლად.' : 'Instead of messy traditional impressions, fast and highly comfortable digital intraoral scanning is used to fabricate veneers and crowns.'}</p>
+                  <a href="#booking" onClick={() => { playClickSound(); setSelectedService('კონსულტაცია'); setShowEquipModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">{lang === 'ka' ? 'დაჯავშნე კონსულტაცია' : 'Book Consultation'} <ChevronRight className="w-3 h-3" /></a>
                 </article>
 
                 <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
-                  <h4 className="font-bold text-sm text-[#33353A] mb-1">სტომატოლოგიური ლაზერი (Biolase)</h4>
-                  <p className="text-xs text-[#5A5D64] mb-2">რბილი ქსოვილების უმტკივნეულო, უსისხლო და ნაკლებად ინვაზიური მკურნალობისთვის. გამოიყენება ღრძილების პლასტიკაში, სტერილიზაციასა და თერაპიაში.</p>
-                  <a href="#booking" onClick={() => { playClickSound(); setSelectedService('კონსულტაცია'); setShowEquipModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                  <h4 className="font-bold text-sm text-[#33353A] mb-1">{lang === 'ka' ? 'სტომატოლოგიური ლაზერი (Biolase)' : 'Dental Laser (Biolase)'}</h4>
+                  <p className="text-xs text-[#5A5D64] mb-2">{lang === 'ka' ? 'რბილი ქსოვილების უმტკივნეულო, უსისხლო და ნაკლებად ინვაზიური მკურნალობისთვის. გამოიყენება ღრძილების პლასტიკაში, სტერილიზაციასა და თერაპიაში.' : 'Painless, bloodless, and less invasive treatments of soft tissues. Used in gum contouring, root canal sterilization, and therapy.'}</p>
+                  <a href="#booking" onClick={() => { playClickSound(); setSelectedService('კონსულტაცია'); setShowEquipModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">{lang === 'ka' ? 'დაჯავშნე კონსულტაცია' : 'Book Consultation'} <ChevronRight className="w-3 h-3" /></a>
                 </article>
               </div>
             </div>
@@ -2253,20 +2472,20 @@ export default function App() {
             </button>
             <div className="text-left">
               <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-2 flex items-center gap-2">
-                ✦ {renderServiceIcon(activeServiceDetail.key)} სერვისის დეტალები
+                ✦ {renderServiceIcon(activeServiceDetail.key)} {lang === 'ka' ? 'სერვისის დეტალები' : 'Service Details'}
               </span>
               <h3 className="font-serif font-bold text-2xl text-[#33353A] mb-4 mt-2">
-                {activeServiceDetail.title}
+                {getServiceDetailTranslated(activeServiceDetail, lang).title}
               </h3>
               <p className="text-sm text-[#5A5D64] leading-relaxed mb-6">
-                {activeServiceDetail.desc}
+                {getServiceDetailTranslated(activeServiceDetail, lang).desc}
               </p>
               
               <h4 className="font-bold text-xs text-[#33353A] mb-3 uppercase tracking-wider">
-                მანიპულაციები და პროცედურები:
+                {lang === 'ka' ? 'მანიპულაციები და პროცედურები:' : 'Treatments & Procedures:'}
               </h4>
               <div className="flex flex-col gap-3 max-h-[300px] overflow-y-auto pr-2">
-                {activeServiceDetail.subs && activeServiceDetail.subs.map((sub, i) => (
+                {activeServiceDetail.subs && getServiceDetailTranslated(activeServiceDetail, lang).subs.map((sub, i) => (
                   <div key={i} className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)', background: 'rgba(255, 255, 255, 0.25)' }}>
                     <h5 className="font-bold text-sm text-[#33353A] mb-1 flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--accent-color)' }}></span>
@@ -2297,7 +2516,7 @@ export default function App() {
                   className="phone-onboarding-btn"
                   style={{ width: 'auto', padding: '12px 24px' }}
                 >
-                  ჩაეწერე კონსულტაციაზე
+                  {lang === 'ka' ? 'ჩაეწერე კონსულტაციაზე' : 'Book Consultation'}
                 </button>
               </div>
             </div>
@@ -2319,27 +2538,27 @@ export default function App() {
             </button>
             <div className="text-left">
               <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-2 flex items-center gap-2">
-                ✦ პროფილაქტიკა & დაცვა
+                ✦ {lang === 'ka' ? 'პროფილაქტიკა & დაცვა' : 'Prophylaxis & Protection'}
               </span>
               <h3 className="font-serif font-bold text-2xl text-[#33353A] mb-4 mt-2">
-                {activeEnamelDetail.title}
+                {getEnamelDetailTranslated(activeEnamelDetail, lang).title}
               </h3>
               
               <div className="glass-neu p-4 mb-4" style={{ background: 'rgba(var(--accent-color-rgb), 0.05)', border: '1px solid rgba(var(--accent-color-rgb), 0.15)', boxShadow: 'none' }}>
                 <h4 className="font-bold text-xs text-[var(--accent-color)] mb-2 uppercase tracking-wider">
-                  როგორ აზიანებს ემალს:
+                  {lang === 'ka' ? 'როგორ აზიანებს ემალს:' : 'How it damages enamel:'}
                 </h4>
                 <p className="text-sm text-[#5A5D64] leading-relaxed">
-                  {activeEnamelDetail.damage}
+                  {getEnamelDetailTranslated(activeEnamelDetail, lang).damage}
                 </p>
               </div>
 
               <div className="glass-neu p-4" style={{ background: 'rgba(255, 255, 255, 0.25)', boxShadow: 'none' }}>
                 <h4 className="font-bold text-xs text-[#33353A] mb-2 uppercase tracking-wider">
-                  რეკომენდაცია / პრევენცია:
+                  {lang === 'ka' ? 'რეკომენდაცია / პრევენცია:' : 'Recommendation / Prevention:'}
                 </h4>
                 <p className="text-sm text-[#5A5D64] leading-relaxed">
-                  {activeEnamelDetail.tip}
+                  {getEnamelDetailTranslated(activeEnamelDetail, lang).tip}
                 </p>
               </div>
 
@@ -2357,7 +2576,7 @@ export default function App() {
                   className="phone-onboarding-btn"
                   style={{ width: 'auto', padding: '12px 24px' }}
                 >
-                  ჩაეწერე კონსულტაციაზე
+                  {lang === 'ka' ? 'ჩაეწერე კონსულტაციაზე' : 'Book Consultation'}
                 </button>
               </div>
             </div>
@@ -2392,7 +2611,7 @@ export default function App() {
               {/* Right Column: Info */}
               <div className="md:col-span-7">
                 <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-1 block">
-                  ✦ პროფესიონალი ექიმი
+                  ✦ {lang === 'ka' ? 'პროფესიონალი ექიმი' : 'Professional Doctor'}
                 </span>
                 <h3 className="font-serif font-bold text-2xl text-[#33353A] mb-1">
                   {activeDoctorDetail.name}
@@ -2405,9 +2624,9 @@ export default function App() {
                 <div className="mb-4 glass-neu p-3" style={{ background: 'rgba(255, 255, 255, 0.25)', border: '1px solid rgba(var(--accent-color-rgb), 0.15)' }}>
                   <div className="flex items-center justify-between flex-wrap gap-2">
                     <div>
-                      <h4 className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-color)] mb-0.5">შეფასება და რეიტინგი</h4>
+                      <h4 className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-color)] mb-0.5">{lang === 'ka' ? 'შეფასება და რეიტინგი' : 'Ratings & Reviews'}</h4>
                       <p className="text-xs text-[#5A5D64]" style={{ margin: 0 }}>
-                        რეიტინგი: <strong className="text-[#33353A]">{getDoctorRating(activeDoctorDetail.name).average} / 5</strong> ({getDoctorRating(activeDoctorDetail.name).count} ხმა)
+                        <span>{lang === 'ka' ? 'რეიტინგი:' : 'Rating:'}</span> <strong className="text-[#33353A]">{getDoctorRating(activeDoctorDetail.name).average} / 5</strong> ({getDoctorRating(activeDoctorDetail.name).count} {lang === 'ka' ? 'ხმა' : 'votes'})
                       </p>
                     </div>
                     <div className="flex items-center gap-1" onMouseLeave={() => setHoverRating(0)}>
@@ -2429,7 +2648,7 @@ export default function App() {
                             onMouseEnter={() => setHoverRating(star)}
                             className="transition-transform hover:scale-125 focus:outline-none"
                             style={{ background: 'none', border: 'none', padding: '2px', cursor: 'pointer' }}
-                            title={`შეაფასე ${star} ვარსკვლავით`}
+                            title={lang === 'ka' ? `შეაფასე ${star} ვარსკვლავით` : `Rate ${star} Stars`}
                           >
                             <Star 
                               className="w-4 h-4 transition-colors" 
@@ -2445,28 +2664,28 @@ export default function App() {
                   </div>
                   {getDoctorRating(activeDoctorDetail.name).userRating && (
                     <div className="text-[10px] text-[#28A745] font-bold mt-1.5 flex items-center gap-1">
-                      ✦ გმადლობთ შეფასებისთვის! (თქვენ მიანიჭეთ {getDoctorRating(activeDoctorDetail.name).userRating} ვარსკვლავი)
+                      lang === 'ka' ? `✦ გმადლობთ შეფასებისთვის! (თქვენ მიანიჭეთ ${getDoctorRating(activeDoctorDetail.name).userRating} ვარსკვლავი)` : `✦ Thank you for rating! (You gave ${getDoctorRating(activeDoctorDetail.name).userRating} stars)`
                     </div>
                   )}
                 </div>
 
                 {activeDoctorDetail.bio && (
                   <div className="mb-4">
-                    <h4 className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-color)] border-b border-[var(--accent-color)]/10 pb-1 mb-2">მოკლე მიმოხილვა</h4>
+                    <h4 className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-color)] border-b border-[var(--accent-color)]/10 pb-1 mb-2">{lang === 'ka' ? 'მოკლე მიმოხილვა' : 'Brief Overview'}</h4>
                     <p className="text-xs text-[#5A5D64] leading-relaxed whitespace-pre-line">{activeDoctorDetail.bio}</p>
                   </div>
                 )}
 
                 {activeDoctorDetail.education && (
                   <div className="mb-4">
-                    <h4 className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-color)] border-b border-[var(--accent-color)]/10 pb-1 mb-2">განათლება და კურსები</h4>
+                    <h4 className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-color)] border-b border-[var(--accent-color)]/10 pb-1 mb-2">{lang === 'ka' ? 'განათლება და კურსები' : 'Education & Courses'}</h4>
                     <p className="text-xs text-[#5A5D64] leading-relaxed whitespace-pre-line">{activeDoctorDetail.education}</p>
                   </div>
                 )}
 
                 {activeDoctorDetail.specialization && (
                   <div className="mb-4">
-                    <h4 className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-color)] border-b border-[var(--accent-color)]/10 pb-1 mb-2">სპეციალიზაცია</h4>
+                    <h4 className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-color)] border-b border-[var(--accent-color)]/10 pb-1 mb-2">{lang === 'ka' ? 'სპეციალიზაცია' : 'Specialization'}</h4>
                     <p className="text-xs text-[#5A5D64] leading-relaxed whitespace-pre-line">{activeDoctorDetail.specialization}</p>
                   </div>
                 )}
@@ -2486,7 +2705,7 @@ export default function App() {
                     className="phone-onboarding-btn"
                     style={{ width: 'auto', padding: '10px 20px', fontSize: '12px' }}
                   >
-                    ჩაეწერე ვიზიტზე
+                    {lang === 'ka' ? 'ჩაეწერე ვიზიტზე' : 'Book Visit'}
                   </button>
                 </div>
               </div>
@@ -2518,11 +2737,11 @@ export default function App() {
             </button>
             
             <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-1.5 block">
-              ✦ ვერიფიკაცია
+              ✦ {lang === 'ka' ? 'ვერიფიკაცია' : 'Verification'}
             </span>
-            <h3 className="font-serif font-bold text-lg text-[#33353A] mb-2">შეფასების დადასტურება</h3>
+            <h3 className="font-serif font-bold text-lg text-[#33353A] mb-2">{lang === 'ka' ? 'შეფასების დადასტურება' : 'Confirm Rating'}</h3>
             <p className="text-xs text-[#5A5D64] mb-4">
-              ექიმის შესაფასებლად გთხოვთ მიუთითოთ თქვენი სახელი, გვარი და ნამდვილი ტელეფონის ნომერი.
+              {lang === 'ka' ? 'ექიმის შესაფასებლად გთხოვთ მიუთითოთ თქვენი სახელი, გვარი და ნამდვილი ტელეფონის ნომერი.' : 'To rate the doctor, please specify your full name and valid phone number.'}
             </p>
             
             <form onSubmit={(e) => {
@@ -2533,12 +2752,12 @@ export default function App() {
               const georgianMobileRegex = /^5\d{8}$/;
               
               if (!authName.trim() || authName.trim().split(/\s+/).length < 2) {
-                setAuthError('გთხოვთ მიუთითოთ სახელი და გვარი (მაგ: გიორგი მაისურაძე)');
+                setAuthError(lang === 'ka' ? 'გთხოვთ მიუთითოთ სახელი და გვარი (მაგ: გიორგი მაისურაძე)' : 'Please enter full name (e.g. John Doe)');
                 return;
               }
               
               if (!georgianMobileRegex.test(cleanPhone)) {
-                setAuthError('მიუთითეთ ნამდვილი მობილურის ნომერი (მაგ: 599 xx xx xx)');
+                setAuthError(lang === 'ka' ? 'მიუთითეთ ნამდვილი მობილურის ნომერი (მაგ: 599 xx xx xx)' : 'Please enter valid phone number (e.g. 599 xx xx xx)');
                 return;
               }
               
@@ -2561,7 +2780,7 @@ export default function App() {
                 <label className="text-xs font-bold text-[#33353A] mb-1 block">სახელი და გვარი</label>
                 <input 
                   type="text" 
-                  placeholder="მაგ: გიორგი მაისურაძე"
+                  placeholder={lang === 'ka' ? "მაგ: გიორგი მაისურაძე" : "e.g., John Doe"}
                   value={authName}
                   onChange={(e) => setAuthName(e.target.value)}
                   required
@@ -2592,7 +2811,7 @@ export default function App() {
                 className="phone-onboarding-btn mt-2" 
                 style={{ width: '100%', padding: '12px', fontSize: '12px' }}
               >
-                შესვლის დადასტურება
+                {lang === 'ka' ? 'შესვლის დადასტურება' : 'Confirm & Login'}
               </button>
             </form>
           </div>
@@ -2613,10 +2832,10 @@ export default function App() {
             </button>
             <div className="text-left mb-4">
               <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-1 block">
-                ✦ კლინიკის მდებარეობა
+                ✦ {lang === 'ka' ? 'კლინიკის მდებარეობა' : 'Clinic Location'}
               </span>
-              <h3 className="font-serif font-bold text-xl text-[#33353A]">გვიპოვეთ რუკაზე</h3>
-              <p className="text-xs text-[#8A8E98] mt-1">მელიტონ და ანდრია ბალანჩივაძეების ქ. 14, თბილისი</p>
+              <h3 className="font-serif font-bold text-xl text-[#33353A]">{lang === 'ka' ? 'გვიპოვეთ რუკაზე' : 'Find Us on Map'}</h3>
+              <p className="text-xs text-[#8A8E98] mt-1">{lang === 'ka' ? 'მელიტონ და ანდრია ბალანჩივაძეების ქ. 14, თბილისი' : '14 Meliton & Andria Balanchivadze St, Tbilisi'}</p>
             </div>
             <div className="rounded-2xl overflow-hidden shadow-inner border border-[var(--accent-color)]/10" style={{ width: '100%', height: '400px' }}>
               <iframe 
