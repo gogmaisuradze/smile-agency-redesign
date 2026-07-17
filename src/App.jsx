@@ -1012,7 +1012,7 @@ export default function App() {
         <div className="wrap nav">
           <a href="#top" className="brand">
             <img src={`${import.meta.env.BASE_URL}images/logo.webp?v=4`} alt="Smile Agency Logo" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
-            ღიმილის სააგენტო
+            {lang === 'ka' ? 'ღიმილის სააგენტო' : 'Smile Agency'}
           </a>
           <nav className={`nav-links ${mobileMenuOpen ? 'open' : ''}`} id="navLinks">
             <a href="#dashboard" onClick={() => { setMobileMenuOpen(false); setActiveLink('#dashboard'); }} className={activeLink === '#dashboard' ? 'active' : ''}>{lang === 'ka' ? 'მთავარი' : 'Home'}</a>
@@ -1788,7 +1788,7 @@ export default function App() {
         <div className="wrap">
           <a href="#top" className="brand">
             <img src={`${import.meta.env.BASE_URL}images/logo.webp?v=4`} alt="Smile Agency Logo" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
-            ღიმილის სააგენტო
+            {lang === 'ka' ? 'ღიმილის სააგენტო' : 'Smile Agency'}
           </a>
           <div className="foot-links">
             <a href="#dashboard">{lang === 'ka' ? 'მთავარი' : 'Home'}</a>
