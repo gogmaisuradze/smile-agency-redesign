@@ -1940,3 +1940,19 @@ footer .brand {
     height: 16px !important;
   }
 }
+
+/* Theme transition smooth filters for Logo and Videos */
+.brand img,
+#dashboard video,
+.enamel-info-video video {
+  transition: filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:root.theme-teal .brand img {
+  filter: hue-rotate(170deg) saturate(1.4) brightness(0.95);
+}
+
+:root.theme-teal #dashboard video,
+:root.theme-teal .enamel-info-video video {
+  filter: hue-rotate(170deg) saturate(1.2) brightness(1.05);
+}
