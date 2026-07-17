@@ -5,6 +5,7 @@
   --app-text-dark: #33353A;
   --app-text-soft: #8A8E98;
   --accent-color: #E08A79;
+  --accent-color-rgb: 224, 138, 121;
   --accent-color-hover: #D48375;
   --line-color: rgba(255, 255, 255, 0.6);
   --shadow-dark: rgba(166, 160, 146, 0.35);
@@ -12,6 +13,14 @@
   --radius-lg: 26px;
   --radius-md: 16px;
   --radius-sm: 10px;
+  --sphere-grad: radial-gradient(circle at 35% 35%, #FFDFD9 0%, #E08A79 45%, #9E4D3E 90%);
+}
+
+:root.theme-teal {
+  --accent-color: #005d5d;
+  --accent-color-rgb: 0, 93, 93;
+  --accent-color-hover: #004c4c;
+  --sphere-grad: radial-gradient(circle at 35% 35%, #B2E5E5 0%, #005d5d 45%, #002626 90%);
 }
 
 *, *::before, *::after {
@@ -226,7 +235,7 @@ header {
 .service-chip.active {
   background: rgba(255, 255, 255, 0.25);
   color: var(--accent-color);
-  border-color: rgba(224, 138, 121, 0.4);
+  border-color: rgba(var(--accent-color-rgb), 0.4);
   box-shadow: 
     inset 3px 3px 6px var(--shadow-dark), 
     inset -3px -3px 6px var(--shadow-light);
@@ -809,7 +818,7 @@ header {
 .day.sel {
   background: rgba(255, 255, 255, 0.15);
   color: var(--accent-color);
-  border-color: rgba(224, 138, 121, 0.3);
+  border-color: rgba(var(--accent-color-rgb), 0.3);
   box-shadow: 
     inset 3px 3px 6px var(--shadow-dark), 
     inset -3px -3px 6px var(--shadow-light);
@@ -868,7 +877,7 @@ header {
 .slot.sel {
   background: rgba(255, 255, 255, 0.15);
   color: var(--accent-color);
-  border-color: rgba(224, 138, 121, 0.3);
+  border-color: rgba(var(--accent-color-rgb), 0.3);
   box-shadow: 
     inset 3px 3px 6px var(--shadow-dark), 
     inset -3px -3px 6px var(--shadow-light);
@@ -1177,32 +1186,30 @@ footer .brand {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #FFDFD9 0%, #E08A79 45%, #9E4D3E 90%);
+  background: var(--sphere-grad);
   box-shadow: 
-    0px 0px 15px rgba(224, 138, 121, 0.4), 
+    0px 0px 15px rgba(var(--accent-color-rgb), 0.4), 
     inset -2px -2px 8px rgba(0,0,0,0.3), 
     inset 2px 2px 8px rgba(255,255,255,0.7),
     3px 3px 8px var(--shadow-dark);
   margin-bottom: 8px;
-  animation: sphereFloat 4s ease-in-out infinite, sphereFlash 2s ease-in-out infinite;
+  animation: sphereFloat 4s ease-in-out infinite, sphereFlash 2.5s ease-in-out infinite;
 }
 
 @keyframes sphereFlash {
   0%, 100% {
     box-shadow: 
-      0px 0px 15px rgba(224, 138, 121, 0.4), 
+      0px 0px 15px rgba(var(--accent-color-rgb), 0.4), 
       inset -2px -2px 8px rgba(0,0,0,0.3), 
       inset 2px 2px 8px rgba(255,255,255,0.7),
       3px 3px 8px var(--shadow-dark);
-    filter: brightness(1);
   }
   50% {
     box-shadow: 
-      0px 0px 32px rgba(224, 138, 121, 0.95), 
-      inset -1px -1px 6px rgba(0,0,0,0.2), 
-      inset 3px 3px 12px rgba(255,255,255,0.95),
-      4px 4px 10px var(--shadow-dark);
-    filter: brightness(1.2);
+      0px 0px 32px rgba(var(--accent-color-rgb), 0.95), 
+      inset -2px -2px 8px rgba(0,0,0,0.35), 
+      inset 2px 2px 8px rgba(255,255,255,0.85),
+      3px 3px 10px var(--shadow-dark);
   }
 }
 
@@ -1253,9 +1260,9 @@ footer .brand {
 }
 
 .chat-msg.user {
-  background: rgba(224, 138, 121, 0.15);
+  background: rgba(var(--accent-color-rgb), 0.15);
   color: var(--app-text-dark);
-  border: 1px solid rgba(224, 138, 121, 0.25);
+  border: 1px solid rgba(var(--accent-color-rgb), 0.25);
   border-bottom-right-radius: 4px;
   box-shadow: 2px 2px 5px rgba(166, 160, 146, 0.05);
 }
@@ -1879,5 +1886,57 @@ footer .brand {
   }
   .menu-hub-blog-wide p {
     font-size: 0.7rem !important;
+  }
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid var(--line-color);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 
+    3px 3px 8px var(--shadow-dark), 
+    -3px -3px 8px var(--shadow-light);
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+.theme-toggle-btn:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.65);
+}
+.theme-toggle-btn:active {
+  box-shadow: 
+    inset 2px 2px 5px var(--shadow-dark), 
+    inset -2px -2px 5px var(--shadow-light);
+}
+.color-preview-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-color) 50%, #005d5d 50%);
+  border: 1.5px solid #ffffff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+  transition: transform 0.4s ease;
+}
+:root.theme-teal .color-preview-circle {
+  background: linear-gradient(135deg, #E08A79 50%, var(--accent-color) 50%);
+  transform: rotate(180deg);
+}
+
+@media (max-width: 768px) {
+  .theme-toggle-btn {
+    margin-right: 8px !important;
+    width: 32px !important;
+    height: 32px !important;
+  }
+  .color-preview-circle {
+    width: 16px !important;
+    height: 16px !important;
   }
 }

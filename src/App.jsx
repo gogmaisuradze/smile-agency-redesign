@@ -406,6 +406,25 @@ export default function App() {
   const [selectedDate, setSelectedDate] = useState(null)
   const [selectedTime, setSelectedTime] = useState(null)
 
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('site-theme') || 'coral';
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'teal') {
+      root.classList.add('theme-teal');
+    } else {
+      root.classList.remove('theme-teal');
+    }
+    localStorage.setItem('site-theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    playClickSound();
+    setTheme(prev => prev === 'coral' ? 'teal' : 'coral');
+  };
+
   // Form inputs
   const [patientName, setPatientName] = useState('')
   const [patientPhone, setPatientPhone] = useState('')
@@ -691,10 +710,20 @@ export default function App() {
             <a href="#doctors" onClick={() => { setMobileMenuOpen(false); setActiveLink('#doctors'); }} className={activeLink === '#doctors' ? 'active' : ''}>ექიმები</a>
             <a href="#booking" onClick={() => { setMobileMenuOpen(false); setActiveLink('#booking'); }} className={activeLink === '#booking' ? 'active' : ''}>დაჯავშნა</a>
           </nav>
-          <a href="#booking" className="nav-cta">
-            <CalendarIcon className="w-4 h-4" />
-            დაჯავშნე ვიზიტი
-          </a>
+          <div className="flex items-center gap-1">
+            <button 
+              onClick={toggleTheme}
+              className="theme-toggle-btn"
+              title="ფერის შეცვლა"
+              aria-label="ფერის შეცვლა"
+            >
+              <span className="color-preview-circle"></span>
+            </button>
+            <a href="#booking" className="nav-cta">
+              <CalendarIcon className="w-4 h-4" />
+              დაჯავშნე ვიზიტი
+            </a>
+          </div>
           <button className="burger" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="მენიუ">
             <span></span><span></span><span></span>
           </button>
@@ -944,7 +973,7 @@ export default function App() {
       <section className="block" id="doctors" style={{ paddingTop: 0 }}>
         <div className="wrap text-left">
           <div className="glass-neu">
-            <span className="text-[10px] uppercase font-bold tracking-widest text-[#E08A79] mb-2 block">
+            <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-2 block">
               ✦ რჩეული ექიმები და სერვისები
             </span>
             <h2 className="font-serif font-bold text-2xl text-[#33353A] mb-5">აირჩიე მიმართულება</h2>
@@ -1213,7 +1242,7 @@ export default function App() {
             <h3>ბლოგი</h3>
             <p>საინტერესო სტატიები & რჩევები ჯანსაღი ღიმილისთვის</p>
           </div>
-          <ChevronRight className="w-5 h-5 text-[#E08A79] shrink-0" />
+          <ChevronRight className="w-5 h-5 text-[var(--accent-color)] shrink-0" />
         </div>
       </div>
 
@@ -1547,7 +1576,7 @@ export default function App() {
               <X className="w-4 h-4" />
             </button>
             <div className="text-left">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-[#E08A79] mb-2 block">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-2 block">
                 {lang === 'ka' ? '✦ კლინიკის შესახებ' : '✦ About Clinic'}
               </span>
               <h3 className="font-serif font-bold text-xl text-[#33353A] mb-4">
@@ -1566,25 +1595,25 @@ export default function App() {
               
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
                 <div className="glass-neu p-4 text-center" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.1)' }}>
-                  <div className="text-2xl font-bold text-[#E08A79] font-serif">2020</div>
+                  <div className="text-2xl font-bold text-[var(--accent-color)] font-serif">2020</div>
                   <div className="text-[10px] font-bold text-[#8A8E98] uppercase mt-1">
                     {lang === 'ka' ? 'წლიდან ბაზარზე' : 'Since 2020 on Market'}
                   </div>
                 </div>
                 <div className="glass-neu p-4 text-center" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.1)' }}>
-                  <div className="text-2xl font-bold text-[#E08A79] font-serif">18</div>
+                  <div className="text-2xl font-bold text-[var(--accent-color)] font-serif">18</div>
                   <div className="text-[10px] font-bold text-[#8A8E98] uppercase mt-1">
                     {lang === 'ka' ? 'ექიმის გუნდი' : 'Doctors Team'}
                   </div>
                 </div>
                 <div className="glass-neu p-4 text-center" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.1)' }}>
-                  <div className="text-2xl font-bold text-[#E08A79] font-serif">10K+</div>
+                  <div className="text-2xl font-bold text-[var(--accent-color)] font-serif">10K+</div>
                   <div className="text-[10px] font-bold text-[#8A8E98] uppercase mt-1">
                     {lang === 'ka' ? 'პაციენტი' : 'Patients'}
                   </div>
                 </div>
                 <div className="glass-neu p-4 text-center" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.1)' }}>
-                  <div className="text-2xl font-bold text-[#E08A79] font-serif">7/7</div>
+                  <div className="text-2xl font-bold text-[var(--accent-color)] font-serif">7/7</div>
                   <div className="text-[10px] font-bold text-[#8A8E98] uppercase mt-1">
                     {lang === 'ka' ? 'ღიაა ყოველდღე' : 'Open Daily'}
                   </div>
@@ -1608,7 +1637,7 @@ export default function App() {
               <X className="w-4 h-4" />
             </button>
             <div className="text-left">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-[#E08A79] mb-2 block">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-2 block">
                 ✦ კლინიკის გუნდი
               </span>
               <h3 className="font-serif font-bold text-xl text-[#33353A] mb-4">ჩვენი პროფესიონალი ექიმები</h3>
@@ -1723,7 +1752,7 @@ export default function App() {
               <X className="w-4 h-4" />
             </button>
             <div className="text-left">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-[#E08A79] mb-2 block">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-2 block">
                 ✦ მკურნალობის შედეგები
               </span>
               <h3 className="font-serif font-bold text-xl text-[#33353A] mb-4">ჩვენი წარმატებული ქეისები</h3>
@@ -1735,19 +1764,19 @@ export default function App() {
                 <div className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
                   <h4 className="font-bold text-sm text-[#33353A] mb-1">იმპლანტაცია და ესთეტიკური პროტეზირება</h4>
                   <p className="text-xs text-[#5A5D64] mb-2">სრული რესტავრაცია ცირკონიუმის გვირგვინებით. პაციენტს აღუდგა ღეჭვითი ფუნქცია და სრულყოფილი ესთეტიკა.</p>
-                  <span className="text-[10px] font-bold text-[#E08A79] uppercase">ხანგრძლივობა: 3 კვირა</span>
+                  <span className="text-[10px] font-bold text-[var(--accent-color)] uppercase">ხანგრძლივობა: 3 კვირა</span>
                 </div>
 
                 <div className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
                   <h4 className="font-bold text-sm text-[#33353A] mb-1">კბილთა გასწორება (ორთოდონტია)</h4>
                   <p className="text-xs text-[#5A5D64] mb-2">კბილთა მწკრივისა და თანკბილვის გასწორება ლითონის თვითლიგირებადი ბრეკეტ-სისტემით.</p>
-                  <span className="text-[10px] font-bold text-[#E08A79] uppercase">ხანგრძლივობა: 14 თვე</span>
+                  <span className="text-[10px] font-bold text-[var(--accent-color)] uppercase">ხანგრძლივობა: 14 თვე</span>
                 </div>
 
                 <div className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
                   <h4 className="font-bold text-sm text-[#33353A] mb-1">პროფესიული წმენდა და გათეთრება</h4>
                   <p className="text-xs text-[#5A5D64] mb-2">ნადებისა და კბილის ქვების მოცილება ულტრაბგერითა და Air-Flow აპარატით, რასაც მოჰყვა კლინიკური გათეთრება 4 ტონით.</p>
-                  <span className="text-[10px] font-bold text-[#E08A79] uppercase">ხანგრძლივობა: 1 სეანსი</span>
+                  <span className="text-[10px] font-bold text-[var(--accent-color)] uppercase">ხანგრძლივობა: 1 სეანსი</span>
                 </div>
               </div>
             </div>
@@ -1769,7 +1798,7 @@ export default function App() {
             </button>
             <div className="text-left" style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
               <div style={{ paddingBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.4)', flexShrink: 0 }}>
-                <span className="text-[10px] uppercase font-bold tracking-widest text-[#E08A79] mb-1 block">
+                <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-1 block">
                   ✦ ფასების კატალოგი
                 </span>
                 <h3 className="font-serif font-bold text-xl text-[#33353A] mb-1">კლინიკის სერვისების ფასები</h3>
@@ -1926,7 +1955,7 @@ export default function App() {
                         <div key={idx} className="flex justify-between items-center py-2 border-b border-[#33353A]/10" style={{ gap: '12px' }}>
                           <span className="text-xs font-semibold text-[#33353A]">{item.n}</span>
                           <div style={{ flexGrow: 1, borderBottom: '1px dotted rgba(51, 53, 58, 0.2)', marginInline: '8px', height: '8px' }} />
-                          <span className="text-xs font-black text-[#E08A79] px-3 py-1" style={{ backgroundColor: 'rgba(224, 138, 121, 0.12)', borderRadius: '12px', whiteSpace: 'nowrap' }}>
+                          <span className="text-xs font-black text-[var(--accent-color)] px-3 py-1" style={{ backgroundColor: 'rgba(var(--accent-color-rgb), 0.12)', borderRadius: '12px', whiteSpace: 'nowrap' }}>
                             {item.p}
                           </span>
                         </div>
@@ -1964,7 +1993,7 @@ export default function App() {
               <X className="w-4 h-4" />
             </button>
             <div className="text-left">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-[#E08A79] mb-2 block">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-2 block">
                 ✦ კლინიკის ბლოგი
               </span>
               <h3 className="font-serif font-bold text-xl text-[#33353A] mb-4">რჩევები ორალური ჰიგიენისთვის</h3>
@@ -1973,19 +2002,19 @@ export default function App() {
                 <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
                   <h4 className="font-bold text-sm text-[#33353A] mb-1">როგორ მოვუაროთ ბრეკეტებს სწორად?</h4>
                   <p className="text-xs text-[#5A5D64] mb-2">გაიგეთ, როგორ გამოიყენოთ სპეციალური ორთოდონტიული ჯაგრისები და ფლოსი ბრეკეტებით მკურნალობის პერიოდში სრულყოფილი სისუფთავის შესანარჩუნებლად.</p>
-                  <a href="#booking" onClick={() => { playClickSound(); setShowBlogModal(false); }} className="text-[10px] font-bold text-[#E08A79] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                  <a href="#booking" onClick={() => { playClickSound(); setShowBlogModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
                 </article>
 
                 <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
                   <h4 className="font-bold text-sm text-[#33353A] mb-1">კბილის იმპლანტაციის 5 უპირატესობა</h4>
                   <p className="text-xs text-[#5A5D64] mb-2">რატომ არის იმპლანტი საუკეთესო და ყველაზე ბუნებრივი არჩევანი დაკარგული კბილების აღსადგენად. როგორ გვეხმარება ის მეზობელი კბილების შენარჩუნებაში.</p>
-                  <a href="#booking" onClick={() => { playClickSound(); setShowBlogModal(false); }} className="text-[10px] font-bold text-[#E08A79] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                  <a href="#booking" onClick={() => { playClickSound(); setShowBlogModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
                 </article>
 
                 <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
                   <h4 className="font-bold text-sm text-[#33353A] mb-1">როგორ ავიცილოთ თავიდან კარიესი?</h4>
                   <p className="text-xs text-[#5A5D64] mb-2">ყოველდღიური მარტივი რჩევები, კვების რაციონის კორექტირება და სწორი ჰიგიენური ჩვევები, რომლებიც დაიცავს თქვენს ემალს დაზიანებისგან.</p>
-                  <a href="#booking" onClick={() => { playClickSound(); setShowBlogModal(false); }} className="text-[10px] font-bold text-[#E08A79] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                  <a href="#booking" onClick={() => { playClickSound(); setShowBlogModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
                 </article>
               </div>
             </div>
@@ -2006,7 +2035,7 @@ export default function App() {
               <X className="w-4 h-4" />
             </button>
             <div className="text-left">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-[#E08A79] mb-2 block">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-2 block">
                 ✦ უახლესი ტექნოლოგიები
               </span>
               <h3 className="font-serif font-bold text-xl text-[#33353A] mb-4">ჩვენი საუკეთესო აპარატურა</h3>
@@ -2018,25 +2047,25 @@ export default function App() {
                 <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
                   <h4 className="font-bold text-sm text-[#33353A] mb-1">სტომატოლოგიური მიკროსკოპი (Leica / Zeiss)</h4>
                   <p className="text-xs text-[#5A5D64] mb-2">კბილის ფესვის არხების მკურნალობისას უზრუნველყოფს 30-ჯერად გადიდებას. გვეხმარება ყველაზე რთულად შესამჩნევი ანატომიური დეტალების დანახვასა და მკურნალობაში.</p>
-                  <a href="#booking" onClick={() => { playClickSound(); setSelectedService('კონსულტაცია'); setShowEquipModal(false); }} className="text-[10px] font-bold text-[#E08A79] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                  <a href="#booking" onClick={() => { playClickSound(); setSelectedService('კონსულტაცია'); setShowEquipModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
                 </article>
 
                 <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
                   <h4 className="font-bold text-sm text-[#33353A] mb-1">3D კომპიუტერული ტომოგრაფი (CBCT)</h4>
                   <p className="text-xs text-[#5A5D64] mb-2">ულტრა-დაბალი გამოსხივების ციფრული 3D დიაგნოსტიკა. წამებში ვიღებთ ყბა-კბილთა სისტემის უზუსტეს სამგანზომილებიან სურათს მკურნალობის უშეცდომო დაგეგმვისთვის.</p>
-                  <a href="#booking" onClick={() => { playClickSound(); setSelectedService('კონსულტაცია'); setShowEquipModal(false); }} className="text-[10px] font-bold text-[#E08A79] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                  <a href="#booking" onClick={() => { playClickSound(); setSelectedService('კონსულტაცია'); setShowEquipModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
                 </article>
 
                 <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
                   <h4 className="font-bold text-sm text-[#33353A] mb-1">შიდა პირის ღრუს 3D სკანერი (3Shape TRIOS)</h4>
                   <p className="text-xs text-[#5A5D64] mb-2">ტრადიციული, უსიამოვნო ანაბეჭდების მასების ნაცვლად, პირის ღრუს სწრაფი, კომფორტული და ზუსტი ციფრული სკანირება ვინირებისა და გვირგვინების დასამზადებლად.</p>
-                  <a href="#booking" onClick={() => { playClickSound(); setSelectedService('კონსულტაცია'); setShowEquipModal(false); }} className="text-[10px] font-bold text-[#E08A79] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                  <a href="#booking" onClick={() => { playClickSound(); setSelectedService('კონსულტაცია'); setShowEquipModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
                 </article>
 
                 <article className="glass-neu p-4" style={{ boxShadow: 'inset 2px 2px 5px rgba(166,160,146,0.05)' }}>
                   <h4 className="font-bold text-sm text-[#33353A] mb-1">სტომატოლოგიური ლაზერი (Biolase)</h4>
                   <p className="text-xs text-[#5A5D64] mb-2">რბილი ქსოვილების უმტკივნეულო, უსისხლო და ნაკლებად ინვაზიური მკურნალობისთვის. გამოიყენება ღრძილების პლასტიკაში, სტერილიზაციასა და თერაპიაში.</p>
-                  <a href="#booking" onClick={() => { playClickSound(); setSelectedService('კონსულტაცია'); setShowEquipModal(false); }} className="text-[10px] font-bold text-[#E08A79] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
+                  <a href="#booking" onClick={() => { playClickSound(); setSelectedService('კონსულტაცია'); setShowEquipModal(false); }} className="text-[10px] font-bold text-[var(--accent-color)] uppercase flex items-center gap-1">დაჯავშნე კონსულტაცია <ChevronRight className="w-3 h-3" /></a>
                 </article>
               </div>
             </div>
@@ -2057,7 +2086,7 @@ export default function App() {
               <X className="w-4 h-4" />
             </button>
             <div className="text-left">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-[#E08A79] mb-2 flex items-center gap-2">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-2 flex items-center gap-2">
                 ✦ {renderServiceIcon(activeServiceDetail.key)} სერვისის დეტალები
               </span>
               <h3 className="font-serif font-bold text-2xl text-[#33353A] mb-4 mt-2">
@@ -2123,15 +2152,15 @@ export default function App() {
               <X className="w-4 h-4" />
             </button>
             <div className="text-left">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-[#E08A79] mb-2 flex items-center gap-2">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-2 flex items-center gap-2">
                 ✦ პროფილაქტიკა & დაცვა
               </span>
               <h3 className="font-serif font-bold text-2xl text-[#33353A] mb-4 mt-2">
                 {activeEnamelDetail.title}
               </h3>
               
-              <div className="glass-neu p-4 mb-4" style={{ background: 'rgba(224, 138, 121, 0.05)', border: '1px solid rgba(224, 138, 121, 0.15)', boxShadow: 'none' }}>
-                <h4 className="font-bold text-xs text-[#E08A79] mb-2 uppercase tracking-wider">
+              <div className="glass-neu p-4 mb-4" style={{ background: 'rgba(var(--accent-color-rgb), 0.05)', border: '1px solid rgba(var(--accent-color-rgb), 0.15)', boxShadow: 'none' }}>
+                <h4 className="font-bold text-xs text-[var(--accent-color)] mb-2 uppercase tracking-wider">
                   როგორ აზიანებს ემალს:
                 </h4>
                 <p className="text-sm text-[#5A5D64] leading-relaxed">
@@ -2196,7 +2225,7 @@ export default function App() {
 
               {/* Right Column: Info */}
               <div className="md:col-span-7">
-                <span className="text-[10px] uppercase font-bold tracking-widest text-[#E08A79] mb-1 block">
+                <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-1 block">
                   ✦ პროფესიონალი ექიმი
                 </span>
                 <h3 className="font-serif font-bold text-2xl text-[#33353A] mb-1">
@@ -2207,10 +2236,10 @@ export default function App() {
                 </span>
 
                 {/* 5-Star interactive rating system */}
-                <div className="mb-4 glass-neu p-3" style={{ background: 'rgba(255, 255, 255, 0.25)', border: '1px solid rgba(224, 138, 121, 0.15)' }}>
+                <div className="mb-4 glass-neu p-3" style={{ background: 'rgba(255, 255, 255, 0.25)', border: '1px solid rgba(var(--accent-color-rgb), 0.15)' }}>
                   <div className="flex items-center justify-between flex-wrap gap-2">
                     <div>
-                      <h4 className="text-[10px] font-bold uppercase tracking-wider text-[#E08A79] mb-0.5">შეფასება და რეიტინგი</h4>
+                      <h4 className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-color)] mb-0.5">შეფასება და რეიტინგი</h4>
                       <p className="text-xs text-[#5A5D64]" style={{ margin: 0 }}>
                         რეიტინგი: <strong className="text-[#33353A]">{getDoctorRating(activeDoctorDetail.name).average} / 5</strong> ({getDoctorRating(activeDoctorDetail.name).count} ხმა)
                       </p>
@@ -2257,21 +2286,21 @@ export default function App() {
 
                 {activeDoctorDetail.bio && (
                   <div className="mb-4">
-                    <h4 className="text-[10px] font-bold uppercase tracking-wider text-[#E08A79] border-b border-[#E08A79]/10 pb-1 mb-2">მოკლე მიმოხილვა</h4>
+                    <h4 className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-color)] border-b border-[var(--accent-color)]/10 pb-1 mb-2">მოკლე მიმოხილვა</h4>
                     <p className="text-xs text-[#5A5D64] leading-relaxed whitespace-pre-line">{activeDoctorDetail.bio}</p>
                   </div>
                 )}
 
                 {activeDoctorDetail.education && (
                   <div className="mb-4">
-                    <h4 className="text-[10px] font-bold uppercase tracking-wider text-[#E08A79] border-b border-[#E08A79]/10 pb-1 mb-2">განათლება და კურსები</h4>
+                    <h4 className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-color)] border-b border-[var(--accent-color)]/10 pb-1 mb-2">განათლება და კურსები</h4>
                     <p className="text-xs text-[#5A5D64] leading-relaxed whitespace-pre-line">{activeDoctorDetail.education}</p>
                   </div>
                 )}
 
                 {activeDoctorDetail.specialization && (
                   <div className="mb-4">
-                    <h4 className="text-[10px] font-bold uppercase tracking-wider text-[#E08A79] border-b border-[#E08A79]/10 pb-1 mb-2">სპეციალიზაცია</h4>
+                    <h4 className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-color)] border-b border-[var(--accent-color)]/10 pb-1 mb-2">სპეციალიზაცია</h4>
                     <p className="text-xs text-[#5A5D64] leading-relaxed whitespace-pre-line">{activeDoctorDetail.specialization}</p>
                   </div>
                 )}
@@ -2322,7 +2351,7 @@ export default function App() {
               <X className="w-4 h-4" />
             </button>
             
-            <span className="text-[10px] uppercase font-bold tracking-widest text-[#E08A79] mb-1.5 block">
+            <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-1.5 block">
               ✦ ვერიფიკაცია
             </span>
             <h3 className="font-serif font-bold text-lg text-[#33353A] mb-2">შეფასების დადასტურება</h3>
@@ -2417,13 +2446,13 @@ export default function App() {
               <X className="w-4 h-4" />
             </button>
             <div className="text-left mb-4">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-[#E08A79] mb-1 block">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--accent-color)] mb-1 block">
                 ✦ კლინიკის მდებარეობა
               </span>
               <h3 className="font-serif font-bold text-xl text-[#33353A]">გვიპოვეთ რუკაზე</h3>
               <p className="text-xs text-[#8A8E98] mt-1">მელიტონ და ანდრია ბალანჩივაძეების ქ. 14, თბილისი</p>
             </div>
-            <div className="rounded-2xl overflow-hidden shadow-inner border border-[#E08A79]/10" style={{ width: '100%', height: '400px' }}>
+            <div className="rounded-2xl overflow-hidden shadow-inner border border-[var(--accent-color)]/10" style={{ width: '100%', height: '400px' }}>
               <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2977.8966209593453!2d44.77977467667475!3d41.72274467125368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40440ccdb692b67f%3A0xc3b8fb3286f0d8bd!2s14%20Meliton%20and%20Andria%20Balanchivadze%20St%2C%20Tbilisi!5e0!3m2!1sen!2sge!4v1714500000000!5m2!1sen!2sge" 
                 width="100%" 
