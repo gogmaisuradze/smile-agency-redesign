@@ -1696,7 +1696,7 @@ export default function App() {
             <form onSubmit={handleCustomMessageSubmit} className="chat-input-form">
               <input 
                 type="text" 
-                placeholder="{lang === 'ka' ? 'ჩაწერეთ შეტყობინება...' : 'Type a message...'}" 
+                placeholder={lang === 'ka' ? 'ჩაწერეთ შეტყობინება...' : 'Type a message...'} 
                 value={customMessage}
                 onChange={(e) => setCustomMessage(e.target.value)}
                 className="chat-input"
