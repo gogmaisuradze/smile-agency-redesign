@@ -872,56 +872,84 @@ export default function App() {
     return matchesSearch && matchesCategory
   })
 
-  // Handle chatbot options
-  const handleBotQuery = (queryType, userText) => {
-    setMessages(prev => [...prev, { id: Date.now(), sender: 'user', text: userText }])
-    
+  // Get or create persistent sessionId in localStorage (key: smile_sid)
+  const getSessionId = () => {
+    try {
+      let sid = localStorage.getItem('smile_sid')
+      if (!sid) {
+        sid = typeof crypto !== 'undefined' && crypto.randomUUID 
+          ? crypto.randomUUID() 
+          : 'sid_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9)
+        localStorage.setItem('smile_sid', sid)
+      }
+      return sid
+    } catch (e) {
+      return 'sid_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9)
+    }
+  }
+
+  // Send message to n8n webhook and update chat UI
+  const sendChatMessage = async (userText) => {
+    if (!userText || !userText.trim()) return
+
+    const textToSend = userText.trim()
+
+    // Append user message immediately
+    setMessages(prev => [...prev, { id: Date.now(), sender: 'user', text: textToSend }])
+
+    // Optional Telegram log message
     const userMsg = lang === 'ka'
-      ? `💬 <b>SmileBot ჩატი</b>\n👤 <b>პაციენტი:</b> ${userText}`
-      : `💬 <b>SmileBot Chat</b>\n👤 <b>Patient:</b> ${userText}`;
+      ? `💬 <b>SmileBot ჩატი</b>\n👤 <b>პაციენტი:</b> ${textToSend}`
+      : `💬 <b>SmileBot Chat</b>\n👤 <b>Patient:</b> ${textToSend}`
     sendTelegramMessage(userMsg)
 
-    setTimeout(() => {
-      let botText = ''
-      if (queryType === 'services') botText = lang === 'ka' ? BOT_RESPONSES.services : BOT_RESPONSES_EN.services
-      else if (queryType === 'prices') botText = lang === 'ka' ? BOT_RESPONSES.prices : BOT_RESPONSES_EN.prices
-      else if (queryType === 'contact') botText = lang === 'ka' ? BOT_RESPONSES.contact : BOT_RESPONSES_EN.contact
-      
-      setMessages(prev => [...prev, { id: Date.now() + 1, sender: 'bot', text: botText }])
-      
-      const botMsg = lang === 'ka'
-        ? `💬 <b>SmileBot ჩატი</b>\n🤖 <b>ბოტი:</b> ${botText}`
-        : `💬 <b>SmileBot Chat</b>\n🤖 <b>Bot:</b> ${botText}`;
-      sendTelegramMessage(botMsg)
-    }, 600)
+    const sessionId = getSessionId()
+
+    try {
+      const response = await fetch('https://meticulous-oyster.pikapod.net/webhook/8613b91b-0c32-48a8-96c9-371bdaf844fd/smile-website-chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: textToSend,
+          sessionId: sessionId
+        })
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      const data = await response.json()
+
+      if (data && data.output) {
+        setMessages(prev => [...prev, { id: Date.now(), sender: 'bot', text: data.output }])
+      } else {
+        throw new Error('Invalid output response')
+      }
+    } catch (error) {
+      console.error('Webhook chat error:', error)
+      setMessages(prev => [...prev, { 
+        id: Date.now(), 
+        sender: 'bot', 
+        text: 'ბოდიში, სცადეთ ხელახლა ან დაგვირეკეთ: 555 585 356' 
+      }])
+    }
+  }
+
+  // Handle quick chatbot options
+  const handleBotQuery = (queryType, userText) => {
+    sendChatMessage(userText)
   }
 
   // Handle custom typed message submit
   const handleCustomMessageSubmit = (e) => {
     e.preventDefault()
     if (!customMessage.trim()) return
-    
     const userText = customMessage.trim()
     setCustomMessage('')
-    
-    setMessages(prev => [...prev, { id: Date.now(), sender: 'user', text: userText }])
-    
-    const userMsg = lang === 'ka'
-      ? `💬 <b>SmileBot ჩატი (ახალი კითხვა)</b>\n👤 <b>პაციენტი:</b> ${userText}`
-      : `💬 <b>SmileBot Chat (New Question)</b>\n👤 <b>Patient:</b> ${userText}`;
-    sendTelegramMessage(userMsg)
-
-    setTimeout(() => {
-      const botText = lang === 'ka'
-        ? "გმადლობთ შეტყობინებისთვის! თქვენი შეკითხვა გადაეცა ადმინისტრატორს და უახლოეს დროში დაგიკავშირდებით ტელეფონით."
-        : "Thank you for your message! Your question has been forwarded to the administrator, and we will contact you shortly by phone.";
-      setMessages(prev => [...prev, { id: Date.now() + 1, sender: 'bot', text: botText }])
-      
-      const botMsg = lang === 'ka'
-        ? `💬 <b>SmileBot ჩატი</b>\n🤖 <b>ბოტი:</b> ${botText}`
-        : `💬 <b>SmileBot Chat</b>\n🤖 <b>Bot:</b> ${botText}`;
-      sendTelegramMessage(botMsg)
-    }, 800)
+    sendChatMessage(userText)
   }
 
   // Handle calendar month change
