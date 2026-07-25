@@ -794,25 +794,19 @@ export default function App() {
     await sendTelegramMessage(text);
   }
 
-  // Telegram credentials
-  const TG_TOKEN = '8954093567:AAH3woxKpRbvQ68w5OlHdhvUIzVvmkAqN8E'
-  const TG_CHAT_ID = '443575738'
+  // შეტყობინებები n8n-ის webhook-ით იგზავნება — ბოტის token აღარ ინახება ფრონტში
+  const NOTIFY_URL = 'https://meticulous-oyster.pikapod.net/webhook/smile-notify'
 
-  // Telegram messaging helper
+  // Notify helper (საიტი → n8n → Telegram, სერვერიდან)
   const sendTelegramMessage = async (text) => {
-    const url = `https://api.telegram.org/bot${TG_TOKEN}/sendMessage`
     try {
-      await fetch(url, {
+      await fetch(NOTIFY_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: TG_CHAT_ID,
-          text: text,
-          parse_mode: 'HTML'
-        })
+        body: JSON.stringify({ text })
       })
     } catch (error) {
-      console.error('Telegram send failed:', error)
+      console.error('Notify send failed:', error)
     }
   }
 
