@@ -888,6 +888,19 @@ export default function App() {
     }
   }
 
+  // ბოტის ტექსტის გაწმენდა — მოვხსნათ markdown ნიშნები (საიტი სუფთა ტექსტს რენდერავს)
+  const cleanBotText = (raw) => {
+    if (!raw) return ''
+    return String(raw)
+      .replace(/\*\*(.*?)\*\*/g, '$1')
+      .replace(/__(.*?)__/g, '$1')
+      .replace(/\*/g, '')
+      .replace(/`/g, '')
+      .replace(/^\s*#{1,6}\s*/gm, '')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim()
+  }
+
   // Send message to n8n webhook and update chat UI
   const sendChatMessage = async (userText) => {
     if (!userText || !userText.trim()) return
@@ -924,7 +937,7 @@ export default function App() {
       const data = await response.json()
 
       if (data && data.output) {
-        setMessages(prev => [...prev, { id: Date.now(), sender: 'bot', text: data.output }])
+        setMessages(prev => [...prev, { id: Date.now(), sender: 'bot', text: cleanBotText(data.output) }])
       } else {
         throw new Error('Invalid output response')
       }
