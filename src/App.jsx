@@ -906,7 +906,7 @@ export default function App() {
     const sessionId = getSessionId()
 
     try {
-      const response = await fetch('https://meticulous-oyster.pikapod.net/webhook/8613b91b-0c32-48a8-96c9-371bdaf844fd/smile-website-chat', {
+      const response = await fetch('https://meticulous-oyster.pikapod.net/webhook/smile-website-chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
