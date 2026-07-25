@@ -897,6 +897,8 @@ export default function App() {
       .replace(/\*/g, '')
       .replace(/`/g, '')
       .replace(/^\s*#{1,6}\s*/gm, '')
+      .replace(/[ \t]+\n/g, '\n')
+      .replace(/\n[ \t]+/g, '\n')
       .replace(/\n{3,}/g, '\n\n')
       .trim()
   }
